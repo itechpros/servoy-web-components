@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: servoywebcomponents
+Bundle-Name: WYSIWYG HTML Editors
+Bundle-Version: 1.0.2
+Package-Type: Web-Component
+
+Name: WYSIWYG/TinyMCE.spec
+Web-Component: True
