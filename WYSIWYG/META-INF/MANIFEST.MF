@@ -1,8 +1,9 @@
 Manifest-Version: 1.0
-Bundle-SymbolicName: servoywebcomponents
-Bundle-Name: Servoy Web Components
-Bundle-Version: 1.0.2
+Bundle-SymbolicName: wysiwyg
+Bundle-Name: WYSIWYG TinyMCE Editor
+Bundle-Version: 1.0.0
 Package-Type: Web-Component
 
 Name: TinyMCE/TinyMCE.spec
 Web-Component: True
+
