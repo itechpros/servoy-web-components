@@ -4,5 +4,5 @@ Bundle-Name: Servoy Web Components
 Bundle-Version: 1.0.0
 Package-Type: Web-Component
 
-Name: WYSIWYG/src/TinyMCE.spec
+Name: WYSIWYG/TinyMCE.spec
 Web-Component: True
