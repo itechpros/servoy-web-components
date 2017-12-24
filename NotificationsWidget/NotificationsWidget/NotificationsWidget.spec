@@ -1,26 +1,26 @@
 {
-	"name": "extracomponents-Notifications-Widget",
+	"name": "notificationswidget-Notifications-Widget",
 	"displayName": "NotificationsWidget",
 	"version": 1,
-	"definition": "extracomponents/NotificationsWidget/NotificationsWidget.js",
+	"definition": "notificationswidget/NotificationsWidget/NotificationsWidget.js",
 	"libraries": [
 		{
 			"name": "ntfy.css",
 			"version": "1",
 			"mimetype": "text/css",
-			"url": "extracomponents/NotificationsWidget/lib/ntfy.css"
+			"url": "notificationswidget/NotificationsWidget/lib/ntfy.css"
 		},
 		{
 			"name": "mustache.min.js",
 			"version": "1",
 			"mimetype": "text/javascript",
-			"url": "extracomponents/NotificationsWidget/lib/mustache.min.js"
+			"url": "notificationswidget/NotificationsWidget/lib/mustache.min.js"
 		},
 		{
 			"name": "ntfy.js",
 			"version": "1",
 			"mimetype": "text/javascript",
-			"url": "extracomponents/NotificationsWidget/lib/ntfy.js"
+			"url": "notificationswidget/NotificationsWidget/lib/ntfy.js"
 		}
 
 	],

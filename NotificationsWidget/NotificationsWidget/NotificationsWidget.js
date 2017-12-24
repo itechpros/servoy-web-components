@@ -1,4 +1,4 @@
-angular.module('extracomponentsNotificationsWidget',['servoy']).directive('extracomponentsNotificationsWidget', function() {  
+angular.module('notificationswidgetNotificationsWidget',['servoy']).directive('notificationswidgetNotificationsWidget', function() {  
   return {
     restrict: 'E',
       scope: {
@@ -15,6 +15,6 @@ angular.module('extracomponentsNotificationsWidget',['servoy']).directive('extra
       })
       $scope.api=window[$attrs.name].svy.api
     },
-    templateUrl: 'extracomponents/NotificationsWidget/NotificationsWidget.html'
+    templateUrl: 'notificationswidget/NotificationsWidget/NotificationsWidget.html'
   }
 })

@@ -1,5 +1,3 @@
-* Itechpros (c)
-
 (c) Itechpros
 
 AdvancedSearchbox (http://dnauck.github.io/angular-advanced-searchbox/)

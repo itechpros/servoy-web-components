@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: notificationswidget
+Bundle-Name: Notifications Widget
+Bundle-Version: 1.0.0
+Package-Type: Web-Component
+
+Name: NotificationsWidget/NotificationsWidget.spec
+Web-Component: True
+
