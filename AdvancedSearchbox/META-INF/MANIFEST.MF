@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-SymbolicName: servoywebcomponents
-Bundle-Name: Advanced Search Box
-Bundle-Version: 1.0.0
-Package-Type: Web-Component
-
-Name: AdvancedSearchbox/src/AdvancedSearchbox.spec
-Web-Component: True
