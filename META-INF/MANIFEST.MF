@@ -1,8 +1,11 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: servoywebcomponents
 Bundle-Name: Servoy Web Components
-Bundle-Version: 1.0.2
+Bundle-Version: 1.0.0
 Package-Type: Web-Component
 
-Name: WYSIWYG/TinyMCE.spec
+Name: WYSIWYG/src/TinyMCE.spec
+Web-Component: True
+
+Name: AdvancedSearchbox/src/AdvancedSearchbox.spec
 Web-Component: True
