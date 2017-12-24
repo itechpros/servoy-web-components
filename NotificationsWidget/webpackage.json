@@ -1,0 +1,10 @@
+{
+    "name":"notificationswidget",
+    "displayName":"Notifications Widget",
+    "packageType": "Web-Component",
+    "icon": "http://freevector.co/wp-content/uploads/2013/03/77682-notification-bell.png",
+    "description": "NG Component of Alarm Bell Notifications",
+    "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/NotificationsWidget/README.md",
+    "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/NotificationsWidget",
+    "releases" : [{"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/notificationswidget.zip"}]
+}
