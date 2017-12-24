@@ -1,20 +1,20 @@
 {
-  "name": "extracomponents-Advanced-Searchbox",
+  "name": "advancedsearchbox-Advanced-Searchbox",
   "displayName": "AdvancedSearchbox",
   "version": 1,
-  "definition": "AdvancedSearchbox/AdvancedSearchbox/AdvancedSearchbox.js",
+  "definition": "advancedsearchbox/AdvancedSearchbox/AdvancedSearchbox.js",
   "libraries": [
       {
       "name": "angular-advanced-searchbox.min.css",
       "version": "1",
       "mimetype": "text/css",
-      "url": "AdvancedSearchbox/AdvancedSearchbox/lib/angular-advanced-searchbox.min.css"
+      "url": "advancedsearchbox/AdvancedSearchbox/lib/angular-advanced-searchbox.min.css"
     },
     {
       "name": "angular-advanced-searchbox.js",
       "version": "1",
       "mimetype": "text/javascript",
-      "url": "AdvancedSearchbox/AdvancedSearchbox/lib/angular-advanced-searchbox.js"
+      "url": "advancedsearchbox/AdvancedSearchbox/lib/angular-advanced-searchbox.js"
     }
   ],
   "model": {

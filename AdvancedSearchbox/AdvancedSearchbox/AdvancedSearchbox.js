@@ -1,4 +1,4 @@
-angular.module('extracomponentsAdvancedSearchbox',['servoy', 'angular-advanced-searchbox']).directive('extracomponentsAdvancedSearchbox', function() {  
+angular.module('advancedsearchboxAdvancedSearchbox',['servoy', 'angular-advanced-searchbox']).directive('advancedsearchboxAdvancedSearchbox', function() {  
 	return {
 		restrict: 'E',
 		scope: {
@@ -63,6 +63,6 @@ angular.module('extracomponentsAdvancedSearchbox',['servoy', 'angular-advanced-s
 
 			
       },
-      templateUrl: 'AdvancedSearchbox/AdvancedSearchbox/AdvancedSearchbox.html'
+      templateUrl: 'advancedsearchbox/AdvancedSearchbox/AdvancedSearchbox.html'
 	};
 })
