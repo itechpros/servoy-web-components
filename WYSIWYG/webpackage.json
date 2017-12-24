@@ -6,5 +6,5 @@
     "description": "WYSIWYG Editor, TinyMCE Servoy NG Component.",
     "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/WYSIWYG/README.md",
     "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/WYSIWYG",
-    "releases" : [{"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/wysiwyg.zip"}]
+    "releases" : [{"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.1/wysiwyg.zip"}]
 }
