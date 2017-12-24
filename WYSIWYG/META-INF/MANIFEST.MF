@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bundle-SymbolicName: wysiwyg
+Bundle-SymbolicName: servoywebcomponents
 Bundle-Name: Servoy Web Components
 Bundle-Version: 1.0.2
 Package-Type: Web-Component
