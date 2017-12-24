@@ -63,6 +63,6 @@ angular.module('extracomponentsAdvancedSearchbox',['servoy', 'angular-advanced-s
 
 			
       },
-      templateUrl: 'extracomponents/AdvancedSearchbox/AdvancedSearchbox.html'
+      templateUrl: 'AdvancedSearchbox/AdvancedSearchbox/AdvancedSearchbox.html'
 	};
 })
