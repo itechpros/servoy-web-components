@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: advancedsearchbox
+Bundle-Name: Advanced Search Box
+Bundle-Version: 1.0.0
+Package-Type: Web-Component
+
+Name: AdvancedSearchbox/AdvancedSearchbox.spec
+Web-Component: True

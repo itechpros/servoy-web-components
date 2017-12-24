@@ -1,4 +1,5 @@
 [
-    {"name":"wysiwyg", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/WYSIWYG/webpackage.json"}
+    {"name":"wysiwyg", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/WYSIWYG/webpackage.json"},
+    {"name":"advancedsearchbox", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/AdvancedSearchbox/webpackage.json"},
+    {"name":"notificationswidget", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/NotificationsWidget/webpackage.json"}
 ]
-    
