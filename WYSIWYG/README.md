@@ -6,7 +6,8 @@ Component Properties:
 
 - plugins: Extended features available in editor 
   - type: string
-  - default: link image code paste
+  - default: link image code paste  
+  full list of plugins https://www.tinymce.com/docs/plugins/
 
 - toolbar: Editor toolbar, groups of buttons are separated with "|" 
   - type: string
