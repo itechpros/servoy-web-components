@@ -18,7 +18,7 @@ Component Properties:
 
 - custom_buttons: Places user-defined buttons in HTML Editor menu appended to "toolbar"
   - type: tinymce_button[] (custom type, array of objects)
-       `
+```
        [
           {
               "callback": "function",   - callback function on Servoy form
@@ -28,7 +28,7 @@ Component Properties:
               "tooltip": "string"       - tooltip popup
           }
        ]
-       `
+```
   - default: none
 
 
