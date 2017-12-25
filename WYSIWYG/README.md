@@ -18,6 +18,7 @@ Component Properties:
 
 - custom_buttons: Places user-defined buttons in HTML Editor menu appended to "toolbar"
   - type: tinymce_button[] (custom type, array of objects)
+  - default: none
 ```
        [
           {
@@ -29,7 +30,6 @@ Component Properties:
           }
        ]
 ```
-  - default: none
 
 
 API:
