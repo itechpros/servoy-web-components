@@ -2,7 +2,7 @@
     "name":"advancedsearchbox",
     "displayName":"Advanced Searchbox",
     "packageType": "Web-Component",
-    "icon": "http://www.itechpros.com/wp-content/uploads/2011/01/iTechLogo2.png",
+    "icon": "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/simple-black-square-icons-business/126715-simple-black-square-icon-business-magnifying-glass-ps.png",
     "description": "A directive for AngularJS providing advanced visual search box",
     "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/AdvancedSearchbox/README.md",
     "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/AdvancedSearchbox",
