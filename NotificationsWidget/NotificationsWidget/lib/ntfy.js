@@ -45,8 +45,8 @@ jsWidget_Notify.prototype.refreshNotifications = function(items, today, pos) {
   });
     
   var template = 
-      '<div class="notifications">' +
-        '<h3>Notifications</h3>' +
+      '<div id="notificationsWidget" class="notifications">' +
+        '<div id="notificationsHeader"><h3>Notifications</h3></div>' +
         '<ul class="notifications-list">' +
           '<li class="item no-data">You don\'t have notifications</li>' +
           '{{#items}}' +
@@ -76,15 +76,17 @@ jsWidget_Notify.prototype.refreshNotifications = function(items, today, pos) {
       .on('click', '.js-show-notifications', function(event) {
         var top = 0,
             left = 0,
-            w = $('.notifications').css('width').replace('px', '')/1,
-            h = $('.notifications').css('height').replace('px', '')/1
+            vOffset = $('#notificationsHeader').css('height').replace('px', '')/1,
+            widget = $('#notificationsWidget'),
+            w = widget.css('width').replace('px', '')/1,
+            h = widget.css('height').replace('px', '')/1
         if (!svy.model.horizontalAlignment) left = svy.model.size.width - w
         else left = 0
-        if (!svy.model.verticalAlignment) top = - svy.model.size.height - (svy.model.maxheight && svy.model.maxheight > h ? h : svy.model.maxheight) - 10
+        if (!svy.model.verticalAlignment) top = - (svy.model.maxheight && svy.model.maxheight < h ? (svy.model.maxheight + vOffset) : h) - 20
         else top = svy.model.size.height + 10
         container.find('.notifications').toggleClass('active').blur();
-        container.find('.notifications').css('top', (top + 'px'))
-        container.find('.notifications').css('left', (left + 'px'))
+        widget.css('top', (top + 'px'))
+        widget.css('left', (left + 'px'))
         if (svy.model.maxheight) {
           container.find('.notifications-list').css('max-height', svy.model.maxheight + 'px')
           container.find('.notifications-list').css('overflow', 'overlay')
@@ -182,4 +184,4 @@ function getTransitionEnd() {
   });
   
   return (properties[match] || {}).end;
-}
+}}

@@ -32,8 +32,8 @@
 		},
 		"onRemove":"function",
 		"size": { "type": "dimension", "default": { "width": 40, "height": 42 } },
-		"horizontalAlignment": { "type": "int", "tags": { "scope": "design" }, "values": [{ "LEFT": 0 }, { "RIGHT": 1 }], "default": "RIGHT"},
-		"verticalAlignment": { "type": "int", "tags": { "scope": "design" }, "values": [{ "TOP": 0 }, { "BOTTOM": 1 }], "default": "TOP"}
+		"horizontalAlignment": { "type": "int", "tags": { "scope": "design" }, "values": [{ "LEFT": 0 }, { "RIGHT": 1 }], "default": 0},
+		"verticalAlignment": { "type": "int", "tags": { "scope": "design" }, "values": [{ "TOP": 0 }, { "BOTTOM": 1 }], "default": 0}
 	},
 	"types":{
 		"notifications": {
