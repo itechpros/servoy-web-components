@@ -19,7 +19,7 @@ Component Properties:
 ```
 - horizontalAlignment: H pos of popup
   - type: string
-  - default: RIGHT
+  - default: LEFT
 - verticalAlignment: V pos of poput
   - type: string
   - default: TOP
