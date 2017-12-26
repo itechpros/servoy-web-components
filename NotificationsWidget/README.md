@@ -4,7 +4,7 @@
 
 Component Properties:
 
-- items: List of notifications placed into the widget
+- items: List of notifications placed into widget
   - type: notifications[], custom type array of objects
   - default: -none-
 ```
@@ -33,7 +33,7 @@ Component Properties:
   
 API:  
 
-- setItems([notifications]): updates content of the widget  
+- setItems([notifications]): updates content of widget  
 - removeItem(id): removes notification id
    
 &copy; Itechpros  
