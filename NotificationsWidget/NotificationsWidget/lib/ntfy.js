@@ -184,4 +184,4 @@ function getTransitionEnd() {
   });
   
   return (properties[match] || {}).end;
-}}
+}
