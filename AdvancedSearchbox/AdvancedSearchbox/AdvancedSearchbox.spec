@@ -57,7 +57,7 @@
       "parameters": [
         {
           "name": "availableSearchParams",
-          "type": "array[]"
+          "type": "object[]"
         }
       ]
     }    
