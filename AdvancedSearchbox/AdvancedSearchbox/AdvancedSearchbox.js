@@ -25,19 +25,11 @@ angular.module('advancedsearchboxAdvancedSearchbox',['servoy', 'angular-advanced
 			}
 			
 			$scope.api.clearAllSearchParameters = function(){
-
-				setTimeout(function() {
-					angular.element(
-						document.getElementsByClassName("remove-all-icon glyphicon glyphicon-trash")[0].parentNode
-					).triggerHandler('click')
-					},
-				0)
-
+				$scope.searchParams = []
 				return true
 			}
 
 			$scope.api.clearAvailableSearchParameters = function(){
-
 				$scope.availableSearchParams = []
 				return true
 			}
