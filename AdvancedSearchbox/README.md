@@ -35,8 +35,11 @@ Component Properties:
 
 
 API:
-- getSearchParams(): returns search parameters from input box
-
+- keyUp: Fired on keyUp event
+- clearAllSearchParameters: Removes selected items
+- clearAvailableSearchParameters: Removes search parameters
+- getSearchParams: Returns selected items
+- setSearchParams: Assigns new search parameters
 
 &copy; Itechpros  
 http://itechpros.com
