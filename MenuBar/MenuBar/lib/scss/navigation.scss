@@ -1,0 +1,29 @@
+
+// MODULES
+
+// Core
+@import 'navigation/variables';
+@import 'navigation/mixins';
+@import 'navigation/navigation.core';
+
+// Elements
+@import 'navigation/navigation.search';
+@import 'navigation/navigation.button';
+@import 'navigation/navigation.text';
+
+// Submenus
+@import 'navigation/navigation.dropdown';
+@import 'navigation/navigation.dropdown.horizontal';
+
+@import 'navigation/navigation.megamenu';
+@import 'navigation/navigation.megamenu.grid';
+@import 'navigation/navigation.megamenu.tabs';
+@import 'navigation/navigation.megamenu.list';
+
+// Skins
+// Choose an additional skin and uncomment it
+//@import 'skins/navigation.skin.border-bottom';
+//@import 'skins/navigation.skin.border-top';
+//@import 'skins/navigation.skin.boxed';
+//@import 'skins/navigation.skin.rounded-boxed';
+//@import 'skins/navigation.skin.striped';

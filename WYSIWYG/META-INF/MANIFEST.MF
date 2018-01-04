@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: wysiwyg
 Bundle-Name: WYSIWYG TinyMCE Editor
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Package-Type: Web-Component
 
 Name: TinyMCE/TinyMCE.spec

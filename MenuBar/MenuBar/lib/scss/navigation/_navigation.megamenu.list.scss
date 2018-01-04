@@ -1,0 +1,87 @@
+
+/* MEGAMENU LIST */
+// This extension provides the use of lists in megamenus
+
+// Lists wrapper
+.megamenu-lists{
+	width: 100%;
+	display: table;
+}
+
+/* The list */
+.megamenu-list{
+	width: 100%;
+	margin: 0 0 15px;
+	padding: 0;
+	display: inline-block;
+	float: left;
+	list-style: none;
+	
+	&:last-child{
+		margin: 0;
+		border: none;
+	}
+	
+	.navigation-landscape &{
+		margin: -15px 0;
+		padding: 20px 0;
+		border-right: solid 1px $border-color;
+		
+		&:last-child{
+			border: none;
+		}
+	}	
+	
+	// List items
+	> li{
+		> a{
+			width: 100%;
+			padding: 10px 15px;
+			display: inline-block;
+			color: $megamenu-list-font-color;
+			text-decoration: none;
+			font-size: 13px;
+			@include transition(all .3s);
+			
+			&:hover{
+				color: $megamenu-list-font-color-hover;
+				background-color: $megamenu-list-background-color-hover;
+			}
+		}
+		
+		// List title
+		&.megamenu-list-title{
+			> a{
+				font-size: 12px;
+				font-weight: 600;
+				text-transform: uppercase;
+				opacity: 0.8;
+				color: $megamenu-list-font-color;
+				
+				&:hover{
+					opacity: 1;
+					background-color: transparent;
+				}
+			}
+		}
+	}	
+}
+
+// List column size 
+.navigation-landscape{
+	.list-col-2{
+		width: 50%;
+	}
+	.list-col-3{
+		width: 33%;
+	}
+	.list-col-4{
+		width: 25%;
+	}
+}
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+
+/* MEGAMENU EXTENSION */
+// This extension provides the use of megamenus in navigation.
+
+// MEGAMENU PANEL
+//===================================
+.megamenu-panel{
+	width: 100%;
+	padding: 15px;
+	display: none;
+	position: absolute;
+	font-size: 14px;
+	z-index: 98;
+	text-align: left;
+	color: inherit;
+	border-top: solid 1px $border-color;
+	background-color: $submenu-background-color;
+	
+	.navigation-portrait &{
+		padding: 25px;
+		position: static;
+		display: block;
+	}
+	
+	// Fix for bootstrap grid
+	[class*="container"]{
+		width: 100%;
+	}
+	[class*="container"] [class*="col-"]{
+		padding: 0;
+	}
+	
+}
+
+// Megamenu panel widths
+.megamenu-panel-half{
+	width: 50%;
+}
+.megamenu-panel-quarter{
+	width: 25%;
+}
+.navigation-portrait .megamenu-panel-half,
+.navigation-portrait .megamenu-panel-quarter{
+	width: 100%;
+}

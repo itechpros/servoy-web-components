@@ -1,0 +1,51 @@
+
+/* ROUNDED BOXED SKIN */
+
+$box-color: $font-color-hover;
+
+.navigation-landscape{
+	.nav-menu:not(.nav-menu-social){
+		> li:not(.icon-item){
+			> a{
+				height: 35px;
+				margin: 18px 0 17px;
+				padding: 8px 15px;
+				border-radius: 20px;
+			}
+			
+			&:hover,
+			&.active,
+			&.focus{
+				> a{
+					color: $white;
+					background-color: $box-color;
+					
+					.submenu-indicator-chevron{
+						border-color: transparent $white $white transparent;
+					}
+				}
+			}
+		}
+	}
+}
+
+.nav-dropdown{
+	> li:hover,
+	> li.focus{
+		> a{
+			color: $white;
+			background-color: $box-color;
+		}
+	}
+}
+
+.nav-dropdown{
+	> li:hover,
+	> li.focus{
+		> a{
+			.submenu-indicator-chevron{
+				border-color: transparent $white $white transparent;
+			}
+		}
+	}
+}

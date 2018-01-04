@@ -1,0 +1,66 @@
+
+/* MEGAMENU TABS */
+// This extension provides the use of tabs in megamenus
+
+.megamenu-tabs{
+	width: 100%;
+	float: left;
+	display: block;
+}
+
+// Tabs nav
+.megamenu-tabs-nav{
+	width: 20%;
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+	
+	.navigation-portrait &{
+		width: 100%;
+	}
+	
+	> li{
+		> a{
+			width: 100%;
+			padding: 10px 16px;
+			float: left;
+			font-size: 13px;
+			text-decoration: none;
+			color: $megamenu-tabs-font-color;
+			border: solid 1px #eff0f2;
+			outline: 0;
+			background-color: $megamenu-tabs-background-color;
+			@include transition(background .3s);
+		}
+	
+		&.active a,
+		&:hover a{
+			background-color: $megamenu-tabs-background-color-hover;
+		}
+	}
+}
+
+// Tabs pane
+.megamenu-tabs-pane{
+	width: 80%;
+	min-height: 30px;
+	padding: 20px;
+	float: right;
+	display: none;
+	opacity: 0;
+	font-size: 13px;
+	color: $megamenu-tabs-font-color;
+	border: solid 1px #eff0f2;
+	background-color: $megamenu-tabs-background-color;
+	@include transition(opacity .5s);
+	
+	&.active{
+		display: block;
+		opacity: 1;
+	}
+	
+	.navigation-portrait &{
+		width: 100%;
+	}
+}

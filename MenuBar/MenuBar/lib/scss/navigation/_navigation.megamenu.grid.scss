@@ -1,0 +1,82 @@
+
+/* GRID */
+// Basic grid for the megamenu extension
+
+.megamenu-panel-row{
+	width: 100%;
+	
+	&:before,
+	&:after {
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+	&:after {
+		clear: both;
+	}
+	
+	[class*="col-"]{
+		display: block;
+		min-height: 20px;
+		float: left;
+		margin-left: 3%;
+		
+		&:first-child {
+			margin-left: 0;
+		}
+		
+		.navigation-portrait &{
+			float: none;
+			display: block;
+			width: 100% !important;
+			margin-left: 0;
+			margin-top: 15px;
+		}
+	}	
+	
+	.navigation-portrait &:first-child{
+		
+		[class*="col-"]:first-child {
+			margin-top: 0;
+		}
+		
+	}
+	
+	// 12 Columns
+	.col-1{
+		width: 5.583333333333%;
+	}
+	.col-2{
+		width: 14.166666666666%;
+	}
+	.col-3{
+		width: 22.75%;
+	}
+	.col-4{
+		width: 31.333333333333%;
+	}
+	.col-5{
+		width: 39.916666666667%;
+	}
+	.col-6{
+		width: 48.5%;
+	}
+	.col-7{
+		width: 57.083333333333%;
+	}
+	.col-8{
+		width: 65.666666666667%;
+	}
+	.col-9{
+		width: 74.25%;
+	}
+	.col-10{
+		width: 82.833333333334%;
+	}
+	.col-11{
+		width: 91.416666666667%;
+	}
+	.col-12{
+		width: 100%;
+	}
+}
