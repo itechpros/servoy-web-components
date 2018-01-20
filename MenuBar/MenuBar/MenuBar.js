@@ -17,10 +17,13 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
 		      }
           })
               
-          $scope.api.setMenu = function(menu)
+          $scope.api.setMenu = function(menu, options)
           {
               container.html(menu)
-              container.navigation()
+			  if (options)
+				  container.navigation(options)
+		      else
+                  container.navigation()
               return true
           }
 

@@ -37,6 +37,10 @@
                     {
                         "name": "menu",
                         "type": "string"
+                    },
+                    {
+                        "name":"options",
+                        "type":"object"
                     }
                 ]
         }
