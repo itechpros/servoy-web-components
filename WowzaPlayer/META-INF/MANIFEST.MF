@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: wowzaplayer
+Bundle-Name: Wowza Player
+Bundle-Version: 1.0.1
+Package-Type: Web-Component
+
+Name: Wowza/Wowza.spec
+Web-Component: True
+
