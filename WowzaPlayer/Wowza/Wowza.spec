@@ -48,7 +48,7 @@
                [
                    {
                        "name": "newTimeMs",
-                       "type": "number"
+                       "type": "int"
                    }
                ]
            },
@@ -59,9 +59,13 @@
                [
                    {
                        "name": "newVolume",
-                       "type": "number"
+                       "type": "int"
                    }
                ]
            }
-    }
+    },
+    "handlers":
+        {
+            "onPlay":"function"
+        }
 }
