@@ -3,30 +3,50 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
       restrict: 'E',
       scope: {
           api: '=svyApi',
-          model: '=svyModel'
+          model: '=svyModel',
+          handlers: '=svyHandlers'
       },
       controller: function($scope, $element, $attrs) {
           var container = $('#navigation')
+
+          function getOpt(opt) 
+          {
+              if ($scope.handlers.onInit)
+                  opt.onInit = $scope.handlers.onInit
+              if ($scope.handlers.onShowOffCanvas)
+                     opt.onShowOffCanvas = $scope.handlers.onShowOffCanvas
+              if ($scope.handlers.onHideOffCanvas)
+                     opt.onHideOffCanvas = $scope.handlers.onHideOffCanvas
+              return opt      
+          }
           
           $(document).ready(function()
-          {  
+          {   
               if ($scope.model.menu)
               {
                  container.html($scope.model.menu)
-                 container.navigation()
-		      }
+                 container.navigation(getOpt({}))
+              }
           })
               
           $scope.api.setMenu = function(menu, options)
           {
               container.html(menu)
-			  if (options)
-				  container.navigation(options)
-		      else
-                  container.navigation()
+              container.navigation(getOpt(options || {}))
               return true
           }
 
+          $scope.api.toggleOffCanvas = function()
+          {
+              container.data('navigation').toggleOffcanvas()
+              return true
+          }
+          
+          $scope.api.toggleSearch = function()
+          {
+              container.data('navigation').toggleSearch()
+              return true
+          }
       },
       templateUrl: 'menubar/MenuBar/MenuBar.html'
     };
