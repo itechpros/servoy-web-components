@@ -1,5 +1,5 @@
-# Advanced Searchbox
-## Web Component for MEGA | Responsive Megamenu Navigation
+# Mega Menu Bar
+## Web Component for Mega | Responsive Megamenu Navigation
 
 
 Website of component library:  
