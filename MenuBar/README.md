@@ -54,7 +54,19 @@ Component Properties:
 
 
 API:
-- setMenu(menu, options): creates menu with specified options at runtime
+- setMenu(menu, options, callbacks): creates menu with specified options at runtime
+  - menu: string of Mega Menu content HTML
+  - options: object of Mega Menu options
+  - callbacks: array of Servoy functions
+      to have Menu item call a Servoy function place following into "href" value:
+```
+<a href="javascript:menubarCallback(<index>,[<parameters>])"><Menu Item Text></a>
+// <index> - index of Servoy callback function in "callbacks" array, 
+// <parameters> - array of values passed to Servoy callback function
+
+<a href="javascript:menubarCallback(0,[<parameter>])">My Menu Item</a>
+<a href="javascript:menubarCallback(1)">My Menu Item</a>
+```
 
 
 ## License
