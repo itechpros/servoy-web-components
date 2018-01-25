@@ -29,10 +29,11 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
               }
           })
               
-          $scope.api.setMenu = function(menu, options)
+          $scope.api.setMenu = function(menu, options, callbacks)
           {
               container.html(menu)
               container.navigation(getOpt(options || {}))
+              menubarCallbacks = callbacks
               return true
           }
 
@@ -47,7 +48,16 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
               container.data('navigation').toggleSearch()
               return true
           }
+
       },
       templateUrl: 'menubar/MenuBar/MenuBar.html'
     };
   })
+  
+var menubarCallbacks
+
+function menubarCallback(func, param){
+    param = param || []
+    if (menubarCallbacks && menubarCallbacks[func])
+    window.executeInlineScript(menubarCallbacks[func].formname,menubarCallbacks[func].script,param)
+}

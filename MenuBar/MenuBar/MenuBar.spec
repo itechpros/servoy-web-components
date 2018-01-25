@@ -42,6 +42,11 @@
                         "name":"options",
                         "type":"object",
                         "optional": true
+                    },
+                    {
+                        "name":"callbacks",
+                        "type": "function[]",
+                        "optional": true
                     }
                 ]
         },
