@@ -3,7 +3,7 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
       restrict: 'E',
       scope: {
           api: '=svyApi',
-          model: '=svyModel',handlers: "=svyHandlers"
+          model: '=svyModel'
       },
       controller: function($scope, $element, $attrs) {
 
@@ -22,23 +22,41 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
           }
           $scope.api.pause = function() {
               wp.pause()
-              return true              
+              return true
           }
           $scope.api.play = function() {
               wp.play()
-              return true              
+              return true
           }
           $scope.api.seek = function(newTimeMS) {
               wp.seek(newTimeMS)
-              return true              
+              return true
           }
           $scope.api.setVolume = function(newVolume) {
               wp.setVolume(newVolume)
-              return true              
+              return true
           }
-          
-          wp.onPlay($scope.handlers.onPlay(event))
-          
+          $scope.api.getCurrentState = function() {
+              return wp.getCurrentState()
+          }
+          $scope.api.getCurrentTime = function() {
+              return wp.getCurrentTime()
+          }
+          $scope.api.getDuration = function() {
+              return wp.getDuration()
+          }
+          $scope.api.getVolume = function() {
+              return wp.getVolume()
+          }
+          $scope.api.isLive = function() {
+              return wp.isLive()
+          }
+          $scope.api.isMuted = function() {
+              return wp.isMuted()
+          }
+          $scope.api.isPlaying = function() {
+              return wp.isPlaying()
+          }
       },
       templateUrl: 'wowzaplayer/Wowza/Wowza.html'
     };

@@ -62,10 +62,34 @@
                        "type": "int"
                    }
                ]
+           },
+        "getCurrentState":
+           {
+               "returns":"int"
+           },
+        "getCurrentTime":
+           {
+               "returns":"int"
+           },
+        "getDuration":
+           {
+               "returns":"int"
+           },
+        "getVolume":
+           {
+               "returns":"int"
+           },
+        "isLive":
+           {
+               "returns":"boolean"
+           },
+        "isMuted":
+           {
+               "returns":"boolean"
+           },
+        "isPlaying":
+           {
+               "returns":"boolean"
            }
-    },
-    "handlers":
-        {
-            "onPlay":"function"
-        }
+    }
 }
