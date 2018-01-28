@@ -7,7 +7,7 @@ https://www.wowza.com/docs/wowza-player-javascript-api-overview#onload
 
 
 Component Properties:
-- license: icense stringl
+- license: license string
 - sourceURL: location of media file
 
 API:
