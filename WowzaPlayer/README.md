@@ -25,6 +25,23 @@ API:
 - isMuted()
 - isPlaying()
 
+Event handlers and respective "remove" methods:
+- onLoad, removeOnLoad
+- onReady, removeOnReady
+- onBitrateChanged, removeOnBitrateChanged
+- onStats, removeOnStats
+- onPlayheadTime, removeOnPlayheadTime
+- onError, removeOnError
+- onStateChanged, removeOnStateChanged
+- onVolume, removeOnVolume
+- onMetadata, removeOnMetaData
+- onPlay, removeOnPlay
+- onPause, removeOnPause
+- onResume, removeOnResume
+- onStop, removeOnStop
+- onCompleted, removeOnCompleted
+- onSeek, removeOnSeek
+
 
 ## License
 
