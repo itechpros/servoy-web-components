@@ -3,7 +3,8 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
       restrict: 'E',
       scope: {
           api: '=svyApi',
-          model: '=svyModel'
+          model: '=svyModel',
+          handlers: '=svyHandlers'
       },
       controller: function($scope, $element, $attrs) {
 
@@ -11,7 +12,7 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
               'license': $scope.model.license,
               'sourceURL': $scope.model.sourceURL
           })
-                    
+  
           $scope.api.finish = function(){
               wp.finish()
               return true
@@ -57,6 +58,47 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
           $scope.api.isPlaying = function() {
               return wp.isPlaying()
           }
+          
+          var handlers = [
+              ['onLoad', 'removeOnLoad'],
+              ['onReady', 'removeOnReady'],
+              ['onBitrateChanged', 'removeOnBitrateChanged'],
+              ['onStats', 'removeOnStats'],
+              ['onPlayheadTime', 'removeOnPlayheadTime'],
+              ['onError', 'removeOnError'],
+              ['onStateChanged', 'removeOnStateChanged'],
+              ['onVolume', 'removeOnVolume'],
+              ['onMetadata', 'removeOnMetaData'],
+              ['onPlay', 'removeOnPlay'],
+              ['onPause', 'removeOnPause'],
+              ['onResume', 'removeOnResume'],
+              ['onStop', 'removeOnStop'],
+              ['onCompleted', 'removeOnCompleted'],
+              ['onSeek', 'removeOnSeek']],
+              fn = {}
+              
+          for (var i=0; i<handlers.length; i+=1) {
+
+              fn[handlers[i][0]] = (
+                  function(h) {                  
+                      return function(e) {
+                          $scope.handlers[h]()
+                      }
+                  })(handlers[i][0])
+              
+              $scope.api[handlers[i][1]] = (
+                  function(h,m) { 
+                      return function() {
+                          wp[m](fn[h])
+                          return true
+                      }
+                  })(handlers[i][0],handlers[i][1])
+              
+              if ($scope.handlers[handlers[i][0]])
+                  wp[handlers[i][0]](fn[handlers[i][0]])
+
+          }
+
       },
       templateUrl: 'wowzaplayer/Wowza/Wowza.html'
     };

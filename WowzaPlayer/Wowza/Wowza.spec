@@ -90,6 +90,84 @@
         "isPlaying":
            {
                "returns":"boolean"
+           },           
+        "removeOnLoad":
+           {
+               "returns":"boolean"
+           },
+        "removeOnReady":
+           {
+               "returns":"boolean"
+           },
+        "removeOnBitrateChanged":
+           {
+               "returns":"boolean"
+           },
+        "removeOnStats":
+           {
+               "returns":"boolean"
+           },
+        "removeOnPlayheadTime":
+           {
+               "returns":"boolean"
+           },
+        "removeOnError":
+           {
+               "returns":"boolean"
+           },
+        "removeOnStateChanged":
+           {
+               "returns":"boolean"
+           },
+        "removeOnVolume":
+           {
+               "returns":"boolean"
+           },
+        "removeOnMetaData":
+           {
+               "returns":"boolean"
+           },
+        "removeOnPlay":
+           {
+               "returns":"boolean"
+           },
+        "removeOnPause":
+           {
+               "returns":"boolean"
+           },
+        "removeOnResume":
+           {
+               "returns":"boolean"
+           },
+        "removeOnStop":
+           {
+               "returns":"boolean"
+           },
+        "removeOnCompleted":
+           {
+               "returns":"boolean"
+           },
+        "removeOnSeek":
+           {
+               "returns":"boolean"
            }
-    }
+    },
+    "handlers":
+    {
+        "onLoad": "function",
+        "onReady": "function",
+        "onBitrateChanged": "function",
+        "onStats": "function",
+        "onPlayheadTime": "function",
+        "onError": "function",
+        "onStateChanged": "function",
+        "onVolume": "function",
+        "onMetadata": "function",
+        "onPlay": "function",
+        "onPause": "function",
+        "onResume": "function",
+        "onStop": "function",
+        "onCompleted": "function",
+        "onSeek": "function"
+    }    
 }
