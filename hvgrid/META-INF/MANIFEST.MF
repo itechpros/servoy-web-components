@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: hvgrid
+Bundle-Name: HV Grid
+Bundle-Version: 1.0.0
+Package-Type: Web-Component
+
+Name: Grid/Grid.spec
+Web-Component: True
+
