@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="row">
+<div class="container" id="hvgrid">
+  <!--div class="row">
     <div class="col">
       1 of 2
     </div>
@@ -17,5 +17,10 @@
     <div class="col">
       3 of 3
     </div>
-  </div>
+  </div-->
 </div>
+<ul ng-if="hasPagination()">
+  <li ng-class="model.currentPage == 1 ? 'disabled' : ''"><a href="#" ng-click="modifyPage(-1)" tabindex="-1">&laquo;</a></li>
+  <li class="disabled"><a href="#" tabindex="-1">{{model.currentPage}}</a></li>
+  <li ng-class="hasNext() ? '' : 'disabled'"><a href="#" ng-click="modifyPage(1)" tabindex="-1">&raquo;</a></li>
+</ul>
