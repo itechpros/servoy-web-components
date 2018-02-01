@@ -16,7 +16,12 @@
 		"columns": { "type": "column[]", "droppable": true, "pushToServer": "shallow", "elementConfig": { "pushToServer": "shallow" } },
 		"currentPage": { "type": "int", "default": 1, "tags": { "scope": "runtime" }, "pushToServer": "shallow" },
 		"foundset": { "type": "foundset","default" : {"foundsetSelector":""} , "pushToServer": "allow", "initialPreferredViewPortSize": 130, "sendSelectionViewportInitially": true },
-		"pageSize": { "type": "int", "default": 20 }
+		"pageSize": { "type": "int", "default": 20 },
+		"columnsPerRow": { "type": "int", "default": 3 },
+		"template": { "type": "dataprovider" },
+		"columnCssClass": { "type": "string", "default": "col" },
+		"rowCssClass": { "type": "string", "default": "row" },
+		"onCellClick": { "type": "function" }
 	},
 	"types": {
 		"column": {
@@ -26,11 +31,13 @@
 			"headerText": { "type": "tagstring", "tags": { "useAsCaptionInDeveloper" : true, "captionPriority" : 1, "showInOutlineView": true }},
 			"styleClass": { "type": "styleclass" },
 			"styleClassDataprovider": { "type": "dataprovider", "forFoundset": "foundset" },
-			"valuelist": { "type": "valuelist", "for": "dataprovider" },
-			"width": { "type": "string", "default": "auto"},
-			"initialWidth": { "type": "string", "tags": { "scope": "runtime" } },
-			"autoResize": { "type": "boolean", "default": false },
 			"showAs": { "type": "string", "default": "text", "values": ["text", "html", "sanitizedHtml"] }
 		}
+    },
+    "api": {
+        "init": {
+            "returns": "boolean",
+            "parameters": [{ "name": "template", "type": "object"}]
+        }
     }
 }
