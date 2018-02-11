@@ -11,7 +11,10 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
           
     	  var stack=[],
 		      count=0,
-			  makeTemplate
+			  makeTemplate,
+			  showRows,
+              columns = $scope.model.columns
+			  
 		  makeTemplate = function(template,container, row) {
 			  var a,b
 		  	  for(a in template) {
@@ -24,7 +27,7 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
 		  			  if (a==='html') $(container).html(template[a])
 		  			  else if (a==='columnAsName') $(container).html(template[a])
 					  else $(container).attr(a,template[a])
-		  		  else if(typeof template[a]==='string')
+		  		  else if(typeof template[a]==='number')
 		  			  if (a==='html') $(container).html(template[a])
 		  			  else if (a==='columnAsIndex') $(container).html(columns[template[a]].dataprovider[row])
 					  else $(container).attr(a,template[a])
@@ -36,17 +39,20 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
 		      }
 		  }
     	  
+		  showRows = function(start, end) {
+			  
           var rows = $scope.model.foundset.viewPort.rows,
-              columns = $scope.model.columns,
               container = $('#hvgrid'),
               row, column,
               columnCssClass = $scope.model.columnCssClass || 'col',
 			  rowCssClass = $scope.model.rowCssClass || 'row',
 			  template = $scope.model.template,
 			  onCellClick = $scope.model.onCellClick
-          
-          for (var i=0; i<rows.length; i+=1) {
-        	  var c = i % $scope.model.columnsPerRow
+		  $(container).empty()
+	      end = end > $scope.model.foundset.viewPort.rows.length ? $scope.model.foundset.viewPort.rows.length : end
+	    		  console.log(start,end,$scope.model.foundset.viewPort.rows)
+          for (var i=start; i<end; i+=1) {
+        	  var c = (i - start) % $scope.model.columnsPerRow
         	  if (!c) {
                   row = document.createElement('div')
                   $(row).addClass(rowCssClass)
@@ -71,7 +77,8 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
                   }
               
           }
-          
+          }
+          showRows(0, $scope.model.columnsPerRow * $scope.model.pageSize)
           //$scope.api.init = function(template) {
         	//  $scope.model.template = template
           //}
@@ -84,6 +91,13 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
   			  console.log('has pagination')
 			  return $scope.model.pageSize && $scope.model.foundset && ($scope.model.foundset.serverSize > ($scope.model.pageSize * $scope.model.columnsPerRow) || $scope.model.foundset.hasMoreRows);
 		  }
+  		  $scope.modifyPage = function(count) {
+  			  //console.log(currentPage)
+  			  //if ()
+			  $scope.model.currentPage += count
+			  var rowsPerPage = $scope.model.columnsPerRow * $scope.model.pageSize
+  			  showRows(($scope.model.currentPage - 1) * rowsPerPage, $scope.model.currentPage * rowsPerPage)
+  		  }
 
       },
       templateUrl: 'hvgrid/Grid/Grid.html'
