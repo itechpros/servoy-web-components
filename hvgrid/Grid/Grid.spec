@@ -14,7 +14,8 @@
 		"template": { "type": "dataprovider" },
 		"columnCssClass": { "type": "string", "default": "col" },
 		"rowCssClass": { "type": "string", "default": "row" },
-		"onCellClick": { "type": "function" }
+		"onCellClick": { "type": "function" },
+		"overflow": { "type": "string", "values": [{"scroll":"scroll"},{"hidden": "hidden"},{"auto": "auto"},{"visible": "visible"}], "default": "scroll" }
 	},
 	"types": {
 		"column": {

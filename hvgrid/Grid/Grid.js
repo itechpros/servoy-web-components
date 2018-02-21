@@ -10,7 +10,11 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
 		  
           $scope.model.fsLoadSize = $scope.model.fsLoadSize > fsRows ? $scope.model.fsLoadSize : fsRows
         	
-    	  
+    	  var attrVal = function(attr, row) {
+    		  if (typeof attr === 'number')
+    			  return $scope.model.columns[attr].dataprovider[row]
+    		  else return attr
+    	  }
           var makeTemplate = function(template, container, row) {
               var a,b,c
               for(a in template) {
@@ -19,8 +23,7 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
                            makeTemplate(template[a][c],container,row)
                     }
                   }
-                  else if (a==='html') $(container).html(template[a])
-                  else if (a==='columnId') $(container).html($scope.model.columns[template[a]].dataprovider[row])
+                  else if (a==='html') $(container).html(attrVal(template[a], row))
                   else if (typeof template[a] === 'object') {
                       if (a==='style')
                           for (c in template[a])
