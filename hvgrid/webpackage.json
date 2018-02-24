@@ -1,0 +1,10 @@
+{
+    "name":"hvgrid",
+    "displayName":"H/V Grid",
+    "packageType": "Web-Component",
+    "icon": "http://clipart-library.com/image_gallery/383764.png",
+    "description": "Bootstrap Grid AngularJS directive",
+    "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/hvgrid/README.md",
+    "sourceUrl": "https://github.com/itechpros/servoy-web-components/tree/master/hvgrid",
+    "releases": [{"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/hvgrid.zip"}]
+}

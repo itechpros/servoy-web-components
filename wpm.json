@@ -3,5 +3,6 @@
     {"name":"advancedsearchbox", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/AdvancedSearchbox/webpackage.json"},
     {"name":"notificationswidget", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/NotificationsWidget/webpackage.json"},
     {"name":"menubar", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/MenuBar/webpackage.json"},
-    {"name":"wowza", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/WowzaPlayer/webpackage.json"}
+    {"name":"wowza", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/WowzaPlayer/webpackage.json"},
+    {"name":"hvgrid", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/hvgrid/webpackage.json"}
 ]
