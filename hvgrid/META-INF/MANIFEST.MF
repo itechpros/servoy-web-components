@@ -1,5 +1,4 @@
 Manifest-Version: 1.0
-CSS-ClientLibs: hvgrid/Grid/bootstrap/css/bootstrap.min.css;name=bootstrap.min.css;version=4.0.0
 Bundle-SymbolicName: hvgrid
 Bundle-Name: HV Grid
 Bundle-Version: 1.0.0

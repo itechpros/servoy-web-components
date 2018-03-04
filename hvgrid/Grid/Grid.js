@@ -2,7 +2,8 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
     return {
       restrict: 'E',
       scope: {
-          model: '=svyModel'
+          model: '=svyModel',
+		  svyServoyapi: "="
       },
       controller: function($scope, $element, $attrs, $window) {
           
@@ -108,7 +109,13 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
               else showRows(($scope.model.currentPage - 1) * fsRows - $scope.model.foundset.viewPort.startIndex, $scope.model.currentPage * fsRows- $scope.model.foundset.viewPort.startIndex)
           }
 
-          $scope.modifyPage(0)
+          $scope.showEditorHint = function() {
+              return (!$scope.model.columns || $scope.model.columns.length == 0) && $scope.svyServoyapi && $scope.svyServoyapi.isInDesigner()
+          }
+
+
+          if ($scope.model.columns && $scope.model.columns.length)
+              $scope.modifyPage(0)
 
       },
       templateUrl: 'hvgrid/Grid/Grid.html'

@@ -2,6 +2,7 @@
     "name": "hvgrid-Grid",
     "displayName": "Grid",
     "version": 1,
+    "icon": "hvgrid/grid/icon.png",
     "definition": "hvgrid/Grid/Grid.js",
     "model":
     {
@@ -12,7 +13,7 @@
         "rowsPerPage": { "type": "int", "default": 10 },
         "columnsPerRow": { "type": "int", "default": 3 },
         "template": { "type": "dataprovider" },
-        "columnCssClass": { "type": "string", "default": "col" },
+        "columnCssClass": { "type": "string", "default": "col-md-4" },
         "rowCssClass": { "type": "string", "default": "row" },
         "onCellClick": { "type": "function" },
         "overflow": { "type": "string", "values": [{"scroll":"scroll"},{"hidden": "hidden"},{"auto": "auto"},{"visible": "visible"}], "default": "visible" }
