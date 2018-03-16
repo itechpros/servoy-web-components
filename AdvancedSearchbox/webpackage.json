@@ -6,5 +6,6 @@
     "description": "A directive for AngularJS providing advanced visual search box",
     "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/AdvancedSearchbox/README.md",
     "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/AdvancedSearchbox",
-    "releases" : [{"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/advancedsearchbox.zip"}]
+    "releases" : [{"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/advancedsearchbox.zip"},
+                  {"version":"1.0.2","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/advancedsearchbox.1.0.2.zip"}]
 }

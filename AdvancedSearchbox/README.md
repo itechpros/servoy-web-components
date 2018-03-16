@@ -23,6 +23,7 @@ Component Properties:
    }
 ]
 ```
+- disableTypeahead: enable/disable typeahead dropdown
 - crlfAction: Servoy form function for "Enter" key
   - type: function
   - default: -none-

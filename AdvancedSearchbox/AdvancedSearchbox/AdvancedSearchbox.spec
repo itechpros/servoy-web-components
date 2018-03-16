@@ -18,6 +18,7 @@
     }
   ],
   "model": {
+    "disableTypeahead": { "type": "boolean", "default": false },
     "availableSearchParams":"searchParam[]",
     "parametersLabel": {
       "type": "string",

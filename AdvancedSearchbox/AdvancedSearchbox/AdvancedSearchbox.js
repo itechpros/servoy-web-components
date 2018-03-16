@@ -7,6 +7,8 @@ angular.module('advancedsearchboxAdvancedSearchbox',['servoy', 'angular-advanced
 		},
 		controller: function($scope, $element, $attrs, $window) {
 
+			$scope.disableTypeahead = $scope.model.disableTypeahead 
+			
 			$scope.parametersLabel = $scope.model.parametersLabel
 			
 			$scope.searchBoxPlaceholder = $scope.model.placeholder

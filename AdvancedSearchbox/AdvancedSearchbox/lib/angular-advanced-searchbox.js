@@ -18,6 +18,7 @@ angular.module('angular-advanced-searchbox', [])
                 model: '=ngModel',
                 parameters: '=',
                 parametersLabel: '@',
+                disableTypeahead: '@',
                 parametersDisplayLimit: '=?',
                 placeholder: '@',
                 searchThrottleTime: '=?'
@@ -32,6 +33,7 @@ angular.module('angular-advanced-searchbox', [])
 
                     $scope.parametersLabel = $scope.parametersLabel || 'Parameter Suggestions';
                     $scope.parametersDisplayLimit = $scope.parametersDisplayLimit || 8;
+                    $scope.typeaheadDisplayLimit = ($scope.disableTypeahead === 'true') ? 0 : $scope.parametersDisplayLimit;
                     $scope.placeholder = $scope.placeholder || 'Search ...';
                     $scope.searchThrottleTime = $scope.searchThrottleTime || 1000;
                     $scope.searchParams = [];
