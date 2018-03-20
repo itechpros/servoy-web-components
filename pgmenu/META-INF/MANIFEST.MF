@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: pgmenu
+Bundle-Name: pgAdmin Menu
+Bundle-Version: 1.0.0
+Package-Type: Web-Component
+
+Name: Menu/Menu.spec
+Web-Component: True
+
