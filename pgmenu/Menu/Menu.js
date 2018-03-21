@@ -2,53 +2,53 @@ angular.module('pgmenuMenu',['servoy']).directive('pgmenuMenu', function() {
     return {
       restrict: 'E',
       scope: {
-    	  model: '=svyModel'
+          model: '=svyModel',
+          svyServoyapi: '='
       },
-      controller: function($scope, $element, $attrs) {
-
+      controller: function($scope, $element, $attrs, $window) {
       
-      
-          var obj = this,
-	        // menu navigation bar
-	        navbar = $('#navbar-menu > ul').first(),
-	        // Drop down menu for objects
-	        $obj_mnu = navbar.find('li#mnu_file > ul.dropdown-menu').first(),
-	        $obj_mnu2 = navbar.find('li#mnu_obj > ul.dropdown-menu').first()
+          var navbar = $('#navbar-menu > ul').first()
 
+          function init(){  
+              var a = 0,
+                  items = []
+              for (; a < $scope.model.groups.length; a += 1) {
+                  navbar.html(navbar.html() + 
+                      '<li id="pgmnu_' + a + '" class="dropdown" id="testitem">'+
+                      '<a href="#" accesskey="f" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' + $scope.model.groups[a].label + '<span class="caret"></span></a>'+
+                      '<ul class="dropdown-menu navbar-inverse" role="menu"></ul>'+
+                      '</li>')
+              }
+          }
 
-	console.log(pgAdmin.Browser)
-	var i1=new pgAdmin.Browser.MenuItem({"enable":true,"name":"mnu_preferences","label":"Preferences","priority":999,"module":{callbacks:{show:function(){console.log('SHOW IT')}}},"callback":"show"})
-	   ,i2=new pgAdmin.Browser.MenuItem({"enable":true,"name":"mnu_resetlayout","label":"Reset Layout","priority":999,"module":{},"callback":"show"})
+          init()
 
-	
-	        pgAdmin.Browser.MenuCreator(
-	          $obj_mnu,
-	 {"mnu_preferences":i1,
-	  "mnu_resetlayout":i2}
-       );
+          $window.pgMenuCtl = new PGMenuCtl(genMenu)
+              
+          function genMenu(grp, data){
+              var a = 0,
+                  $g = navbar.find('li#pgmnu_' + grp + ' > ul.dropdown-menu').first(),
+                  o = {}
+              for(; a < data.length; a += 1) {
+                  o[data[a].name] = new pgAdmin.Browser.MenuItem(data[a])
+                  pgAdmin.Browser.MenuCreator($g, o)
+                  o = {}
+              }
+          }
 
-
-	    
-	    
-	var create_submenu=        pgAdmin.Browser.MenuGroup(
-	{"label":"Import","single":false}
-	,[{"name":"import","label":"Import/Export...","priority":10,"module":{"initialized":true},"callback":"callback_import_export","category":"create","node":"table","is_disabled":false,
-	$el: $('<li class="menu-item disabled"><a href="#">No object selected</a></li>'),//{"0":{},"length":1},
-	"context":{"name":"Import/Export...","disabled":false}},
-	{"name":"import","label":"Import/Export...","priority":10,"module":{"initialized":true},"callback":"callback_import_export","category":"create","node":"table","is_disabled":false,
-	$el: $('<li class="menu-item disabled"><a href="#">GOGOGbject selected</a></li>'),//{"0":{},"length":1},
-	"context":{"name":"Import/Export...","disabled":false}}]
-	,false
-	)
-	//);
-
-	$obj_mnu2.append(create_submenu.$el)
-
-
-      
-      
+          $scope.showEditorHint = function() {
+              return $scope.svyServoyapi.isInDesigner()
+          }
       
       },
       templateUrl: 'pgmenu/Menu/Menu.html'
     };
   })
+  
+var PGMenuCtl = function(fn){
+    this.fn=fn
+}
+
+PGMenuCtl.prototype.group = function(grp, data){
+    this.fn(grp, data)
+}

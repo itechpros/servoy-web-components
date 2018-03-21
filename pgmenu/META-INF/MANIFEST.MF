@@ -4,6 +4,9 @@ Bundle-Name: pgAdmin Menu
 Bundle-Version: 1.0.0
 Package-Type: Web-Component
 
+Name: Group/Group.spec
+Web-Component: True
+
 Name: Menu/Menu.spec
 Web-Component: True
 

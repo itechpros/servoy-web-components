@@ -56,6 +56,11 @@
 	],
 	"model":
 	{
-		"yourName" : {"type": "string", "default":"World"}
+		"groups":{"type":"group[]", "droppable":true}
+	},
+	"types":
+	{
+		"group":{"label":{"type":"string"}}
 	}
+	
 }
