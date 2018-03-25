@@ -11,6 +11,10 @@
 	},
 	"types":
 	{
-		"item":{"label":{"type":"string"}}
+		"item":
+		{
+			"label":{"type":"string"},
+			"callback": { "type": "function" }
+		}
 	}
 }

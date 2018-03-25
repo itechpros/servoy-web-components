@@ -56,11 +56,21 @@
 	],
 	"model":
 	{
-		"groups":{"type":"group[]", "droppable":true}
+		"groups": { "type":"group[]", "droppable":true},
+		"menuItems": { "type": "item[]" }
 	},
 	"types":
 	{
-		"group":{"label":{"type":"string"}}
+		"group": { "label":{"type":"string"} },
+		"item":
+		 {
+		     "label": { "type": "string"},
+		     "callback": { "type": "function" },
+		     "items": { "type": "item[]" }
+		 }
+	},
+	"api":
+	{
+	    "initMenu": { "returns": "boolean", "parameters": [ {"name": "items", "type": "item[]"} ] }
 	}
-	
 }

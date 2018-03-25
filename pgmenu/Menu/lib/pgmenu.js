@@ -54,7 +54,7 @@
         cb: this.callback,
         data: this.data,
       }).addClass('menu-link');
-
+//console.log(url)
       this.is_disabled = this.disabled(node, item);
       if (this.icon) {
         url.append($('<i></i>', {
@@ -242,7 +242,7 @@
 
     for (var idx in items) {
       m = items[idx];
-console.log(m)
+//console.log(m)
       $menu.append(m.$el);
       if (!m.is_disabled) {
         submenus[ctx + ctxId] = m.context;
@@ -400,7 +400,6 @@ console.log(m)
       return false;
     }
     var d = this.$element.data('pgMenu');
-console.log(d)
     if (d.cb) {
       var cb = d.module && d.module['callbacks'] && d.module['callbacks'][d.cb] || d.module && d.module[d.cb];
       if (cb) {
