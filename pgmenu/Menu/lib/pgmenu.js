@@ -1,4 +1,4 @@
-(function(){
+function pgMenuDefine(){
   'use strict';
 
   pgAdmin.Browser = pgAdmin.Browser || {};
@@ -242,7 +242,6 @@
 
     for (var idx in items) {
       m = items[idx];
-//console.log(m)
       $menu.append(m.$el);
       if (!m.is_disabled) {
         submenus[ctx + ctxId] = m.context;
@@ -461,4 +460,7 @@
       });
 
   return pgAdmin.Browser.MenuItem;
-})()
+}
+
+
+//pgMenuDefine()

@@ -56,12 +56,10 @@
 	],
 	"model":
 	{
-		"groups": { "type":"group[]", "droppable":true},
 		"menuItems": { "type": "item[]" }
 	},
 	"types":
 	{
-		"group": { "label":{"type":"string"} },
 		"item":
 		 {
 		     "label": { "type": "string"},

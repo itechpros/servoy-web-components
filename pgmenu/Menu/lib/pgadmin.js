@@ -1,5 +1,4 @@
-//define([], function() {
-(function(){// defineAdmin(){
+function pgAdminDefine(){
   var pgAdmin = window.pgAdmin = window.pgAdmin || {};
 
   // Reference:
@@ -103,4 +102,6 @@
   };
 
   return pgAdmin;
-})()//);
+}
+
+//pgAdminDefine()
