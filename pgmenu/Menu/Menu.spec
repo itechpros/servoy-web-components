@@ -1,10 +1,10 @@
 {
-	"name": "pgmenu-Menu",
-	"displayName": "Menu",
-	"version": 1,
-	"definition": "pgmenu/Menu/Menu.js",
-	"libraries": [
-	    {
+    "name": "pgmenu-Menu",
+    "displayName": "Menu",
+    "version": 1,
+    "definition": "pgmenu/Menu/Menu.js",
+    "libraries": [
+        {
             "name": "style.css",
             "version": "1",
             "mimetype": "text/css",
@@ -23,52 +23,49 @@
             "url": "pgmenu/Menu/lib/pgadmin.css"
         },
         {
-        	"name": "underscore.js",
-        	"version": "1",
-        	"mimetype": "text/javascript",
-        	"url": "pgmenu/Menu/lib/underscore.js"
-    	},
+            "name": "underscore.js",
+            "version": "1",
+            "mimetype": "text/javascript",
+            "url": "pgmenu/Menu/lib/underscore.js"
+        },
         {
-        	"name": "underscore.string.js",
-        	"version": "1",
-        	"mimetype": "text/javascript",
-        	"url": "pgmenu/Menu/lib/underscore.string.js"
-    	},
-    	{
-        	"name": "pgadmin.js",
-        	"version": "1",
-        	"mimetype": "text/javascript",
-        	"url": "pgmenu/Menu/lib/pgadmin.js"
-    	},
-    	{
-        	"name": "pgmenu.js",
-        	"version": "1",
-        	"mimetype": "text/javascript",
-        	"url": "pgmenu/Menu/lib/pgmenu.js"
-    	},
-    	{
-        	"name": "error.js",
-        	"version": "1",
-        	"mimetype": "text/javascript",
-        	"url": "pgmenu/Menu/lib/error.js"
-    	}
-	
-	],
-	"model":
-	{
-		"menuItems": { "type": "item[]" }
-	},
-	"types":
-	{
-		"item":
-		 {
-		     "label": { "type": "string"},
-		     "callback": { "type": "function" },
-		     "items": { "type": "item[]" }
-		 }
-	},
-	"api":
-	{
-	    "initMenu": { "returns": "boolean", "parameters": [ {"name": "items", "type": "item[]"} ] }
-	}
+            "name": "underscore.string.js",
+            "version": "1",
+            "mimetype": "text/javascript",
+            "url": "pgmenu/Menu/lib/underscore.string.js"
+        },
+        {
+            "name": "pgadmin.js",
+            "version": "1",
+            "mimetype": "text/javascript",
+            "url": "pgmenu/Menu/lib/pgadmin.js"
+        },
+        {
+            "name": "pgmenu.js",
+            "version": "1",
+            "mimetype": "text/javascript",
+            "url": "pgmenu/Menu/lib/pgmenu.js"
+        },
+        {
+            "name": "error.js",
+            "version": "1",
+            "mimetype": "text/javascript",
+            "url": "pgmenu/Menu/lib/error.js"
+        }
+    
+    ],
+    "model":
+    {
+        "callback": { "type": "function" },
+        "menuItems": { "type": "item[]" }
+    },
+    "types":
+    {
+        "item":
+         {
+             "label": { "type": "string" },
+             "id": { "type": "string" },
+             "items": { "type": "item[]" }
+         }
+    }
 }

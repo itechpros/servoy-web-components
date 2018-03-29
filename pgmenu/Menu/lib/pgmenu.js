@@ -461,6 +461,3 @@ function pgMenuDefine(){
 
   return pgAdmin.Browser.MenuItem;
 }
-
-
-//pgMenuDefine()

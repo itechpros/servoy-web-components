@@ -103,5 +103,3 @@ function pgAdminDefine(){
 
   return pgAdmin;
 }
-
-//pgAdminDefine()

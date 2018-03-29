@@ -8,37 +8,50 @@ angular.module('pgmenuMenu',['servoy']).directive('pgmenuMenu', function() {
       },
       controller: function($scope, $element, $attrs, $window) {
       
-          var navbar = $('#navbar-menu > ul').first()
+          var navbar = $('#navbar-menu > ul').first(),
+              submenus = []
 
+          function getCallback(a, b) {
+              if (!$scope.model.callback)
+                  return function(){}                  
+              var o = {}
+              if (a) o.label = a
+              if (b) o.id = b
+              return function(){ $window.executeInlineScript($scope.model.callback.formName, $scope.model.callback.script, [o]) }
+          }
+          
           function menuMainGroup(id, item) {
-              var el,
-                  single = item.items && item.items.length ? false : true
-              el = $('<li id="pgmnu_' + id + '" ' + (single ? '' : 'class="dropdown"') + '>'+
-                     '<a onclick="clicker" href="' + (item.href ? item.href : '#') + '" ' +
-                     (single ? 'class="menu-item"' : 'class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"') +
-                     '>' + item.label +
-                     (single ? '' : '<span class="caret"></span>') +
-                     '</a>' +
-                     (single ? '' : '<ul class="dropdown-menu navbar-inverse" role="menu"></ul>') +
-                     '</li>')          
-              if (item.callback) {
-            	  //console.log(item,id)
-                  $(document).on(
-                      'click',
-                      '#pgmnu_' + id,
-                      (function(a, b, c) {
-                    
-                           return function(data){ $window.executeInlineScript(a, b, [c]) }
-                      })(item.callback.formName,
-                         item.callback.script,
-                         {label: item.label})
-                  )}
+              var el
+              if (item.items && item.items.length)
+                  el = $('<li id="pgmnu_' + id + '" class="dropdown">'+
+                         '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
+                         item.label +
+                         '<span class="caret"></span>' +
+                         '</a>' +
+                         '<ul class="dropdown-menu navbar-inverse" role="menu"></ul>' +
+                         '</li>')
+              else {
+                  el = $('<li id="pgmnu_' + id + '">' +
+                         '<a href="#" class="menu-item">' +
+                         item.label +
+                         '</a>' +
+                         '</li>')
+                  if ($scope.model.callback)
+                      $(document).on('click', '#pgmnu_' + id, getCallback(item.label, item.id) )
+              }
               navbar.append(el)
           }
 
-          function initMenu(){
-              console.log('ini')
-              var a,b,c,$g,el,grp,itm,submenu
+          function initMenu() {
+              if (!$scope.model.menuItems || !$scope.model.menuItems.length) return
+              var a,
+                  b,
+                  c,
+                  $g,
+                  el,
+                  grp,
+                  itm,
+                  submenu
               for (a = 0; a < $scope.model.menuItems.length; a += 1) {
                   menuMainGroup(a, $scope.model.menuItems[a])
                   if ($scope.model.menuItems[a].items) {
@@ -51,20 +64,13 @@ angular.module('pgmenuMenu',['servoy']).directive('pgmenuMenu', function() {
                                 priority: b,
                                 enable: true,
                                 url: '#',
-                                data: { label: $scope.model.menuItems[a].items[b].label },
                                 module:{
                                     callbacks: {
-                                        cb: $scope.model.menuItems[a].items[b].callback ? (function(a, b) {
-                                     //       console.log(a,b)
-                                                                                              return function(data){ console.log(a,b,data);$window.executeInlineScript(a, b, [data]) }
-                                                                                          })($scope.model.menuItems[a].items[b].callback.formName,
-                                                                                             $scope.model.menuItems[a].items[b].callback.script)
-                                                                                        : function(){}
+                                        cb: getCallback($scope.model.menuItems[a].items[b].label, $scope.model.menuItems[a].items[b].id)
                                     }
                                 },
                                callback: 'cb' 
                               }
-                              console.log(itm)
                               grp = {}
                               grp[itm.name] = new pgAdmin.Browser.MenuItem(itm)
                               pgAdmin.Browser.MenuCreator($g, grp)
@@ -72,16 +78,15 @@ angular.module('pgmenuMenu',['servoy']).directive('pgmenuMenu', function() {
                           else {
                               submenu=[]
                               for (c = 0; c < $scope.model.menuItems[a].items[b].items.length; c += 1) {
-                                   el = $('<li id="pgmu_item_'+a+'_'+b+'_'+c+'" class="menu-item"><a href="#">' + $scope.model.menuItems[a].items[b].items[c].label + '</a></li>')
-                                   $(document).on(
-                                       'click',
-                                       '#pgmu_item_'+a+'_'+b+'_'+c,
-                                       (function(a, b, c) {
-                                            return function(){ $window.executeInlineScript(a, b, [c]) }
-                                       })($scope.model.menuItems[a].items[b].items[c].callback.formName,
-                                          $scope.model.menuItems[a].items[b].items[c].callback.script,
-                                          {label:$scope.model.menuItems[a].items[b].items[c].label})
-                                   )
+                                  itm = 'pgmnu_item_' + a + '_' + b + '_' + c
+                                  submenus.push(itm)
+                                   el = $('<li id="' + itm + '" class="menu-item"><a href="#">' + $scope.model.menuItems[a].items[b].items[c].label + '</a></li>')
+                                   if ($scope.model.callback)
+                                       $(document).on(
+                                           'click',
+                                           '#' + itm,
+                                           getCallback($scope.model.menuItems[a].items[b].items[c].label, $scope.model.menuItems[a].items[b].items[c].id)
+                                       )
                                    submenu.push({
                                      priority: c,
                                      $el: el,
@@ -95,46 +100,23 @@ angular.module('pgmenuMenu',['servoy']).directive('pgmenuMenu', function() {
                   
               }
           }
-        //  $scope.model.menuItems=[]
-  //        if (!$scope.model.menuItems) {
-//              initMenu()
-    //      }
           
           $scope.showEditorHint = function() {
               return $scope.svyServoyapi.isInDesigner()
           }
-
-          $scope.api.initMenu = function(items) {
-              $scope.model.menuItems = items
-              initMenu()
-          }
           
           $scope.$watch('model.menuItems', function() {
-
-        	  $(document)
-			    .off('click.pg.menu.data-api', '[data-toggle^="pg-menu"]')
-				
-              //pgAdmin = {}
+              $(document).off('click.pg.menu.data-api', '[data-toggle^="pg-menu"]')              
+              submenus.map( function(i){ $(document).off('click', '#' + i) } )              
+              submenus = []
+              $.makeArray( navbar.children('li') ).map( function(i){ $(document).off('click', '#' + i.id) } )
+              navbar.empty()
               pgAdminDefine()
               pgMenuDefine()
-        
-			  $(document).off('click', '.menu-item')
-  		 $.makeArray(navbar.children('li')).map(function(i){$(document).off('click', '#' + i.id)})
-			 console.log(navbar.children('li > ul'))//.map(function(i){console.log(i)})
-			 
-			  //$(document).off('click.myevent', '.form-template-name');
-			  
-    //          while(navbar.hasChildNodes())navbar.removeChild(navbar.lastChild)
-              navbar.empty()
               initMenu()
-              
-              
           })
           
-      
       },
       templateUrl: 'pgmenu/Menu/Menu.html'
     };
   })
-
-  function clicker(){console.log('click')}
