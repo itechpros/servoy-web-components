@@ -1,0 +1,10 @@
+{
+    "name":"pgmenu",
+    "displayName":"pgMenu",
+    "packageType": "Web-Component",
+    "icon": "https://image.flaticon.com/icons/svg/148/148795.svg",
+    "description": "pgAdmin Menu AngularJS directive",
+    "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/pgmenu/README.md",
+    "sourceUrl": "https://github.com/itechpros/servoy-web-components/tree/master/pgmenu",
+    "releases": [{"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/pgmenu.zip"}]
+}
