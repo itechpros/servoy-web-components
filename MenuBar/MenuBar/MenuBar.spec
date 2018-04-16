@@ -25,7 +25,19 @@
     ],
     "model":
     {
-        "menu": "string"
+        "callback": { "type": "function" },
+        "menuItems": { "type": "item[]" }
+    },
+    "types":
+    {
+        "item":
+         {
+             "label": { "type": "string" },
+             "id": { "type": "string" },
+             "horizontal": { "type": "boolean" },
+             "icon": { "type": "string" },
+             "items": { "type": "item[]" }
+         }
     },
     "api":
     {
@@ -41,11 +53,6 @@
                     {
                         "name":"options",
                         "type":"object",
-                        "optional": true
-                    },
-                    {
-                        "name":"callbacks",
-                        "type": "function[]",
                         "optional": true
                     }
                 ]
