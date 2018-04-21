@@ -26,7 +26,9 @@
     "model":
     {
         "callback": { "type": "function" },
-        "menuItems": { "type": "item[]" }
+        "menuItems": { "type": "item[]" },
+        "brandText": { "type": "string" },
+        "brandLogo": { "type": "string" }
     },
     "types":
     {
@@ -34,8 +36,24 @@
          {
              "label": { "type": "string" },
              "id": { "type": "string" },
+             "href": { "type": "string" },
+             "right": { "type": "boolean" },
              "horizontal": { "type": "boolean" },
              "icon": { "type": "string" },
+             "items": { "type": "item[]" },
+             "panel": { "type": "string",
+                        "values": [ {"off": ""},
+                                    {"Full": "megamenu-panel"},
+                                    {"Half": "megamenu-panel megamenu-panel-half"},
+                                    {"Quarter": "megamenu-panel megamenu-panel-quarter"}
+                                  ]
+                      },
+             "grid": { "type": "item[]" },
+             "list": { "type": "listitem[]" }
+         },
+         "listitem": 
+         {
+             "title": { "type": "string" },
              "items": { "type": "item[]" }
          }
     },

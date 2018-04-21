@@ -1,4 +1,4 @@
- 
+function navigationInit(){ 
 ;(function ( $, window, document, undefined ){
  
     $.navigation = function(element, options){
@@ -490,6 +490,7 @@
  
     $.fn.navigation = function(options){
         return this.each(function(){
+            $(this).removeData();
             if (undefined === $(this).data("navigation")){
                 var plugin = new $.navigation(this, options);
                 $(this).data("navigation", plugin);
@@ -498,3 +499,7 @@
     };
  
 })( jQuery, window, document );
+}
+
+
+navigationInit()

@@ -23,6 +23,16 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
 					          '">'
                       trav(items[i].items)
                       menu += '</ul>'
+                  } else if (items[i].list && items[i].list.length) {
+                	  menu += '<li><a href="#">' + items[i].label + '</a>' +
+                	          '<ul class="nav-dropdown"><div class="megamenu-lists">'
+                      for (var j = 0, m = items[i].list.length; j < m; j += 1) {
+                    	  menu += '<ul class="megamenu-list list-col-' + m + '">' +
+                    	          '<li class="megamenu-list-title"><a href="#">List title</a></li>'
+                    	  if (items[i].list[j].items && items[i].list[j].items.length) trav(items[i].list[j].items)
+                    	  menu += '</ul>'
+                      }
+                      menu += '</div></ul></li>'
                   } else
                 	  menu += '<li><a href="javascript:menubarCallback(\'' +
 					          (items[i].id || '').replace(/'/g, "\\'") + 
@@ -30,20 +40,30 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
 							  (items[i].label || '').replace(/'/g, "\\'") + '\')">' +
 							  (items[i].icon ? '<i class="' + items[i].icon + '"></i>' : '') +
 							  items[i].label +
-							  '</a>'
-                  menu += '</li>'                  
+							  '</a></li>'
               }
           }
           
           
           $scope.$watch('model.menuItems', function() {
-              menu = '<div class="nav-menus-wrapper">'
+        	  menu = ''
+              if ($scope.model.brandText || $scope.model.brandLogo) {
+            	  menu += '<div class="nav-header">'
+            	  //if ($scope.model.brandText) menu += '<a class="nav-brand" href="#">' + $scope.model.brandText + '</a>'
+				  menu +='<div class="nav-toggle"></div>'
+				  menu += '</div>'
+              }
+
+        	  menu += '<div class="nav-menus-wrapper">'
+              //<div class="nav-toggle"></div>
               menu += '<ul class="nav-menu">'
               trav($scope.model.menuItems)
               menu += '</ul>'
               menu += '</div>'
               container.html(menu)
-              container.navigation()//getOpt({}))
+			  console.log(menu)
+              container.navigation()//{mobileBreakpoint: 99999})//getOpt({}))
+			  container.data("navigation").toggleOffcanvas();
           })
 
           function getOpt(opt) 
