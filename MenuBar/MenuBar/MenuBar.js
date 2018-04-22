@@ -11,7 +11,16 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
               menu
 
           if ($scope.model.callback) $window.menubarCallbackFunction = $scope.model.callback
-                       
+          function href(item) {
+        	  if (item.href)
+        		  return item.href
+        	  else
+        		  return 'javascript:menubarCallback(\'' +
+	                     (item.id || '').replace(/'/g, "\\'") + 
+	                     '\',\'' + 
+			             (item.label || '').replace(/'/g, "\\'") + '\')'  
+        	  
+          }
           function trav(items) {
               for (var i = 0, l = items && items.length || 0; i < l; i += 1) {
                   if (items[i].items && items[i].items.length) {
@@ -34,10 +43,7 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
                       }
                       menu += '</div></ul></li>'
                   } else
-                	  menu += '<li><a href="javascript:menubarCallback(\'' +
-					          (items[i].id || '').replace(/'/g, "\\'") + 
-					          '\',\'' + 
-							  (items[i].label || '').replace(/'/g, "\\'") + '\')">' +
+                	  menu += '<li><a href="' + href(items[i]) + '">' +
 							  (items[i].icon ? '<i class="' + items[i].icon + '"></i>' : '') +
 							  items[i].label +
 							  '</a></li>'
@@ -46,24 +52,46 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
           
           
           $scope.$watch('model.menuItems', function() {
+        	  var align,
+			      header = false
+			  
         	  menu = ''
-              if ($scope.model.brandText || $scope.model.brandLogo) {
-            	  menu += '<div class="nav-header">'
-            	  //if ($scope.model.brandText) menu += '<a class="nav-brand" href="#">' + $scope.model.brandText + '</a>'
-				  menu +='<div class="nav-toggle"></div>'
-				  menu += '</div>'
-              }
-
-        	  menu += '<div class="nav-menus-wrapper">'
-              //<div class="nav-toggle"></div>
-              menu += '<ul class="nav-menu">'
-              trav($scope.model.menuItems)
-              menu += '</ul>'
-              menu += '</div>'
+        		  
+        	  for (var i = 0, l = $scope.model.menuItems.length; i < l; i += 1) {  
+        		  if ($scope.model.menuItems[i].brand) {
+                	  menu += '<div class="nav-header">'
+                	  if ($scope.model.menuItems[i].label)
+                		  menu += '<a class="nav-brand" href="' + href($scope.model.menuItems[i]) + '">' +
+                	              $scope.model.menuItems[i].label + '</a>'
+                  	  if ($scope.model.menuItems[i].icon)
+                  		  menu += '<a class="nav-logo" href="' + href($scope.model.menuItems[i]) + '">' +
+					              '<img src="' + $scope.model.menuItems[i].icon + '" alt="' + ($scope.model.menuItems[i].label || 'Logo').replace(/'/g, "\\'") + '">'
+    				  menu += '<div class="nav-toggle"></div>'
+    				  menu += '</div>'
+    				  header = true
+                  } else {
+                	  align = $scope.model.menuItems[i].align
+                   	  menu += '<div class="nav-menus-wrapper">' +
+                              '<ul class="nav-menu' + (align ? ' ' + align : '') + '">'
+                      while (i < l && !$scope.model.menuItems[i].brand) {
+                    	  if ($scope.model.menuItems[i].align && align !== $scope.model.menuItems[i].align) {
+                    		  align = $scope.model.menuItems[i].align
+                    		  menu += '</ul><ul class="nav-menu' + (align ? ' ' + align : '') + '">'
+                    	  }
+                          trav([$scope.model.menuItems[i]])
+	    				  i += 1
+                      }
+                      if ($scope.model.menuItems[i] && $scope.model.menuItems[i].brand)
+                    	  i -= 1
+                      menu += '</ul></div>'
+                  }
+        	  }
+        	  
+        	  if (!header) menu = '<div class="nav-header"><div class="nav-toggle"></div></div>' + menu
               container.html(menu)
 			  console.log(menu)
               container.navigation()//{mobileBreakpoint: 99999})//getOpt({}))
-			  container.data("navigation").toggleOffcanvas();
+			 // container.data("navigation").toggleOffcanvas();
           })
 
           function getOpt(opt) 

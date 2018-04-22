@@ -26,9 +26,7 @@
     "model":
     {
         "callback": { "type": "function" },
-        "menuItems": { "type": "item[]" },
-        "brandText": { "type": "string" },
-        "brandLogo": { "type": "string" }
+        "menuItems": { "type": "item[]" }
     },
     "types":
     {
@@ -37,8 +35,9 @@
              "label": { "type": "string" },
              "id": { "type": "string" },
              "href": { "type": "string" },
-             "right": { "type": "boolean" },
+             "align": { "type": "boolean"},
              "horizontal": { "type": "boolean" },
+             "brand": { "type": "boolean" },
              "icon": { "type": "string" },
              "items": { "type": "item[]" },
              "panel": { "type": "string",
