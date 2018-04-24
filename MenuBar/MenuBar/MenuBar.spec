@@ -32,14 +32,15 @@
     {
         "item":
          {
-             "label": { "type": "string" },
-             "id": { "type": "string" },
-             "href": { "type": "string" },
-             "align": { "type": "boolean"},
-             "horizontal": { "type": "boolean" },
+             "align": { "type": "boolean" },
              "brand": { "type": "boolean" },
+             "grid": { "type": "item[]" },
+             "horizontal": { "type": "boolean" },
+             "href": { "type": "string" },
              "icon": { "type": "string" },
+             "id": { "type": "string" },
              "items": { "type": "item[]" },
+             "list": { "type": "listitem[]" },
              "panel": { "type": "string",
                         "values": [ {"off": ""},
                                     {"Full": "megamenu-panel"},
@@ -47,8 +48,22 @@
                                     {"Quarter": "megamenu-panel megamenu-panel-quarter"}
                                   ]
                       },
-             "grid": { "type": "item[]" },
-             "list": { "type": "listitem[]" }
+             "type": { "type": "string",
+                       "default": "item",
+                       "values": [ {"item":"item"},
+                                   {"brand":"brand"},
+                                   {"logotype":"logotype"},
+                                   {"grid":"grid"},
+                                   {"list":"list"},
+                                   {"listHead":"listHead"},
+                                   {"panel":"panel"},
+                                   {"panelHalf":"panelHalf"},
+                                   {"panelQuarter":"panelQuarter"},
+                                   {"text":"text"},
+                                   {"button":"button"}
+                                  ]
+                     },
+             "value": { "type": "string" }
          },
          "listitem": 
          {
