@@ -26,28 +26,19 @@
     "model":
     {
         "callback": { "type": "function" },
-        "menuItems": { "type": "item[]" }
+        "menuItems": { "type": "item[]" },
+        "options": { "type": "object" }
     },
     "types":
     {
         "item":
          {
              "align": { "type": "boolean" },
-             "brand": { "type": "boolean" },
-             "grid": { "type": "item[]" },
              "horizontal": { "type": "boolean" },
              "href": { "type": "string" },
              "icon": { "type": "string" },
              "id": { "type": "string" },
              "items": { "type": "item[]" },
-             "list": { "type": "listitem[]" },
-             "panel": { "type": "string",
-                        "values": [ {"off": ""},
-                                    {"Full": "megamenu-panel"},
-                                    {"Half": "megamenu-panel megamenu-panel-half"},
-                                    {"Quarter": "megamenu-panel megamenu-panel-quarter"}
-                                  ]
-                      },
              "type": { "type": "string",
                        "default": "item",
                        "values": [ {"item":"item"},
@@ -64,31 +55,10 @@
                                   ]
                      },
              "value": { "type": "string" }
-         },
-         "listitem": 
-         {
-             "title": { "type": "string" },
-             "items": { "type": "item[]" }
          }
     },
     "api":
     {
-        "setMenu": 
-        {
-            "returns": "boolean",
-            "parameters":
-                [
-                    {
-                        "name": "menu",
-                        "type": "string"
-                    },
-                    {
-                        "name":"options",
-                        "type":"object",
-                        "optional": true
-                    }
-                ]
-        },
         "toggleOffCanvas":
         {
             "returns": "boolean"
@@ -101,6 +71,8 @@
     "handlers":
        {
            "onInit": "function",
+           "onLandscape": "function",
+           "onPortrait": "function",
            "onShowOffCanvas": "function",
            "onHideOffCanvas": "function"
        }

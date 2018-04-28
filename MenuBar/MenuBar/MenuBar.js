@@ -8,7 +8,8 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
       },
       controller: function($scope, $element, $attrs, $window) {
           var container = $('#navigation'),
-              menu
+              menu,
+			  options
 
           if ($scope.model.callback) $window.menubarCallbackFunction = $scope.model.callback
           function href(item) {
@@ -35,7 +36,7 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
                       for (var j = 0, m = (items[i].items||[]).length; j < m; j += 1) {
                           if (items[i].items[j].items && items[i].items[j].items.length) {
                               menu += '<ul class="megamenu-list list-col-' + m + '">' +
-                                       '<li class="megamenu-list-title"><a href="#">' + items[i].items[j].items[0].value + '</a></li>'
+                                      '<li class="megamenu-list-title"><a href="#">' + items[i].items[j].items[0].value + '</a></li>'
                               items[i].items[j].items.shift()
                               trav(items[i].items[j].items)
 							  menu += '</ul>'
@@ -77,9 +78,20 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
 						          '</div>'
                       menu += '</div></div></li>'
                   } else if (items[i].type === 'button') {
-                      menu += '<a href="' + href(items[i]) + '" class="nav-button">' + items[i].value + '</a>'
+                      menu += '<a href="' + href(items[i]) + '" class="nav-button" href="' + href(items[i]) + '">' + items[i].value + '</a>'
                   } else if (items[i].type === 'text') {
-                      menu += '<span class="nav-text">' + items[i].value + '</span>'
+                      menu += '<li><span class="nav-text">' + items[i].value + '</span></li>'
+                  } else if (items[i].type === 'search') {  
+                      menu += '<div class="nav-search">' +
+                              '<div class="nav-search-button">' +
+                              '<i class="nav-search-icon"></i>' +
+                              '</div>' +
+                              '<form>'+
+                              '<div class="nav-search-inner">' +
+                              '<input type="search" name="search" placeholder="' + items[i].value + '"/>' +
+                              '</div>' +
+                              '</form>' +
+                              '</div>'
                   } else
                       menu += '<li><a href="' + href(items[i]) + '">' +
                               (items[i].icon ? '<i class="' + items[i].icon + '"></i>' : '') +
@@ -90,66 +102,69 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
           
           $scope.$watch('model.menuItems', function() {
               var align,
-                  header = false
-              
-              menu = ''
-                  
-              for (var i = 0, l = $scope.model.menuItems.length; i < l; i += 1) {  
-                  if (!header && ~['brand','logotype'].indexOf($scope.model.menuItems[i].type)) {
-                      menu += '<div class="nav-header">'
-                      for (var j = i; j < l; j += 1)
-                          if ($scope.model.menuItems[j].type === 'brand')
-                              menu += '<a class="nav-brand" href="' + href($scope.model.menuItems[j]) + '">' +
-                                      $scope.model.menuItems[j].value + '</a>'
-                          else if ($scope.model.menuItems[j].type === 'logotype')
-                                menu += '<a class="nav-logo" href="' + href($scope.model.menuItems[j]) + '">' +
-                                      '<img src="' + $scope.model.menuItems[j].value + '">'
-                      menu += '<div class="nav-toggle"></div>'
-                      menu += '</div>'
-                      header = true
-                  } else {
-                      align = $scope.model.menuItems[i].align
-                      menu += '<div class="nav-menus-wrapper">' +
-                              '<ul class="nav-menu' + (align ? ' ' + align : '') + '">'
-                      while (i < l && !~['brand','logotype'].indexOf($scope.model.menuItems[i].type)) {
-                          if ($scope.model.menuItems[i].align && align !== $scope.model.menuItems[i].align) {
-                              align = $scope.model.menuItems[i].align
-                              menu += '</ul><ul class="nav-menu' + (align ? ' ' + align : '') + '">'
-                          }
-                          trav([$scope.model.menuItems[i]])
-                          i += 1
-                      }
-                      if ($scope.model.menuItems[i] && ~['brand','logotype'].indexOf($scope.model.menuItems[i].type))
-                          i -= 1
-                      menu += '</ul></div>'
-                  }
-              }
-              if (!header) menu = '<div class="nav-header"><div class="nav-toggle"></div></div>' + menu
-              container.html(menu)
-              console.log(menu)
-              container.navigation()//{mobileBreakpoint: 99999})//getOpt({}))
-             // container.data("navigation").toggleOffcanvas();
+	          	  header = false
+	      
+	          menu = ''
+	          
+	          for (var i = 0, l = $scope.model.menuItems.length; i < l; i += 1) {  
+	              if (!header && ~['brand','logotype'].indexOf($scope.model.menuItems[i].type)) {
+	          		  menu += '<div class="nav-header">'
+	          		  for (var j = i; j < l; j += 1)
+	                      if ($scope.model.menuItems[j].type === 'brand') {
+	                          menu += '<a class="nav-brand" href="' + href($scope.model.menuItems[j]) + '">' +
+	                                  $scope.model.menuItems[j].value + '</a>'
+						      i = j
+					      } else if ($scope.model.menuItems[j].type === 'logotype') {
+	                          menu += '<a class="nav-logo" href="' + href($scope.model.menuItems[j]) + '">' +
+	                                  '<img src="' + $scope.model.menuItems[j].value + '">'
+						      i = j
+					      }
+	                  menu += '<div class="nav-toggle"></div>' +
+	                          '</div>'
+	                  header = true
+	              } else {
+	                  align = $scope.model.menuItems[i].align
+	                  menu += '<div class="nav-menus-wrapper">' +
+	                          '<ul class="nav-menu' + (align ? ' ' + align : '') + '">'
+	                  while (i < l && !~['brand','logotype'].indexOf($scope.model.menuItems[i].type)) {
+	                      if ($scope.model.menuItems[i].align && align !== $scope.model.menuItems[i].align) {
+	                          align = $scope.model.menuItems[i].align
+	                          menu += '</ul><ul class="nav-menu' + (align ? ' ' + align : '') + '">'
+	                      }
+	                      trav([$scope.model.menuItems[i]])
+	                      i += 1
+	                  }
+	                  if ($scope.model.menuItems[i] && ~['brand','logotype'].indexOf($scope.model.menuItems[i].type))
+	                      i -= 1
+	                  menu += '</ul></div>'
+	              }
+	          }
+	          if (!header) menu = '<div class="nav-header"><div class="nav-toggle"></div></div>' + menu
+	          container.html(menu)
+			  container.navigation(options)
           })
-
-          function getOpt(opt) 
-          {
-              if ($scope.handlers.onInit)
-                  opt.onInit = $scope.handlers.onInit
-              if ($scope.handlers.onShowOffCanvas)
-                     opt.onShowOffCanvas = $scope.handlers.onShowOffCanvas
-              if ($scope.handlers.onHideOffCanvas)
-                     opt.onHideOffCanvas = $scope.handlers.onHideOffCanvas
-              return opt      
-          }
-
-          $scope.api.toggleOffCanvas = function()
-          {
+		  
+		  $scope.$watch('model.options', function() {
+			  var handlers = ['onInit',
+	                          'onLandscape',
+	                          'onPortrait',
+	                          'onShowOffCanvas',
+	                          'onHideOffCanvas'
+	                          ]
+			  options = $scope.model.options || {}
+			  for (var i = 0, l = handlers.length; i < l; i += 1)
+				  if ($scope.handlers[handlers[i]]) 
+					  options[handlers[i]] = $scope.handlers[handlers[i]]
+			  container.html(menu)
+			  container.navigation(options)
+		  })
+		  
+          $scope.api.toggleOffCanvas = function() {
               container.data('navigation').toggleOffcanvas()
               return true
           }
           
-          $scope.api.toggleSearch = function()
-          {
+          $scope.api.toggleSearch = function() {
               container.data('navigation').toggleSearch()
               return true
           }
