@@ -17,50 +17,52 @@ Component Properties:
 elements.<menu element>.menuItems = 
 [
   {
-    label:'Submenu A',
-    items:
-    [
-      {
-        label:'Item A 1',
-        id:'A1'
-      },
-      {
-        label:'Submenu A 1',
-        items:
-        [
-          {
-            label:'Item A 1 1',
-            id:'A11'
-          }
-        ]
-      }
-    ]
-  },
-  {
     label:'Item 1',
     id:'1'
   },
   {
-    label:'Submenu B',
+    label:'Item 2',
+    id:'2'
+  },
+  {
+    label:'Menu',
     items:
     [
       {
-        label:'Item B 1',
-        id:'B1'
+        label:'Item 1',
+        id:'A1'
       },
       {
-        label:'Submenu B 1',
+        label:'Submenu A',
         items:
         [
           {
-            label:'Item B 1 1',
-            id:'B11'
-          },
-          {
-            label:'Item B 1 2',
-            id:'B12'
+            label:'Item A 1',
+            id:'A1'
           }
         ]
+      },
+      {
+        label:'Submenu B',
+        items:
+        [
+          {
+            label:'Item B 1',
+            id:'B1'
+          },
+          {
+            label:'Item B 2',
+            id:'B2'
+          }
+        ]
+      }, 
+      {
+        label:'Item 2',
+        id:'A2'
+      },
+      {
+        label:'Item 3',
+        id:'A3'
       }
     ]
   }
