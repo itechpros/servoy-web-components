@@ -88,11 +88,13 @@ angular.module('pgmenuMenu',['servoy']).directive('pgmenuMenu', function() {
                                            getCallback($scope.model.menuItems[a].items[b].items[c].label, $scope.model.menuItems[a].items[b].items[c].id)
                                        )
                                    submenu.push({
+                                	 label: $scope.model.menuItems[a].items[b].items[c].label,
                                      priority: c,
                                      $el: el,
                                      is_disabled: false
                                    })
                               }
+                              console.log(submenu)
                               $g.append(pgAdmin.Browser.MenuGroup({ label: $scope.model.menuItems[a].items[b].label }, submenu).$el)
                           }
                       }
