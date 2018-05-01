@@ -8,9 +8,9 @@ https://www.pgadmin.org/docs/pgadmin4/dev/pgadmin_menu_bar.html
 Component Properties:
 - callback: Servoy function called when menu item is clicked
 - menuItems: Array of Menu/Submenu items
- - label: Menu/Submenu label
- - id: value passed to callback function (blank for Submenu headers)
- - items: Array of Submenu items (blank for Menu items)
+  - label: Menu/Submenu label
+  - id: value passed to callback function (blank for Submenu headers)
+  - items: Array of Submenu items (blank for Menu items)
 ```
 // example of "menuItems" property:
 
