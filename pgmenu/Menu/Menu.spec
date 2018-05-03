@@ -65,6 +65,7 @@
          {
              "label": { "type": "string" },
              "id": { "type": "string" },
+             "icon": { "type": "string" },
              "items": { "type": "item[]" }
          }
     }

@@ -25,6 +25,7 @@ angular.module('pgmenuMenu',['servoy']).directive('pgmenuMenu', function() {
               if (item.items && item.items.length)
                   el = $('<li id="pgmnu_' + id + '" class="dropdown">'+
                          '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
+                         (item.icon ? '<i class="' + item.icon + '"></i>  ' : '') +
                          item.label +
                          '<span class="caret"></span>' +
                          '</a>' +
@@ -33,6 +34,7 @@ angular.module('pgmenuMenu',['servoy']).directive('pgmenuMenu', function() {
               else {
                   el = $('<li id="pgmnu_' + id + '">' +
                          '<a href="#" class="menu-item">' +
+                         (item.icon ? '<i class="' + item.icon + '"></i>  ' : '') +
                          item.label +
                          '</a>' +
                          '</li>')
@@ -48,7 +50,6 @@ angular.module('pgmenuMenu',['servoy']).directive('pgmenuMenu', function() {
                   b,
                   c,
                   $g,
-                  el,
                   grp,
                   itm,
                   submenu
@@ -69,7 +70,8 @@ angular.module('pgmenuMenu',['servoy']).directive('pgmenuMenu', function() {
                                         cb: getCallback($scope.model.menuItems[a].items[b].label, $scope.model.menuItems[a].items[b].id)
                                     }
                                 },
-                               callback: 'cb' 
+                               callback: 'cb',
+                               icon: $scope.model.menuItems[a].items[b].icon 
                               }
                               grp = {}
                               grp[itm.name] = new pgAdmin.Browser.MenuItem(itm)
@@ -80,26 +82,33 @@ angular.module('pgmenuMenu',['servoy']).directive('pgmenuMenu', function() {
                               for (c = 0; c < $scope.model.menuItems[a].items[b].items.length; c += 1) {
                                   itm = 'pgmnu_item_' + a + '_' + b + '_' + c
                                   submenus.push(itm)
-                                   el = $('<li id="' + itm + '" class="menu-item"><a href="#">' + $scope.model.menuItems[a].items[b].items[c].label + '</a></li>')
-                                   if ($scope.model.callback)
-                                       $(document).on(
-                                           'click',
-                                           '#' + itm,
-                                           getCallback($scope.model.menuItems[a].items[b].items[c].label, $scope.model.menuItems[a].items[b].items[c].id)
-                                       )
-                                   submenu.push({
-                                	 label: $scope.model.menuItems[a].items[b].items[c].label,
+                                  if ($scope.model.callback)
+                                      $(document).on(
+                                          'click',
+                                          '#' + itm,
+                                          getCallback($scope.model.menuItems[a].items[b].items[c].label, $scope.model.menuItems[a].items[b].items[c].id)
+                                      )
+                                  submenu.push({
+                                     label: $scope.model.menuItems[a].items[b].items[c].label,
+                                     //icon: $scope.model.menuItems[a].items[b].items[c].icon,
+                                     above:true,
                                      priority: c,
-                                     $el: el,
+                                     $el: $('<li id="' + itm + '" class="menu-item"><a href="#">' +
+                                            ($scope.model.menuItems[a].items[b].items[c].icon ? '<i class="' + $scope.model.menuItems[a].items[b].items[c].icon + '"></i>' : '') +
+                                            '  ' + $scope.model.menuItems[a].items[b].items[c].label +
+                                            '</a></li>'),
                                      is_disabled: false
-                                   })
+                                  })
                               }
-                              console.log(submenu)
-                              $g.append(pgAdmin.Browser.MenuGroup({ label: $scope.model.menuItems[a].items[b].label }, submenu).$el)
+                              $g.append(pgAdmin.Browser.MenuGroup({ 
+                                                                    label: $scope.model.menuItems[a].items[b].label,
+                                                                    below:true,
+                                                                    icon: $scope.model.menuItems[a].items[b].icon
+                                                                  },
+                                                                  submenu).$el)
                           }
                       }
                   }
-                  
               }
           }
           

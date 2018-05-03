@@ -11,58 +11,67 @@ Component Properties:
   - label: Menu/Submenu label
   - id: value passed to callback function (blank for Submenu headers)
   - items: Array of Submenu items (blank for Menu items)
+  - icon: css class of icon
+
 ```
 // example of "menuItems" property:
 
 elements.<menu element>.menuItems = 
 [
   {
-    label:'Item 1',
-    id:'1'
-  },
-  {
-    label:'Item 2',
-    id:'2'
-  },
-  {
-    label:'Menu',
+    label:'Submenu A',
+       icon: 'fa fa-database aria-hidden=false',
     items:
     [
       {
-        label:'Item 1',
+        label:'Item A 1',
+        icon: 'fa fa-check aria-hidden=false',
         id:'A1'
       },
       {
-        label:'Submenu A',
+        label:'Submenu A 1',
+        icon:'fa fa-cogs',
         items:
         [
           {
-            label:'Item A 1',
-            id:'A1'
+            label:'Item A 1 1',
+            id:'A11'
           }
         ]
       },
       {
-        label:'Submenu B',
+          label:'Item A 2',
+          id:'A2'
+      }
+    ]
+  },
+  {
+    label:'Item 1',
+    icon:'fa fa-clone',
+    id:'1'
+  },
+  {
+    label:'Submenu B',
+    items:
+    [
+      {
+        label:'Item B 1',
+        id:'B1'
+      },
+      {
+        label:'Submenu B 1',
         items:
         [
           {
-            label:'Item B 1',
-            id:'B1'
+            label:'Item B 1 1',
+            id:'B11'
           },
           {
-            label:'Item B 2',
-            id:'B2'
+            label:'Item B 1 2',
+            id:'B12',
+            icon:'fa fa-check-square-o'
           }
         ]
-      }, 
-      {
-        label:'Item 2',
-        id:'A2'
-      },
-      {
-        label:'Item 3',
-        id:'A3'
       }
     ]
   }
