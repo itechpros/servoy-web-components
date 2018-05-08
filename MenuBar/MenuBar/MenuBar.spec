@@ -27,13 +27,14 @@
     {
         "callback": { "type": "function" },
         "menuItems": { "type": "item[]" },
-        "options": { "type": "object" }
+        "options": { "type": "object" },
+        "skin": { "type": "string" }
     },
     "types":
     {
         "item":
          {
-             "align": { "type": "boolean" },
+             "align": { "type": "string" },
              "horizontal": { "type": "boolean" },
              "href": { "type": "string" },
              "icon": { "type": "string" },
@@ -74,6 +75,7 @@
            "onLandscape": "function",
            "onPortrait": "function",
            "onShowOffCanvas": "function",
-           "onHideOffCanvas": "function"
+           "onHideOffCanvas": "function",
+           "onSearch": "function"
        }
 }
