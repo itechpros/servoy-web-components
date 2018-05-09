@@ -7,7 +7,7 @@ function pgMenuDefine(){
   var MenuItem = pgAdmin.Browser.MenuItem = function(opts) {
     var menu_opts = [
         'name', 'label', 'priority', 'module', 'callback', 'data', 'enable',
-        'category', 'target', 'url' /* Do not show icon in the menus, 'icon' */ , 'node',
+        'category', 'target', 'url' /* Do not show icon in the menus, 'icon' */,'icon' , 'node',
       ],
       defaults = {
         url: '#',
@@ -32,7 +32,7 @@ function pgMenuDefine(){
 
       this.context = {
         name: this.label,
-        /* icon: this.icon || this.module && (this.module.type), */
+        /**/ icon: this.icon || this.module && (this.module.type), 
         disabled: this.is_disabled,
         callback: this.context_menu_callback.bind(this, item),
       };
@@ -54,7 +54,6 @@ function pgMenuDefine(){
         cb: this.callback,
         data: this.data,
       }).addClass('menu-link');
-//console.log(url)
       this.is_disabled = this.disabled(node, item);
       if (this.icon) {
         url.append($('<i></i>', {
@@ -207,7 +206,7 @@ function pgMenuDefine(){
   pgAdmin.Browser.MenuGroup = function(opts, items, prev, ctx) {
     var template = _.template([
         '<% if (above) { %><hr><% } %>',
-        '<li class="menu-item dropdown dropdown-submenu">',
+        '<li <% if (id) { %>id="<%= id %>" <% } %> class="menu-item dropdown dropdown-submenu">',
         ' <a href="#" class="dropdown-toggle" data-toggle="dropdown">',
         '  <% if (icon) { %><i class="<%= icon %>"></i><% } %>',
         '  <span><%= label %></span>',
@@ -218,6 +217,7 @@ function pgMenuDefine(){
         '<% if (below) { %><hr><% } %>',
       ].join('\n')),
       data = {
+        'id': opts.name,
         'label': opts.label,
         'icon': opts.icon,
         'above': opts.above && !prev,

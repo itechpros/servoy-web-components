@@ -51,8 +51,13 @@
             "version": "1",
             "mimetype": "text/javascript",
             "url": "pgmenu/Menu/lib/error.js"
+        },
+        {
+            "name": "hotkeys.min.js",
+            "version": "1",
+            "mimetype": "text/javascript",
+            "url": "pgmenu/Menu/lib/hotkeys.min.js"
         }
-    
     ],
     "model":
     {
@@ -66,7 +71,8 @@
              "label": { "type": "string" },
              "id": { "type": "string" },
              "icon": { "type": "string" },
-             "items": { "type": "item[]" }
+             "items": { "type": "item[]" },
+             "combo": { "type": "string" }
          }
     }
 }
