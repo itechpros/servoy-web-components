@@ -7,19 +7,10 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
           svyServoyapi: '='
       },
       controller: function($scope, $element, $attrs, $window, hotkeys) {
-      
-          hotkeys.bindTo($scope).add({
-              combo: 'a',
-              description: 'tst',
-              callback: function() {
-                  console.log('AA')
-                //$('#pgmnu_' + id).trigger('click')
-              }
-            })
-          
+                
           var navbar = $('#navbar-menu > ul').first(),
               submenus = [],
-              hotkeys = {}
+              keys = {}
 
           function getCallback(a, b) {
               if (!$scope.model.callback)
@@ -53,16 +44,7 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
                       $(document).on('click', '#' + id, getCallback(item.label, item.id) )
               }
               navbar.append(el)
-              
-              if (item.combo)
-//                  if ($scope.model.menuItems[a].items[b].combo)
-                      (hotkeys[item.combo]=hotkeys[item.combo]||[]).push(id)
-  //                hotkeys.add({
-    //                  combo: item.combo,
-      //                callback: function() {
-        //                  $('#' + id + ' a:first').trigger('click')                        
-          //            }
-            //        })
+              item.combo && (keys[item.combo]=keys[item.combo]||[]).push(id)
           }
 
           function initMenu() {
@@ -98,8 +80,7 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
                                callback: 'cb',
                                icon: z.icon 
                               }
-                              if (z.combo)
-                                  (hotkeys[z.combo] = hotkeys[z.combo] || []).push(id)
+                              z.combo && (keys[z.combo] = keys[z.combo] || []).push(id)
                               grp = {}
                               grp[itm.name] = new pgAdmin.Browser.MenuItem(itm)
                               pgAdmin.Browser.MenuCreator($g, grp)
@@ -114,25 +95,28 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
                                       $(document).on(
                                           'click',
                                           '#' + id,
-                                          getCallback(z.label, $scope.model.menuItems[a].items[b].items[c].id)
+                                          getCallback(z.label, z.id)
                                       )
                                   submenu.push({
-                                     label: $scope.model.menuItems[a].items[b].items[c].label,
+                                     label: z.label,
                                      above:true,
                                      priority: c,
                                      $el: $('<li id="' + id + '" class="menu-item"><a href="#">' +
-                                            ($scope.model.menuItems[a].items[b].items[c].icon ? '<i class="' + $scope.model.menuItems[a].items[b].items[c].icon + '"></i>' : '') +
-                                            '  ' + $scope.model.menuItems[a].items[b].items[c].label +
+                                            (z.icon ? '<i class="' + z.icon + '"></i>' : '') +
+                                            '  ' + z.label +
                                             '</a></li>'),
                                      is_disabled: false
                                   })
-                                  if ($scope.model.menuItems[a].items[b].items[c].combo)
-                                      (hotkeys[$scope.model.menuItems[a].items[b].items[c].combo] = hotkeys[$scope.model.menuItems[a].items[b].items[c].combo]||[]).push(id)
+                                  z.combo && (keys[z.combo] = keys[z.combo]||[]).push(id)
                               }
+                              z = $scope.model.menuItems[a].items[b]
+                              id = 'pgmnu_sbmnu_' + a + '_' + b
+                              z.combo && (keys[z.combo] = keys[z.combo]||[]).push(id)
                               $g.append(pgAdmin.Browser.MenuGroup({
-                                                                    label: $scope.model.menuItems[a].items[b].label,
+                                                                    name: id, 
+                                                                    label: z.label,
                                                                     below:true,
-                                                                    icon: $scope.model.menuItems[a].items[b].icon
+                                                                    icon: z.icon
                                                                   },
                                                                   submenu).$el)
                           }
@@ -154,9 +138,22 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
               pgAdminDefine()
               pgMenuDefine()
               initMenu()
-              console.log(hotkeys)
-          })
-          
+              for (var h in keys)
+                  hotkeys.add({
+                      combo: h,
+                      callback: function(e, combo) {
+                          var h = combo.combo[0]
+                          for (var i = 0, l = keys[h].length; i < l; i += 1){
+                              if ($('#' + keys[h][i]).is(':visible')) {
+                                  $('#' + keys[h][i]+' ul:first').show()//.trigger('mouseenter')
+                                 
+                                  //$('#' + keys[h][i] + ' a:first').dropdown('toggle')                                  
+                                 // $('#' + keys[h][i] + ' a:first').trigger( (~keys[h][i].search('pgmnu_sbmnu') ? 'mouseenter' : 'click'))
+                              console.log(keys[h][i],h,(~keys[h][i].search('pgmnu_sbmnu') ? 'mouseover' : 'click'))}}
+                      }                        
+                  })
+                  console.log(keys)
+          })          
       },
       templateUrl: 'pgmenu/Menu/Menu.html'
     };
