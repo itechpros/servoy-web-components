@@ -8,6 +8,7 @@ function pgMenuDefine(){
     var menu_opts = [
         'name', 'label', 'priority', 'module', 'callback', 'data', 'enable',
         'category', 'target', 'url' /* Do not show icon in the menus, 'icon' */,'icon' , 'node',
+        'combo'
       ],
       defaults = {
         url: '#',
@@ -61,9 +62,18 @@ function pgMenuDefine(){
         }));
       }
 
-      var textSpan = $('<span data-test="menu-item-text"></span>').text('  ' + this.label);
+      if (this.combo && !~this.combo.indexOf('+') && ~this.label.indexOf(this.combo))
+          this.label = this.label.replace(this.combo, '<u>' + this.combo + '</u>')
+     
+      var textSpan = $('<span data-test="menu-item-text"></span>').html('  ' + this.label);
 
       url.append(textSpan);
+      
+      if (this.combo && ~this.combo.indexOf('+')) {
+          textSpan = $('<span></span>').text('  ' + this.combo);
+          url.append(textSpan);
+      }
+          
 
       this.$el = $('<li/>')
         .addClass('menu-item' + (this.is_disabled ? ' disabled' : ''))
@@ -204,7 +214,13 @@ function pgMenuDefine(){
    */
 
   pgAdmin.Browser.MenuGroup = function(opts, items, prev, ctx) {
-    var template = _.template([
+      if (opts.combo)
+          if(!~opts.combo.indexOf('+') && ~opts.label.indexOf(opts.combo))
+              opts.label = opts.label.replace(opts.combo, '<u>' + opts.combo + '</u>')
+          else
+              opts.label += '  ' + opts.combo
+
+      var template = _.template([
         '<% if (above) { %><hr><% } %>',
         '<li <% if (id) { %>id="<%= id %>" <% } %> class="menu-item dropdown dropdown-submenu">',
         ' <a href="#" class="dropdown-toggle" data-toggle="dropdown">',

@@ -6,5 +6,8 @@
     "description": "pgAdmin Menu AngularJS directive",
     "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/pgmenu/README.md",
     "sourceUrl": "https://github.com/itechpros/servoy-web-components/tree/master/pgmenu",
-    "releases": [{"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/blob/master/pgmenu/pgmenu.zip?raw=true"}]
+    "releases": [
+        {"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/blob/master/pgmenu/pgmenu.zip?raw=true"},
+        {"version":"1.0.2","url":"https://github.com/itechpros/servoy-web-components/blob/master/pgmenu/pgmenu_1_0_2.zip?raw=true"}
+    ]
 }

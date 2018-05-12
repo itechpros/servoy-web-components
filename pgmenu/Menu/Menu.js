@@ -12,23 +12,23 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
               submenus = [],
               keys = {}
 
-          function getCallback(a, b) {
+          function getCallback(id) {
               if (!$scope.model.callback)
-                  return function(){}                  
-              var o = {}
-              if (a) o.label = a
-              if (b) o.id = b
-              return function(){ $window.executeInlineScript($scope.model.callback.formName, $scope.model.callback.script, [o]) }
+                  return function(){}
+              return function(){ $window.executeInlineScript($scope.model.callback.formName, $scope.model.callback.script, [id]) }
           }
           
           function menuMainGroup(id, item) {
-              var el
+              var el,
+                  label,
+                  key = item.combo && item.combo.substring(item.combo.lastIndexOf('+') + 1)
               id = 'pgmnu_' + id
+              label = item.combo ? item.label.replace(key, '<u>' + key + '</u>') : item.label
               if (item.items && item.items.length)
                   el = $('<li id="' + id + '" class="dropdown">'+
                          '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">' +
                          (item.icon ? '<i class="' + item.icon + '"></i>  ' : '') +
-                         item.label +
+                         label +
                          '<span class="caret"></span>' +
                          '</a>' +
                          '<ul class="dropdown-menu navbar-inverse" role="menu"></ul>' +
@@ -37,14 +37,14 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
                   el = $('<li id="' + id + '">' +
                          '<a href="#" class="menu-item">' +
                          (item.icon ? '<i class="' + item.icon + '"></i>  ' : '') +
-                         item.label +
+                         label +
                          '</a>' +
                          '</li>')
                   if ($scope.model.callback)
-                      $(document).on('click', '#' + id, getCallback(item.label, item.id) )
+                      $(document).on('click', '#' + id, getCallback(item.id) )
               }
               navbar.append(el)
-              item.combo && (keys[item.combo]=keys[item.combo]||[]).push(id)
+              item.combo && (keys[item.combo.toLowerCase()] = keys[item.combo.toLowerCase()] || []).push(id)
           }
 
           function initMenu() {
@@ -56,6 +56,7 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
                   grp,
                   id,
                   itm,
+                  label,
                   submenu,
                   z
               for (a = 0; a < $scope.model.menuItems.length; a += 1) {
@@ -68,19 +69,20 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
                               id = 'pgmnu_item_' + a + '_' + b
                               itm = {
                                 label: z.label,
+                                combo: z.combo,
                                 name: id,
                                 priority: b,
                                 enable: true,
                                 url: '#',
                                 module:{
                                     callbacks: {
-                                        cb: getCallback(z.label, z.id)
+                                        cb: getCallback(z.id)
                                     }
                                 },
-                               callback: 'cb',
-                               icon: z.icon 
+                                callback: 'cb',
+                                icon: z.icon 
                               }
-                              z.combo && (keys[z.combo] = keys[z.combo] || []).push(id)
+                              z.combo && (keys[z.combo.toLowerCase()] = keys[z.combo.toLowerCase()] || []).push(id)
                               grp = {}
                               grp[itm.name] = new pgAdmin.Browser.MenuItem(itm)
                               pgAdmin.Browser.MenuCreator($g, grp)
@@ -95,24 +97,31 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
                                       $(document).on(
                                           'click',
                                           '#' + id,
-                                          getCallback(z.label, z.id)
+                                          getCallback(z.id)
                                       )
+                                  label = z.label
+                                  if (z.combo)
+                                      if (!~z.combo.indexOf('+') && ~z.label.indexOf(z.combo))
+                                          label = label.replace(z.combo, '<u>' + z.combo + '</u>')
+                                      else
+                                          label += '  ' + z.combo
+
                                   submenu.push({
                                      label: z.label,
-                                     above:true,
                                      priority: c,
                                      $el: $('<li id="' + id + '" class="menu-item"><a href="#">' +
                                             (z.icon ? '<i class="' + z.icon + '"></i>' : '') +
-                                            '  ' + z.label +
+                                            '  ' + label +
                                             '</a></li>'),
                                      is_disabled: false
                                   })
-                                  z.combo && (keys[z.combo] = keys[z.combo]||[]).push(id)
+                                  z.combo && (keys[z.combo.toLowerCase()] = keys[z.combo.toLowerCase()] || []).push(id)
                               }
                               z = $scope.model.menuItems[a].items[b]
-                              id = 'pgmnu_sbmnu_' + a + '_' + b
-                              z.combo && (keys[z.combo] = keys[z.combo]||[]).push(id)
+                              id = 'pgsbmnu_' + a + '_' + b
+                              z.combo && (keys[z.combo.toLowerCase()] = keys[z.combo.toLowerCase()] || []).push(id)
                               $g.append(pgAdmin.Browser.MenuGroup({
+                                                                    combo: z.combo,
                                                                     name: id, 
                                                                     label: z.label,
                                                                     below:true,
@@ -130,6 +139,8 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
           }
           
           $scope.$watch('model.menuItems', function() {
+              for (var k in keys) hotkeys.del(k);
+              keys = {}
               $(document).off('click.pg.menu.data-api', '[data-toggle^="pg-menu"]')              
               submenus.map( function(i){ $(document).off('click', '#' + i) } )              
               submenus = []
@@ -142,21 +153,37 @@ angular.module('pgmenuMenu',['servoy','cfp.hotkeys']).directive('pgmenuMenu', fu
                   hotkeys.add({
                       combo: h,
                       callback: function(e, combo) {
-                          var h = combo.combo[0]
-                          for (var i = 0, l = keys[h].length; i < l; i += 1){
-                              if ($('#' + keys[h][i]).is(':visible')) {
-                                  $('#' + keys[h][i]+' ul:first').show()//.trigger('mouseenter')
-                                 
-                                  //$('#' + keys[h][i] + ' a:first').dropdown('toggle')                                  
-                                 // $('#' + keys[h][i] + ' a:first').trigger( (~keys[h][i].search('pgmnu_sbmnu') ? 'mouseenter' : 'click'))
-                              console.log(keys[h][i],h,(~keys[h][i].search('pgmnu_sbmnu') ? 'mouseover' : 'click'))}}
+                          e = e || window.event
+                          e.preventDefault()
+                          var k = combo.combo[0].toLowerCase(),
+                              clk = -1
+                          for (var i = 0, l = keys[k].length; i < l; i += 1) {
+                              if ($('#' + keys[k][i]).is(':visible')) {
+                                  switch ((keys[k][i].match(/_/g).length)) {
+                                      case 1:
+                                          $('#' + keys[k][i] + ' a:first').dropdown('toggle')
+                                          i = l
+                                          break
+                                      case 2:
+                                          $('#' + keys[k][i]+' ul:first').show()
+                                          i = l
+                                          break
+                                      case 3:
+                                          clk = i
+                                          break
+                                      case 4:
+                                          $('#' + keys[k][i] + ' a:first').trigger('click')
+                                          clk = -1
+                                          i = l
+                                          break
+                                  }
+                              }
+                          }
+                          if (~clk) $('#' + keys[k][clk]).trigger('click')
                       }                        
                   })
-                  console.log(keys)
           })          
       },
       templateUrl: 'pgmenu/Menu/Menu.html'
     };
   })
-  
-//angular.module('pgmenuMenu', ['cfp.hotkeys'])
