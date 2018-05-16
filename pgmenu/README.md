@@ -12,7 +12,7 @@ Component Properties:
   - id: value passed to callback function (blank for Submenu headers)
   - items: Array of Submenu items (blank for Menu items)
   - icon: css class of icon
-
+  - combo: shortcut key ("<char>"|"Ctrl|Alt+<char>")
 ```
 // example of "menuItems" property:
 
