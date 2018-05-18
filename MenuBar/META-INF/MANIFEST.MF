@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: menubar
 Bundle-Name: Menu Bar
-Bundle-Version: 1.0.2
+Bundle-Version: 1.0.3
 Package-Type: Web-Component
 
 Name: MenuBar/MenuBar.spec
