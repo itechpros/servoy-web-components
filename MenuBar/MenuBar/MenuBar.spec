@@ -42,18 +42,19 @@
              "items": { "type": "item[]" },
              "type": { "type": "string",
                        "default": "item",
-                       "values": [ {"item":"item"},
+                       "values": [
+                                   {"item":"item"},
                                    {"brand":"brand"},
                                    {"logotype":"logotype"},
                                    {"grid":"grid"},
                                    {"list":"list"},
-                                   {"listHead":"listHead"},
                                    {"panel":"panel"},
                                    {"panelHalf":"panelHalf"},
                                    {"panelQuarter":"panelQuarter"},
                                    {"text":"text"},
-                                   {"button":"button"}
-                                  ]
+                                   {"button":"button"},
+                                   {"search":"search"}                                   
+                                 ]
                      },
              "value": { "type": "string" }
          }

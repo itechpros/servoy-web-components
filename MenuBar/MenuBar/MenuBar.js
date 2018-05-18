@@ -26,105 +26,104 @@ angular.module('menubarMenuBar',['servoy']).directive('menubarMenuBar', function
           }
           
           function trav(items) {
-              for (var i = 0, l = items && items.length || 0; i < l; i += 1)
-                  ({
-                      item: function() {
-                          if (items[i].items) {
-                              menu += '<li><a href="#">' +
-                                      (items[i].icon ? '<i class="' + items[i].icon + '"></i>' : '') +
-                                      items[i].value + '</a>' +
-                                      '<ul class="nav-dropdown' +
-                                      (items[i].horizontal ? ' nav-dropdown-horizontal' : '') +
-                                      '">'
-                              trav(items[i].items||[])
-                              menu += '</ul></li>'
-                          } else
-                              menu += '<li><a href="' + href(items[i]) + '">' +
-                                      (items[i].icon ? '<i class="' + items[i].icon + '"></i>' : '') +
-                                      items[i].value +
-                                      '</a></li>'
-                      },
-                      list: function() {
-                          menu += '<li><a href="#">' + items[i].value + '</a>' +
-                                  '<ul class="nav-dropdown"><div class="megamenu-lists">'
-                          for (var j = 0, m = (items[i].items||[]).length; j < m; j += 1) {
-                              if (items[i].items[j].items && items[i].items[j].items.length) {
-                                  menu += '<ul class="megamenu-list list-col-' + m + '">' +
-                                          '<li class="megamenu-list-title"><a href="#">' + items[i].items[j].items[0].value + '</a></li>'
-                                  items[i].items[j].items.shift()
-                                  trav(items[i].items[j].items)
-    							  menu += '</ul>'
-                              }
+              for (var i = 0, l = items && items.length || 0; i < l; i += 1) ({
+                  item: function() {
+                      if (items[i].items) {
+                          menu += '<li><a href="#">' +
+                                  (items[i].icon ? '<i class="' + items[i].icon + '"></i>' : '') +
+                                  items[i].value + '</a>' +
+                                  '<ul class="nav-dropdown' +
+                                  (items[i].horizontal ? ' nav-dropdown-horizontal' : '') +
+                                  '">'
+                          trav(items[i].items||[])
+                          menu += '</ul></li>'
+                      } else
+                          menu += '<li><a href="' + href(items[i]) + '">' +
+                                  (items[i].icon ? '<i class="' + items[i].icon + '"></i>' : '') +
+                                  items[i].value +
+                                  '</a></li>'
+                  },
+                  list: function() {
+                      menu += '<li><a href="#">' + items[i].value + '</a>' +
+                              '<ul class="nav-dropdown"><div class="megamenu-lists">'
+                      for (var j = 0, m = (items[i].items||[]).length; j < m; j += 1) {
+                          if (items[i].items[j].items && items[i].items[j].items.length) {
+                              menu += '<ul class="megamenu-list list-col-' + m + '">' +
+                                      '<li class="megamenu-list-title"><a href="#">' + items[i].items[j].items[0].value + '</a></li>'
+                              items[i].items[j].items.shift()
+                              trav(items[i].items[j].items)
+							  menu += '</ul>'
                           }
-                          menu += '</div></ul></li>'
-                      },
-                      panel: function() {
-                          menu += '<li><a href="#">' + items[i].value + '</a>' +
-                                  '<div class="megamenu-panel">' +
-                                  (items[i].items && items[i].items[0] && items[i].items[0].value || '') +                      
-                                  '</div></li>'
-    
-                      },
-                      panelHalf: function() {
-                          menu += '<li><a href="#">' + items[i].value + '</a>' +
-                                  '<div class="megamenu-panel megamenu-panel-half">' +
-                                  (items[i].items && items[i].items[0] && items[i].items[0].value || '') +                      
-                                  '</div></li>'
-                      },
-                      panelQuarter: function() {
-                          menu += '<li><a href="#">' + items[i].value + '</a>' +
-                                  '<div class="megamenu-panel megamenu-panel-quarter">' +
-                                  (items[i].items && items[i].items[0] && items[i].items[0].value || '') +                      
-                                  '</div></li>'
-                      },
-                      grid: function() {
-                          menu += '<li><a href="#">' + items[i].value + '</a>' +
-                                  '<div class="megamenu-panel">'
-                          for (var j = 0, m = (items[i].items||[]).length; j < m; j += 1) {
-                              menu += '<div class="megamenu-panel-row">'
-                              for (var k = 0, n = (items[i].items[j].items||[]).length; k < n; k += 1)
-                            	  menu += '<div class="col' + ((12/n) % 1 ? '' : '-' + (12/n) ) + '">' +
-                            	          items[i].items[j].items[k].value +
-    							          '</div>'
-                              menu += '</div>'
-                          }
-                          menu += '</div></li>'
-                      },                      
-                      tabs: function() {
-                          menu += '<li><a href="#">' + items[i].value + '</a>' +
-    					          '<div class="megamenu-panel">' +
-                                  '<div class="megamenu-tabs">' +
-                                  '<ul class="megamenu-tabs-nav">'
-                          for (var j = 0, m = (items[i].items||[]).length; j < m; j += 1)
-                              menu += '<li><a href="#"' + (j ? '' : ' class="active"') + '>' +
-                            	      (items[i].items[j].items && items[i].items[j].items[0] && items[i].items[j].items[0].value || '') +
-    							      '</a></li>'
-                          menu += '</ul>'
-                          for (var j = 0, m = (items[i].items||[]).length; j < m; j += 1)
-                        	  menu += '<div class="megamenu-tabs-pane' + (j ? '' : ' active') + '">' +
-                        	          (items[i].items[j].items && items[i].items[j].items[1] && items[i].items[j].items[1].value || '') +
-    						          '</div>'
-                          menu += '</div></div></li>'
-                      },
-                      button: function() {
-                          menu += '<a href="' + href(items[i]) + '" class="nav-button" href="' + href(items[i]) + '">' + items[i].value + '</a>'
-                      },
-                      text: function() {
-                          menu += '<li><span class="nav-text">' + items[i].value + '</span></li>'
-                      },
-                      search: function() {  
-                          menu += '<div class="nav-search">' +
-                                  '<div class="nav-search-button">' +
-                                  '<i class="nav-search-icon"></i>' +
-                                  '</div>' +
-                                  '<form onsubmit="return false;">' +
-                                  '<div class="nav-search-inner">' +
-                                  '<input type="search" id="menubarsearch" onchange="menubarSearch()" placeholder="' + items[i].value + '"/>' +
-                                  '</div>' +
-                                  '</form>' +
-                                  '</div>'
                       }
-                  })[items[i].type || 'item']()
+                      menu += '</div></ul></li>'
+                  },
+                  panel: function() {
+                      menu += '<li><a href="#">' + items[i].value + '</a>' +
+                              '<div class="megamenu-panel">' +
+                              (items[i].items && items[i].items[0] && items[i].items[0].value || '') +                      
+                              '</div></li>'
+
+                  },
+                  panelHalf: function() {
+                      menu += '<li><a href="#">' + items[i].value + '</a>' +
+                              '<div class="megamenu-panel megamenu-panel-half">' +
+                              (items[i].items && items[i].items[0] && items[i].items[0].value || '') +                      
+                              '</div></li>'
+                  },
+                  panelQuarter: function() {
+                      menu += '<li><a href="#">' + items[i].value + '</a>' +
+                              '<div class="megamenu-panel megamenu-panel-quarter">' +
+                              (items[i].items && items[i].items[0] && items[i].items[0].value || '') +                      
+                              '</div></li>'
+                  },
+                  grid: function() {
+                      menu += '<li><a href="#">' + items[i].value + '</a>' +
+                              '<div class="megamenu-panel">'
+                      for (var j = 0, m = (items[i].items||[]).length; j < m; j += 1) {
+                          menu += '<div class="megamenu-panel-row">'
+                          for (var k = 0, n = (items[i].items[j].items||[]).length; k < n; k += 1)
+                        	  menu += '<div class="col' + ((12/n) % 1 ? '' : '-' + (12/n) ) + '">' +
+                        	          items[i].items[j].items[k].value +
+							          '</div>'
+                          menu += '</div>'
+                      }
+                      menu += '</div></li>'
+                  },                      
+                  tabs: function() {
+                      menu += '<li><a href="#">' + items[i].value + '</a>' +
+					          '<div class="megamenu-panel">' +
+                              '<div class="megamenu-tabs">' +
+                              '<ul class="megamenu-tabs-nav">'
+                      for (var j = 0, m = (items[i].items||[]).length; j < m; j += 1)
+                          menu += '<li><a href="#"' + (j ? '' : ' class="active"') + '>' +
+                        	      (items[i].items[j].items && items[i].items[j].items[0] && items[i].items[j].items[0].value || '') +
+							      '</a></li>'
+                      menu += '</ul>'
+                      for (var j = 0, m = (items[i].items||[]).length; j < m; j += 1)
+                    	  menu += '<div class="megamenu-tabs-pane' + (j ? '' : ' active') + '">' +
+                    	          (items[i].items[j].items && items[i].items[j].items[1] && items[i].items[j].items[1].value || '') +
+						          '</div>'
+                      menu += '</div></div></li>'
+                  },
+                  button: function() {
+                      menu += '<a href="' + href(items[i]) + '" class="nav-button" href="' + href(items[i]) + '">' + items[i].value + '</a>'
+                  },
+                  text: function() {
+                      menu += '<li><span class="nav-text">' + items[i].value + '</span></li>'
+                  },
+                  search: function() {  
+                      menu += '<div class="nav-search">' +
+                              '<div class="nav-search-button">' +
+                              '<i class="nav-search-icon"></i>' +
+                              '</div>' +
+                              '<form onsubmit="return false;">' +
+                              '<div class="nav-search-inner">' +
+                              '<input type="search" id="menubarsearch" onchange="menubarSearch()" placeholder="' + items[i].value + '"/>' +
+                              '</div>' +
+                              '</form>' +
+                              '</div>'
+                  }
+              })[items[i].type || 'item']()
           }
           
                     
