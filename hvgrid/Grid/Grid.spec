@@ -2,7 +2,7 @@
     "name": "hvgrid-Grid",
     "displayName": "Grid",
     "version": 1,
-    "icon": "hvgrid/grid/icon.png",
+    "icon": "hvgrid/Grid/icon.png",
     "definition": "hvgrid/Grid/Grid.js",
     "model":
     {

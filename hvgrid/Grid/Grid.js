@@ -14,36 +14,35 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
           var attrVal = function(attr, row) {
               if (typeof attr === 'number')
                   return $scope.model.columns[attr].dataprovider[row]
-              else return attr
+              return attr
           }
           
-          var makeTemplate = function(template, container, row) {
-              var a,b,c
-              for(a in template) {
-                  if(template[a].constructor===Array) {
-                      for (c=0; c<template[a].length; c+=1) {
-                           makeTemplate(template[a][c],container,row)
-                    }
-                  }
-                  else if (a === 'html')
-                      $(container).html(attrVal(template[a], row))
-                  else if (typeof template[a] === 'object') {
-                      if (a==='style')
-                          for (c in template[a])
-                               $(container).css(c, template[a][c])
-                      else {
-                          b=document.createElement(a)
-                          $(container).append(b)
-                          makeTemplate(template[a],b,row)
-                      }
-                  }
-                  else $(container).attr(a,attrVal(template[a], row))
-              }
+          var getTemplate = function(template, row) {
+              var a,
+                  b,
+                  c,
+                  el
+			  for (a in template) break
+			  el = document.createElement(a)
+              for (b in template[a])
+                  if (template[a][b].constructor === Array)
+                      for (c=0; c<template[a][b].length; c+=1)
+                           el.appendChild(getTemplate(template[a][b][c],row))
+                  else if(typeof template[a][b] === 'object')
+                      for (c in template[a][b])
+                          el.style[c] = template[a][b][c]
+                  else
+                	  el[b] = attrVal(template[a][b], row)  
+              return el
           }
 
           var showRows = function(start, end) {
               var container = $('#hvgrid'),
-                  row, column, cell, i, j
+                  row,
+                  column,
+                  cell,
+                  i,
+                  j
               $(container).empty()
               end = end > $scope.model.foundset.viewPort.rows.length ? $scope.model.foundset.viewPort.rows.length : end
               for (i=start; i<end; i+=1) {
@@ -60,12 +59,12 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
                                 return function() {
                                     $window.executeInlineScript($scope.model.onCellClick.formName,
                                                                 $scope.model.onCellClick.script,
-                                                                [$scope.model.foundset.viewPort.rows[r]])
+                                                                [r+1])
                                 }
                             })(i))
                   $(row).append(column)
                   if ($scope.model.template)
-                      makeTemplate($scope.model.template, column, i)
+                      column.appendChild(getTemplate($scope.model.template, i))
                   else
                       for (j=0; j<$scope.model.columns.length; j+=1) {
                           cell = document.createElement('div')
@@ -110,7 +109,7 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
           }
 
           $scope.showEditorHint = function() {
-              return (!$scope.model.columns || $scope.model.columns.length == 0) && $scope.svyServoyapi && $scope.svyServoyapi.isInDesigner()
+              return $scope.svyServoyapi && $scope.svyServoyapi.isInDesigner()
           }
 
 
