@@ -5,5 +5,6 @@
     {"name":"menubar", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/MenuBar/webpackage.json"},
     {"name":"wowza", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/WowzaPlayer/webpackage.json"},
     {"name":"hvgrid", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/hvgrid/webpackage.json"},
-    {"name":"pgmenu", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/pgmenu/webpackage.json"}
+    {"name":"pgmenu", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/pgmenu/webpackage.json"},
+    {"name":"servoyucomponents", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/ServoyUComponents/webpackage.json"}
 ]

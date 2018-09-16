@@ -8,11 +8,8 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
       },
       controller: function($scope, $element, $attrs) {
 
-          var wp =  WowzaPlayer.create('wowzaplayer', {
-              'license': $scope.model.license,
-              'sourceURL': $scope.model.sourceURL
-          })
-  
+          var wp = null
+          
           $scope.api.finish = function(){
               wp.finish()
               return true
@@ -87,7 +84,7 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
                   })(handlers[i][0])
               
               $scope.api[handlers[i][1]] = (
-                  function(h,m) { 
+                  function(h, m) { 
                       return function() {
                           wp[m](fn[h])
                           return true
@@ -98,7 +95,28 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
                   wp[handlers[i][0]](fn[handlers[i][0]])
 
           }
+          
+          $scope.$watch('model.sourceURL', function() {
+              
+              if (!$scope.model.sourceURL) return
+              
+              if (wp && wp.getCurrentState()) {
+                  if (wp.isPlaying()) wp.finish()
+                  wp.setConfig({'sourceURL': $scope.model.sourceURL})
+              }
+              else
+                  wp = WowzaPlayer.create('wowzaplayer', {
+                     'license': $scope.model.license,
+                     'sourceURL': $scope.model.sourceURL
+                  })
+              
+              if (wp.getCurrentState() === 4) wp.play()
+              
+          })
 
+          $scope.$on('$destroy', function() {
+              wp.destroy()
+          })
       },
       templateUrl: 'wowzaplayer/Wowza/Wowza.html'
     };

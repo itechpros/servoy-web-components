@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: servoyucomponents
+Bundle-Name: servoyucomponents
+Bundle-Version: 1.0.0
+Package-Type: Web-Component
+
+Name: Header/Header.spec
+Web-Component: True
+
+Name: VideoDetailsTop/VideoDetailsTop.spec
+Web-Component: True
+
+Name: VideoDetailsBottom/VideoDetailsBottom.spec
+Web-Component: True
+
+Name: Footer/Footer.spec
+Web-Component: True
+
+Name: VideoSearchBar/VideoSearchBar.spec
+Web-Component: True
+
+Name: Dashboard/Dashboard.spec
+Web-Component: True
+
+Name: Hero/Hero.spec
+Web-Component: True
+
