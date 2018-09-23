@@ -4,52 +4,54 @@ angular.module('servoyucomponentsVideoSearchBar',['servoy']).directive('servoyuc
       scope: {
     	  model: '=svyModel'
       },
-      controller: function($scope, $element, $attrs) {
+      controller: function($scope, $element, $attrs, $window) {
+          
+          var getFilterValue = function(){
+                  return {
+                      text: '%' + $('#video_text_search').val() + '%',
+                      category: $('.selection1').children().eq(2).find(":selected").val() / 1,
+                      series: $('.selection1').children().eq(1).find(":selected").val() / 1
+                  }
+              },
+              filter = getFilterValue()
+          
+          $scope.filter = function() {
+              var flt = getFilterValue(),
+                  f
+              for (f in filter)
+                  if (filter[f] === flt[f])
+                      delete flt[f]
+                  else
+                      filter[f] = flt[f]
+              if ($scope.model.filter && Object.keys(flt).length)
+                  $window.executeInlineScript
+                  (
+                      $scope.model.filter.formname,
+                      $scope.model.filter.script,
+                      [flt]
+                  )
+          }
+          
+          function popSelect(s){
+              var sel = {
+                  category: 2,
+                  series: 1
+              }
+              $('.selection1').children().eq(sel[s]).find("option:gt(0)").remove()
+              $.each($scope.model[s], function (i, item) {
+                  $('.selection1').children().eq(sel[s]).append($('<option>', item))
+              })
+          }
+          
+          $scope.$watch('model.category', function() {
+              popSelect('category')
+          })
+          $scope.$watch('model.series', function() {
+              popSelect('series')
+          })
           
         $(document).ready(function () {
-            
-            $('#User').click(function(){
-                $('#userMenu').slideToggle();
-            });
-            
-            $(".phone-menu").click(function () {
-                $(".nav-items").slideToggle();
-            });
         
-            $('.modal-toggle').click(function (e) {
-                var tab = e.target.hash;
-                $('li > a[href="' + tab + '"]').tab("show");
-            });
-            var $sliderpage = $('.video-slider');
-            if ($sliderpage.width() > 1) {
-                $('.video-slider').slick({
-                    dots: false,
-                    infinite: false,
-                    speed: 800,
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    responsive: [
-                        {
-                            breakpoint: 1024,
-                            settings: {
-                                slidesToShow: 2,
-                                slidesToScroll: 2
-                            }
-                        },
-                        {
-                            breakpoint: 600,
-                            settings: {
-                                slidesToShow: 1,
-                                slidesToScroll: 1
-                            }
-                        }
-                        // You can unslick at a given breakpoint now by adding:
-                        // settings: "unslick"
-                        // instead of a settings object
-                    ]
-                });
-            }
-            ;
             
             // Iterate over each select element
             $('select').each(function () {
@@ -105,6 +107,7 @@ angular.module('servoyucomponentsVideoSearchBar',['servoy']).directive('servoyuc
                     $styledSelect.text($(this).text()).removeClass('active');
                     $this.val($(this).attr('rel'));
                     $list.hide();
+                    $scope.filter()
                     /* alert($this.val()); Uncomment this for demonstration! */
                 });
         
@@ -115,24 +118,7 @@ angular.module('servoyucomponentsVideoSearchBar',['servoy']).directive('servoyuc
                 });
         
             });
-            
-            
-            showMenu();
-        
         });
-        $(window).resize(function () {
-            showMenu();
-        });
-        function showMenu() {
-            var windowWidth = $(window).innerWidth();
-            if (windowWidth < 992) {
-                $('.phone-menu').show();
-                $('.nav-items').hide();
-            } else {
-                $('.phone-menu').hide();
-                $('.nav-items').show();
-            }
-        }      
       },
       templateUrl: 'servoyucomponents/VideoSearchBar/VideoSearchBar.html'
     };

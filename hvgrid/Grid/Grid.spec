@@ -18,6 +18,10 @@
         "onCellClick": { "type": "function" },
         "overflow": { "type": "string", "values": [{"scroll":"scroll"},{"hidden": "hidden"},{"auto": "auto"},{"visible": "visible"}], "default": "visible" }
     },
+    "api":
+    {
+        "refresh": {}
+    },
     "types": {
         "column": {
             "dataprovider": { "type": "dataprovider", "forFoundset": "foundset"}

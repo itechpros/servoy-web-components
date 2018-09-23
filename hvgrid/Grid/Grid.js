@@ -3,13 +3,11 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
       restrict: 'E',
       scope: {
           model: '=svyModel',
-		  svyServoyapi: "="
+          api: "=svyApi"
       },
       controller: function($scope, $element, $attrs, $window) {
           
-          var fsRows = $scope.model.columnsPerRow * $scope.model.rowsPerPage
-          
-          $scope.model.fsLoadSize = $scope.model.fsLoadSize > fsRows ? $scope.model.fsLoadSize : fsRows
+          var fsRows
             
           var attrVal = function(attr, row) {
               if (typeof attr === 'number')
@@ -83,7 +81,10 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
               return $scope.model.rowsPerPage && $scope.model.foundset && ($scope.model.foundset.serverSize > ($scope.model.rowsPerPage * $scope.model.columnsPerRow) || $scope.model.foundset.hasMoreRows);
           }
 
-          $scope.modifyPage = function(count) {       
+          $scope.modifyPage = function(count) {
+              fsRows = $scope.model.columnsPerRow * $scope.model.rowsPerPage
+              $scope.model.fsLoadSize = $scope.model.fsLoadSize > fsRows ? $scope.model.fsLoadSize : fsRows
+                      
               if ($scope.model.currentPage + count < 1 || (!$scope.hasNext() && count > 0))
                   return
               $scope.model.currentPage += count
@@ -113,6 +114,10 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
           }
 
 
+          $scope.api.refresh = function(){
+              $scope.modifyPage(0)
+          }
+          
           if ($scope.model.columns && $scope.model.columns.length)
               $scope.modifyPage(0)
 

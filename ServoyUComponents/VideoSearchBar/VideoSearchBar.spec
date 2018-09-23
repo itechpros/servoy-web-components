@@ -6,6 +6,8 @@
 	"libraries": [],
 	"model":
 	{
-		"yourName" : {"type": "string", "default":"World"}
+		"category" : {"type": "object[]"},
+		"series" : {"type": "object[]"},
+		"filter" : {"type": "function"}
 	}
 }
