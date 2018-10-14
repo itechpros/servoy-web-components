@@ -6,7 +6,5 @@
     "description": "AngularJS directive for Wowza Player",
     "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/WowzaPlayer/README.md",
     "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/WowzaPlayer",
-    "releases" : [{"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/wowzaplayer.zip"},
-                  {"version":"1.0.2","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/wowzaplayer.1.0.2.zip"},
-                  {"version":"1.0.3","url":"https://github.com/itechpros/servoy-web-components/raw/master/WowzaPlayer/wowzaplayer.1.0.3.zip"}]
+    "releases" : [{"version":"1.0.3","url":"https://github.com/itechpros/servoy-web-components/raw/master/WowzaPlayer/wowzaplayer.1.0.3.zip"}]
 }

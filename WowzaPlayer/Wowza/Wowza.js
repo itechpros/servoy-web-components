@@ -9,7 +9,7 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
       controller: function($scope, $element, $attrs) {
 
           var wp = null
-          
+		  
           $scope.api.finish = function(){
               wp.finish()
               return true
@@ -56,62 +56,58 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
               return wp.isPlaying()
           }
           
-          var handlers = [
-              ['onLoad', 'removeOnLoad'],
-              ['onReady', 'removeOnReady'],
-              ['onBitrateChanged', 'removeOnBitrateChanged'],
-              ['onStats', 'removeOnStats'],
-              ['onPlayheadTime', 'removeOnPlayheadTime'],
-              ['onError', 'removeOnError'],
-              ['onStateChanged', 'removeOnStateChanged'],
-              ['onVolume', 'removeOnVolume'],
-              ['onMetadata', 'removeOnMetaData'],
-              ['onPlay', 'removeOnPlay'],
-              ['onPause', 'removeOnPause'],
-              ['onResume', 'removeOnResume'],
-              ['onStop', 'removeOnStop'],
-              ['onCompleted', 'removeOnCompleted'],
-              ['onSeek', 'removeOnSeek']],
-              fn = {}
-              
-          for (var i=0; i<handlers.length; i+=1) {
-
-              fn[handlers[i][0]] = (
-                  function(h) {                  
-                      return function(e) {
-                          $scope.handlers[h]()
-                      }
-                  })(handlers[i][0])
-              
-              $scope.api[handlers[i][1]] = (
-                  function(h, m) { 
-                      return function() {
-                          wp[m](fn[h])
-                          return true
-                      }
-                  })(handlers[i][0],handlers[i][1])
-              
-              if ($scope.handlers[handlers[i][0]])
-                  wp[handlers[i][0]](fn[handlers[i][0]])
-
+          function assignHandlers(){
+          
+	          var handlers = [
+	              ['onLoad', 'removeOnLoad'],
+	              ['onReady', 'removeOnReady'],
+	              ['onBitrateChanged', 'removeOnBitrateChanged'],
+	              ['onStats', 'removeOnStats'],
+	              ['onPlayheadTime', 'removeOnPlayheadTime'],
+	              ['onError', 'removeOnError'],
+	              ['onStateChanged', 'removeOnStateChanged'],
+	              ['onVolume', 'removeOnVolume'],
+	              ['onMetadata', 'removeOnMetaData'],
+	              ['onPlay', 'removeOnPlay'],
+	              ['onPause', 'removeOnPause'],
+	              ['onResume', 'removeOnResume'],
+	              ['onStop', 'removeOnStop'],
+	              ['onCompleted', 'removeOnCompleted'],
+	              ['onSeek', 'removeOnSeek']],
+	              fn = {}
+	              
+	          for (var i=0; i<handlers.length; i+=1) {
+	
+	              fn[handlers[i][0]] = (
+	                  function(h) {                  
+	                      return function(e) {
+	                          $scope.handlers[h]()
+	                      }
+	                  })(handlers[i][0])
+	              
+	              $scope.api[handlers[i][1]] = (
+	                  function(h, m) { 
+	                      return function() {
+	                          wp[m](fn[h])
+	                          return true
+	                      }
+	                  })(handlers[i][0],handlers[i][1])
+	              
+	              if ($scope.handlers[handlers[i][0]])
+	                  wp[handlers[i][0]](fn[handlers[i][0]])
+	
+	          }
           }
           
-          $scope.$watch('model.sourceURL', function() {
-              
-              if (!$scope.model.sourceURL) return
-              
-              if (wp && wp.getCurrentState()) {
-                  if (wp.isPlaying()) wp.finish()
-                  wp.setConfig({'sourceURL': $scope.model.sourceURL})
-              }
-              else
-                  wp = WowzaPlayer.create('wowzaplayer', {
-                     'license': $scope.model.license,
-                     'sourceURL': $scope.model.sourceURL
-                  })
-              
-              if (wp.getCurrentState() === 4) wp.play()
-              
+          $scope.$watch('model.sourceURL', function() {              
+              if (wp)
+                  wp.destroy('wowzaplayer')
+              wp = WowzaPlayer.create('wowzaplayer', {
+                 'license': $scope.model.license,
+                 'sourceURL': $scope.model.sourceURL,
+				 'autoPlay':true
+              })
+			  assignHandlers()
           })
 
           $scope.$on('$destroy', function() {
