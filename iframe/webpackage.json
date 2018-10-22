@@ -1,0 +1,10 @@
+{
+    "name":"iframe",
+    "displayName":"iframe",
+    "packageType": "Web-Component",
+    "icon": "https://raw.githubusercontent.com/itechpros/servoy-web-components/master/iframe/logo.png",
+    "description": "Web component for embedding an HTML iframe.",
+    "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/iframe/README.md",
+    "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/iframe",
+    "releases" : [{"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/iframe.zip"}]
+}
