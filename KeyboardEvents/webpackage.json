@@ -1,5 +1,5 @@
 {
-    "name":"keyboardeventlistener",
+    "name":"keyboardevents",
     "displayName":"Keyboard Events",
     "packageType": "NG Service",
     "icon": "https://raw.githubusercontent.com/itechpros/servoy-web-components/master/KeyboardEvents/keyboard.png",
