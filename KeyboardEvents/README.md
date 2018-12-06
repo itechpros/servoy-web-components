@@ -1,5 +1,6 @@
 # Keyboard Events
 ## NG Service for grabbing Keyboard Events
+Upon successful NG Service installation, plugins.keyboardeventsservicesEnterKey will become available under Developer's plugins node
 
 ## License
 
