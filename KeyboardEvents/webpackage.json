@@ -1,0 +1,10 @@
+{
+    "name":"keyboardeventlistener",
+    "displayName":"Keyboard Events",
+    "packageType": "NG Service",
+    "icon": "https://raw.githubusercontent.com/itechpros/servoy-web-components/master/KeyboardEvents/keyboard.png",
+    "description": "Upon successful NG Service installation, plugins.keyboardeventsservicesEnterKey will become available under Developer plugins node",
+    "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/KeyboardEvents/README.md",
+    "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/KeyboardEvents",
+    "releases" : [{"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.1/keyboardeventsservices.zip"}]
+}
