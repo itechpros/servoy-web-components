@@ -4,7 +4,11 @@
 	  </label>
 </div>
 <div>
-  <div class="container" id="hvgrid" style="overflow:{{model.overflow}}"></div>
+  <div class="container" id="hvgrid" style="overflow:{{model.overflow}}">
+    <div id="hvgrid-spinner"  ng-if='!showEditorHint()' style="margin:auto;text-align:center;right:0;left:0;z-index:1;top:0;bottom:0;"> 
+       <img src="hvgrid/Grid/Spinner-1s-200px.svg">
+    </div>
+  </div>
   <div class="wrapper v-2" ng-if="hasPagination()">
     <div class="row">
       <div class="col-lg-12">
@@ -16,7 +20,7 @@
         </div>
        </div>
     </div>
-
+<!-- default Servoy pagination  --> 
     <!--ul class="svy-pagination pagination svy-nomargin">
       <li ng-class="model.currentPage == 1 ? 'disabled' : ''"><a href="#" ng-click="modifyPage(-1)" tabindex="-1">&laquo;</a></li>
       <li class="disabled"><a href="#" tabindex="-1">{{model.currentPage}}</a></li>

@@ -3,11 +3,14 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
       restrict: 'E',
       scope: {
           model: '=svyModel',
-          api: "=svyApi"
+          api: '=svyApi',
+          svyServoyapi: '='
       },
       controller: function($scope, $element, $attrs, $window) {
           
-          var fsRows
+          var container = $('#hvgrid'),
+              fsRows = $scope.model.columnsPerRow * $scope.model.rowsPerPage,
+              promise
             
           var attrVal = function(attr, row) {
               if (typeof attr === 'number')
@@ -35,13 +38,11 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
           }
 
           var showRows = function(start, end) {
-              var container = $('#hvgrid'),
-                  row,
+              var row,
                   column,
                   cell,
                   i,
                   j
-              $(container).empty()
               end = end > $scope.model.foundset.viewPort.rows.length ? $scope.model.foundset.viewPort.rows.length : end
               for (i=start; i<end; i+=1) {
                   if (!((i - start) % $scope.model.columnsPerRow)) {
@@ -70,6 +71,7 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
                           $(column).append(cell)
                       }
               }
+              $(container).find('#hvgrid-spinner').hide()
           }
                     
           $scope.hasNext = function() {
@@ -82,7 +84,13 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
           }
 
           $scope.modifyPage = function(count) {
-              fsRows = $scope.model.columnsPerRow * $scope.model.rowsPerPage
+
+              if (promise || ($scope.model.currentPage === 1 && count === -1) || (!$scope.hasNext() && count === 1))
+                  return
+
+              $(container).find('*').not('#hvgrid-spinner').find('*').remove()
+              $(container).find('#hvgrid-spinner').show()
+
               $scope.model.fsLoadSize = $scope.model.fsLoadSize > fsRows ? $scope.model.fsLoadSize : fsRows
                       
               if ($scope.model.currentPage + count < 1 || (!$scope.hasNext() && count > 0))
@@ -93,8 +101,9 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
               if (!$scope.model.foundset.viewPort.rows.length
                   || fsRows * ($scope.model.currentPage + 1) > ($scope.model.foundset.viewPort.startIndex + $scope.model.foundset.viewPort.size)
                   || $scope.model.foundset.viewPort.startIndex > ($scope.model.currentPage - 1) * fsRows) {
-                 var promise = $scope.model.foundset.loadExtraRecordsAsync(loadSize, false)
+                 promise = $scope.model.foundset.loadExtraRecordsAsync(loadSize, false)
                  promise.then(function() {
+                     promise = null
                      var start = ($scope.model.currentPage - 1) * fsRows,
                          pStart = start - $scope.model.foundset.viewPort.startIndex,
                          pEnd = $scope.model.currentPage * fsRows - $scope.model.foundset.viewPort.startIndex,
