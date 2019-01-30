@@ -14,7 +14,8 @@
     "model":
     {
         "license" : {"type": "string", "default":""},
-        "sourceURL" : {"type": "string", "default":""}
+        "sourceURL" : {"type": "string", "default":""},
+        "visible": "visible"
     },
     "api":
     {
