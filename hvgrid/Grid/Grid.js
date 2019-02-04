@@ -93,8 +93,8 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
 
               $scope.model.fsLoadSize = $scope.model.fsLoadSize > fsRows ? $scope.model.fsLoadSize : fsRows
                       
-              if ($scope.model.currentPage + count < 1 || (!$scope.hasNext() && count > 0))
-                  return
+              if (count === 0)
+                  $scope.model.currentPage = 1
               $scope.model.currentPage += count
               var loadSize = (count === -1 ? -1 : 1) * $scope.model.fsLoadSize,
                   keepRows = $scope.model.fsLoadSize * 1
