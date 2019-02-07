@@ -19,6 +19,10 @@
     },
     "api":
     {
+       "destroy":
+           {
+               "returns":"boolean"
+           },
        "finish":
            {
                "returns":"boolean"

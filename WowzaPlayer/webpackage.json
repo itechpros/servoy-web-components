@@ -8,6 +8,7 @@
     "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/WowzaPlayer",
     "releases" : [
         {"version":"1.0.3","url":"https://github.com/itechpros/servoy-web-components/raw/master/WowzaPlayer/wowzaplayer.1.0.3.zip"},
-        {"version":"1.0.4","url":"https://github.com/itechpros/servoy-web-components/raw/master/WowzaPlayer/wowzaplayer.1.0.4.zip"}
+        {"version":"1.0.4","url":"https://github.com/itechpros/servoy-web-components/raw/master/WowzaPlayer/wowzaplayer.1.0.4.zip"},
+        {"version":"1.0.5","url":"https://github.com/itechpros/servoy-web-components/raw/master/WowzaPlayer/wowzaplayer.1.0.5.zip"}
     ]
 }

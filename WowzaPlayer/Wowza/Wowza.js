@@ -10,6 +10,10 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
 
           var wp = null
 		  
+          $scope.api.destroy = function(){
+              wp.destroy()
+              return true
+          }
           $scope.api.finish = function(){
               wp.finish()
               return true
