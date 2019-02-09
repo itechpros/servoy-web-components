@@ -103,7 +103,8 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
 	          }
           }
           
-          $scope.$watch('model.sourceURL', function() {              
+          $scope.$watch('model.sourceURL', function() {
+              if (!$scope.model.sourceURL) return
               if (wp)
                   wp.destroy('wowzaplayer')
               wp = WowzaPlayer.create('wowzaplayer', {
