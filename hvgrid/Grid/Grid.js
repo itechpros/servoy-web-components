@@ -71,7 +71,7 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
                           $(column).append(cell)
                       }
               }
-              $(container).find('#hvgrid-spinner').hide()
+              setTimeout(()=>{$(container).find('#hvgrid-spinner').hide()}, 1)
           }
                     
           $scope.hasNext = function() {
@@ -87,14 +87,13 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
 
               if (promise || ($scope.model.currentPage === 1 && count === -1) || (!$scope.hasNext() && count === 1))
                   return
-
               $(container).find('*').not('#hvgrid-spinner').find('*').remove()
               $(container).find('#hvgrid-spinner').show()
 
               $scope.model.fsLoadSize = $scope.model.fsLoadSize > fsRows ? $scope.model.fsLoadSize : fsRows
-                      
+
               if (count === 0)
-                  $scope.model.currentPage = 1
+                  $scope.model.currentPage = $scope.model.currentPage || 1
               $scope.model.currentPage += count
               var loadSize = (count === -1 ? -1 : 1) * $scope.model.fsLoadSize,
                   keepRows = $scope.model.fsLoadSize * 1
@@ -124,6 +123,7 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
 
 
           $scope.api.refresh = function(){
+              $scope.model.currentPage = 1
               $scope.modifyPage(0)
           }
           
