@@ -9,7 +9,11 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
       controller: function($scope, $element, $attrs) {
 
           var wp = null
-		  
+
+          window.addEventListener('unload', function(event) {
+             wp && wp.destroy()
+          })
+
           $scope.api.destroy = function(){
               wp.destroy()
               return true
