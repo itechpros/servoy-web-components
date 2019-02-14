@@ -7,19 +7,27 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
           handlers: '=svyHandlers'
       },
       controller: function($scope, $element, $attrs) {
+          'use strict'
+		var wp = null,
+			latch = false,
+			prevURL = ''
 
-          var wp = null
-
-          window.addEventListener('unload', function(event) {
-             wp && wp.destroy()
-          })
-
+		function destroywp() {
+			wp && wp.finish()
+			wp && wp.destroy()
+			$('#wowzawrapper').find('div').remove()
+		}
+		
+		window.addEventListener('unload', function(event) {
+			destroywp()
+		})
+		
           $scope.api.destroy = function(){
-              wp.destroy()
+              destroywp()
               return true
           }
           $scope.api.finish = function(){
-              wp.finish()
+              wp && wp.finish()
               return true
           }
           $scope.api.mute = function(isMuted) {
@@ -106,21 +114,34 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
 	
 	          }
           }
-          
-          $scope.$watch('model.sourceURL', function() {
-              if (!$scope.model.sourceURL) return
-              if (wp)
-                  wp.destroy('wowzaplayer')
-              wp = WowzaPlayer.create('wowzaplayer', {
-                 'license': $scope.model.license,
-                 'sourceURL': $scope.model.sourceURL,
-				 'autoPlay':true
-              })
-			  assignHandlers()
-          })
+		function startWP(){
+			destroywp()
+			latch = true
+			setTimeout(function() {
+				latch = false
+				if (prevURL !== $scope.model.sourceURL && $scope.model.sourceURL)
+					startWP()
+			}, 500)
+			setTimeout(function() {
+				!wp && startWP()
+			}, 1500)
+			$('<div>', {id:'wowzaplayer'}).appendTo($('#wowzawrapper'))
+			wp = WowzaPlayer.create('wowzaplayer', {
+				'license': $scope.model.license,
+				'sourceURL': $scope.model.sourceURL,
+				'autoPlay':true,
+				'debugLevel':'OFF' 
+			})
+			assignHandlers()
+			prevURL = $scope.model.sourceURL
+		}
+
+		$scope.$watch('model.sourceURL', function() {
+			!latch && $scope.model.sourceURL && startWP()
+		})
 
           $scope.$on('$destroy', function() {
-              wp.destroy()
+              destroywp()
           })
       },
       templateUrl: 'wowzaplayer/Wowza/Wowza.html'
