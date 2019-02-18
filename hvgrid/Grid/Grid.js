@@ -71,7 +71,7 @@ angular.module('hvgridGrid',['servoy']).directive('hvgridGrid', function() {
                           $(column).append(cell)
                       }
               }
-              setTimeout(()=>{$(container).find('#hvgrid-spinner').hide()}, 1)
+              setTimeout(function(){$(container).find('#hvgrid-spinner').hide()}, 1)
           }
                     
           $scope.hasNext = function() {

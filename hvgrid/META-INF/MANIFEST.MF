@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: hvgrid
 Bundle-Name: HV Grid
-Bundle-Version: 1.0.6
+Bundle-Version: 1.0.7
 Package-Type: Web-Component
 
 Name: Grid/Grid.spec
