@@ -114,7 +114,7 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
 	
 	          }
           }
-		function startWP(){
+		function startWP(preventAutoplay){
 			destroywp()
 			latch = true
 			setTimeout(function() {
@@ -129,10 +129,14 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
 			wp = WowzaPlayer.create('wowzaplayer', {
 				'license': $scope.model.license,
 				'sourceURL': $scope.model.sourceURL,
-				'autoPlay':true,
+				'autoPlay': !preventAutoplay && true || false,
 				'debugLevel':'OFF' 
 			})
 			assignHandlers()
+			wp.onCompleted(function() {
+				if (~navigator.userAgent.toLowerCase().indexOf('firefox') && wp.getCurrentState() === 4)
+					startWP(true)
+			})
 			prevURL = $scope.model.sourceURL
 		}
 
