@@ -13,24 +13,13 @@ angular.module('wowzaplayerWowza',['servoy']).directive('wowzaplayerWowza', func
 			prevURL = ''
 
 		function destroywp() {
-
-//			try{
-//console.log('CHLD:',$('#wowzawrapper').children().length)
-	if($('#wowzawrapper').children().length){
-//wp&&wp.removeOnCompleted()
-			wp && wp.finish()
-			wp && wp.destroy()
-//wp=null
-			$('#wowzawrapper').find('div').remove()
-	}//else console.log('none')
-//}catch(e){console.log(e)}
+			if ($('#wowzawrapper').children().length) {
+				wp && ~navigator.userAgent.toLowerCase().indexOf('firefox') && wp && wp.removeOnCompleted()
+				wp && wp.finish()
+				wp && wp.destroy()
+				$('#wowzawrapper').find('div').remove()
+			}
 		}
-		
-		window.addEventListener('unload', function(event) {
-console.log('unload')
-			destroywp()
-			$scope.model.sourceURL=null
-		})
 		
           $scope.api.destroy = function(){
               destroywp()
@@ -125,22 +114,17 @@ console.log('unload')
 	          }
           }
 		function startWP(preventAutoplay){
-//if($('#ytbeid').length)return
-//console.log($scope.model.sourceURL,$('#ytbeid').length)
 			destroywp()
 			latch = true
 			setTimeout(function() {
 				latch = false
-				if (prevURL !== $scope.model.sourceURL && $scope.model.sourceURL/* && $('#wowzawrapper').children().length*/)
+				if (prevURL !== $scope.model.sourceURL && $scope.model.sourceURL)
 					startWP()
 			}, 500)
 			setTimeout(function() {
-console.log('restart 1500',wp)
-				!wp /*&& $('#wowzawrapper').children().length*/ && startWP()
+				!wp && startWP()
 			}, 5500)
-			//if(!$('#wowzawrapper').children().length)
-				$('<div>', {id:'wowzaplayer'}).appendTo($('#wowzawrapper'))
-//try{
+			$('<div>', {id:'wowzaplayer'}).appendTo($('#wowzawrapper'))
 			wp = WowzaPlayer.create('wowzaplayer', {
 				'license': $scope.model.license,
 				'sourceURL': $scope.model.sourceURL,
@@ -148,13 +132,8 @@ console.log('restart 1500',wp)
 				'debugLevel':'OFF' 
 			})
 			assignHandlers()
-//}catch(e){console.log('WP',e)
-//destroywp()
-//}
-			if (~navigator.userAgent.toLowerCase().indexOf('firefox'))
-				wp.onCompleted(function() {
-					if (~navigator.userAgent.toLowerCase().indexOf('firefox') && wp.getCurrentState() === 4)
-
+			~navigator.userAgent.toLowerCase().indexOf('firefox') && wp.onCompleted(function() {
+					if (wp.getCurrentState() === 4)
 						startWP(true)
 				})
 			prevURL = $scope.model.sourceURL
