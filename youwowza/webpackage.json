@@ -1,11 +1,10 @@
 {
     "name":"wowza",
-    "displayName":"Wowza Player",
+    "displayName":"YouWowza Player",
     "packageType": "Web-Component",
-    "icon": "https://github.com/itechpros/servoy-web-components/raw/master/WowzaPlayer/icon.png",
+    "icon": "https://github.com/itechpros/servoy-web-components/raw/master/youwowza/icon.jpeg",
     "description": "AngularJS directive for Wowza Player",
-    "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/WowzaPlayer/README.md",
-    "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/WowzaPlayer",
+    "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/youwowza",
     "releases" : [
         {"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/raw/master/youwowza/youwowza.1.0.3.zip"}
     ]
