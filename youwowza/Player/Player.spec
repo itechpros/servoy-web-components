@@ -15,8 +15,7 @@
     {
         "license" : {"type": "string", "default":""},
         "sourceURL" : {"type": "string", "default":""},
-        "visible": "visible",
-        "isWowza": {"type": "protected"}
+        "visible": "visible"
     },
     "api":
     {
