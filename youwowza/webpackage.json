@@ -6,6 +6,6 @@
     "description": "AngularJS directive for Wowza Player",
     "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/youwowza",
     "releases" : [
-        {"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/raw/master/youwowza/youwowza.1.0.3.zip"}
+        {"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/raw/master/youwowza/youwowza.1.0.0.zip"}
     ]
 }
