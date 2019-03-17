@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: youwowza
+Bundle-Name: YouWowza
+Bundle-Version: 1.0.0
+Package-Type: Web-Component
+
+Name: Player/Player.spec
+Web-Component: True
+
