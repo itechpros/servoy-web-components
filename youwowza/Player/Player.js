@@ -1,20 +1,21 @@
 angular.module('youwowzaPlayer',['servoy']).directive('youwowzaPlayer', function($sce) {
 	return {
-	  restrict: 'E',
-	  scope: {
+		restrict: 'E',
+		scope: {
 		  api: '=svyApi',
 		  model: '=svyModel',
 		  handlers: '=svyHandlers'
-	  },
-	  controller: function($scope, $element, $attrs) {
-	  	'use strict'
+		},
+	controller: function($scope, $element, $attrs) {
+		'use strict'
 		var wp = null,
 			latch = false,
-			prevURL = ''
+			prevURL = '',
+			isFF = ~navigator.userAgent.toLowerCase().indexOf('firefox')
 
 		function destroyPlayer() {
 			if ($('#videoplayer').children().length) {
-				wp && ~navigator.userAgent.toLowerCase().indexOf('firefox') && wp && wp.removeOnCompleted()
+				wp && isFF && wp && wp.removeOnCompleted()
 				wp && wp.finish()
 				wp && wp.destroy()
 				$('#videoplayer').find('div').remove()
@@ -23,7 +24,7 @@ angular.module('youwowzaPlayer',['servoy']).directive('youwowzaPlayer', function
 		}
 		
 		$scope.api.destroy = function(){
-			destroywp()
+			destroyPlayer()
 			return true
 		}
 		$scope.api.finish = function(){
@@ -117,7 +118,7 @@ angular.module('youwowzaPlayer',['servoy']).directive('youwowzaPlayer', function
 		
 		function startWP(preventAutoplay){
 			setTimeout(function() {
-				!wp && startPlayer()
+				!wp && !isYoutube() && startPlayer()
 			}, 2500)
 			$('<div>', {id:'wowzaplayer'}).appendTo($('#videoplayer'))
 			wp = WowzaPlayer.create('wowzaplayer', {
@@ -127,7 +128,7 @@ angular.module('youwowzaPlayer',['servoy']).directive('youwowzaPlayer', function
 				'debugLevel':'OFF' 
 			})
 			assignHandlers()
-			~navigator.userAgent.toLowerCase().indexOf('firefox') && wp.onCompleted(function() {
+			isFF && wp.onCompleted(function() {
 				if (wp.getCurrentState() === 4)
 					startWP(true)
 			})
@@ -141,10 +142,14 @@ angular.module('youwowzaPlayer',['servoy']).directive('youwowzaPlayer', function
 			}).appendTo($('#videoplayer'))
 		}
 
+		function isYoutube() {
+			return ~$scope.model.sourceURL.indexOf('youtube.com')
+		}
+
 		function startPlayer() {
 			destroyPlayer()
 			prevURL = $scope.model.sourceURL
-			if (~$scope.model.sourceURL.indexOf('youtube.com')) startYoutube()
+			if (isYoutube()) startYoutube()
 			else startWP()
 		}
 		
