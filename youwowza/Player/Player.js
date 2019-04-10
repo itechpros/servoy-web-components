@@ -15,7 +15,7 @@ angular.module('youwowzaPlayer',['servoy']).directive('youwowzaPlayer', function
 
 		function destroyPlayer() {
 			if ($('#videoplayer').children().length) {
-				wp && isFF && wp && wp.removeOnCompleted()
+				isFF && wp && wp.removeOnCompleted()
 				wp && wp.finish()
 				wp && wp.destroy()
 				$('#videoplayer').find('div').remove()
