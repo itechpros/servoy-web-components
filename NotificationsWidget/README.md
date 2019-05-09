@@ -20,7 +20,7 @@ Component Properties:
 - horizontalAlignment: H pos of popup
   - type: string
   - default: LEFT
-- verticalAlignment: V pos of poput
+- verticalAlignment: V pos of popup
   - type: string
   - default: TOP
 - maxheight: Max height of notificatios popup in pixels
