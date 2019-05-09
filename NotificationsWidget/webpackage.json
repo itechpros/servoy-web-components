@@ -8,6 +8,6 @@
     "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/NotificationsWidget",
     "releases" : [
         {"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/notificationswidget.zip"},
-        {"version":"1.0.2","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/notificationswidget.1.0.2.zip"}
+        {"version":"1.0.2","url":"https://github.com/itechpros/servoy-web-components/raw/master/NotificationsWidget/notificationswidget.1.0.2.zip"}
     ]
 }
