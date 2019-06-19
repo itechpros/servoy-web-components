@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: dropzone
+Bundle-Name: Dropzone
+Bundle-Version: 1.0.0
+Package-Type: Web-Component
+
+Name: Uploader/Uploader.spec
+Web-Component: True
+
