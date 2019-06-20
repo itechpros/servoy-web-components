@@ -16,5 +16,32 @@
 			"mimetype": "text/css",
 			"url": "dropzone/Uploader/lib/dropzone.css"
 		}
-	]
+	],
+	"model": {
+		"options": "object[]",
+		"file": {
+		    "type": "dataprovider",
+		    "pushToServer": "allow",
+		    "ondatachange": { "onchange": "onDataChangeMethodID", "callback": "onDataChangeCallback" }
+		}
+	},
+	"handlers": {
+		"onDataChangeMethodID" : {
+		    "returns": "boolean", 
+		    "parameters": [
+		        {
+		            "name":"oldValue",
+		            "type":"${dataproviderType}"
+		        },
+		        {
+		            "name":"newValue",
+		            "type":"${dataproviderType}"
+		        },
+		        {
+		            "name":"event",
+		            "type":"JSEvent"
+		        }
+		    ]
+		}
+	}	
 }

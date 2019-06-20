@@ -1,18 +1,18 @@
-angular.module('dropzoneUploader',['servoy']).directive('dropzoneUploader', function() {  
+angular.module('dropzoneUploader',['servoy', 'sabloApp']).directive('dropzoneUploader', ['$sabloApplication', function($sabloApplication) {  
     return {
       restrict: 'E',
       scope: {
     	  model: '=svyModel'
       },
       controller: function($scope, $element, $attrs, $window) {
+          
+          var url = 'resources/upload/' + $sabloApplication.getSessionId() + '/' + $scope.$parent.formname + '/' + $attrs.name + '/file'
           $window.Dropzone.options.dz = {
-              dictDefaultMessage : 'yoo'
+              dictDefaultMessage : 'yoo',addRemoveLinks:true
           }
           
-          var dz = new Dropzone("div#dz", { url: "/file/post"})//, dictDefaultMessage : 'abc'});//
-          //$("div#dz").dropzone({ url: "/file/post", dictDefaultMessage : 'ab'})
-          
+          var dz = new Dropzone('div#dz', { url: url})
       },
       templateUrl: 'dropzone/Uploader/Uploader.html'
     };
-  })
+  }])
