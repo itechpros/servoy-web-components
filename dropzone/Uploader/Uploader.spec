@@ -18,7 +18,7 @@
 		}
 	],
 	"model": {
-		"options": "object[]",
+		"options": "object",
 		"file": {
 		    "type": "dataprovider",
 		    "pushToServer": "allow",
