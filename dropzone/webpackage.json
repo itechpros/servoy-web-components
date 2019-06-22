@@ -1,0 +1,12 @@
+{
+    "name":"dropzone",
+    "displayName":"Dropzone Drag-n-Drop File Uploader",
+    "packageType": "Web-Component",
+    "icon": "https://github.com/itechpros/servoy-web-components/raw/master/dropzone/icon.svg",
+    "description": "A directive for AngularJS providing drag-n-drop file upload component",
+    "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/dropzone/README.md",
+    "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/dropzone",
+    "releases" : [
+        {"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/raw/master/dropzone/dropzone.zip"}
+    ]
+}

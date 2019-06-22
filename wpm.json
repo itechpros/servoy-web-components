@@ -9,5 +9,6 @@
     {"name":"pgmenu", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/pgmenu/webpackage.json"},
     {"name":"iframe", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/iframe/webpackage.json"},
     {"name":"keyboardevents", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/KeyboardEvents/webpackage.json"},
-    {"name":"pdfviewer", "url":"https://raw.githubusercontent.com/itechpros/svyPDFViewer/master/pdfviewer/webpackage.json"}
+    {"name":"pdfviewer", "url":"https://raw.githubusercontent.com/itechpros/svyPDFViewer/master/pdfviewer/webpackage.json"},
+    {"name":"dropzone", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/dropzone/webpackage.json"}
 ]

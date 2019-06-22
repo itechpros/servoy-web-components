@@ -14,8 +14,7 @@ angular.module('dropzoneUploader',['servoy', 'sabloApp']).directive('dropzoneUpl
           function createDZ() {
               dz && dz.destroy()
               $('#dz_container').find('div').remove()
-              $('<div>', {class:'dropzone',id:'dz'}).appendTo($('#dz_container'))
-              console.log($scope.model.options)
+              $('<div>', {'class':'dropzone',id:'dz'}).appendTo($('#dz_container'))
               if ($scope.model.options) 
                   Dropzone.options.dz = $scope.model.options
               dz = new Dropzone('div#dz', { url: url})
@@ -24,7 +23,6 @@ angular.module('dropzoneUploader',['servoy', 'sabloApp']).directive('dropzoneUpl
           createDZ()
           
           $scope.$watch('model.options', function() {
-              console.log($scope.model.options)
               createDZ()
           })
           
