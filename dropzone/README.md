@@ -19,6 +19,28 @@ elements.<uploader>.options = {option:value}
  - note: options of type function are not supported in current ver.
 
 
+Example use in Servoy Form:
+```
+// Create a MEDIA var, bind it to "file" property of Dropzone
+var m = solutionModel.newGlobalVariable('globals', 'gMedia', JSVariable.MEDIA);
+
+// Create string var with same name as MEDIA var + _filename
+// and _mimetype to store file info
+var m_filename = '';
+var m_mimetype = '';
+
+// create a callback function and bind it to onDataChange event of Dropzone
+function cbk(a, b, c){
+    // a - old value, b - new value, c - event
+    application.output(m) // 
+    application.output(m_filename)
+    application.output(m_mimetype)
+    application.output(plugins.file.writeFile(plugins.file.createFile('<file path>'), b))
+}
+
+```
+
+
 
 
 ## License
