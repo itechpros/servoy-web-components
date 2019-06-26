@@ -26,6 +26,14 @@
 		}
 	},
 	"handlers": {
+		"onFileRemove": {
+			"parameters": [
+				{
+					"name": "file",
+					"type": "string"
+				}
+			]
+		},
 		"onDataChangeMethodID" : {
 		    "returns": "boolean", 
 		    "parameters": [

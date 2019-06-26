@@ -12,6 +12,7 @@ Component properties:
 - option: configuration options (see dropzonejs "configuration" section)
 Events:
 - onDataChange: Servoy callback function to receive uploaded files
+- onFileRemove: called with file name parameter on "Remove file" click
 
 
 set options using:

@@ -2,7 +2,9 @@ angular.module('dropzoneUploader',['servoy', 'sabloApp']).directive('dropzoneUpl
     return {
       restrict: 'E',
       scope: {
-    	  model: '=svyModel'
+          handlers: '=svyHandlers',
+    	  model: '=svyModel',
+    	  handlers: '=svyHandlers'
       },
       controller: function($scope, $element, $attrs) {
           
@@ -15,9 +17,16 @@ angular.module('dropzoneUploader',['servoy', 'sabloApp']).directive('dropzoneUpl
               dz && dz.destroy()
               $('#dz_container').find('div').remove()
               $('<div>', {'class':'dropzone',id:'dz'}).appendTo($('#dz_container'))
-              if ($scope.model.options) 
-                  Dropzone.options.dz = $scope.model.options
+              var opt = {
+                    addRemoveLinks: true
+                  }
+              for (var a in $scope.model.options)
+                  opt[a] = $scope.model.options[a]
+              Dropzone.options.dz = opt
               dz = new Dropzone('div#dz', { url: url})
+              $scope.handlers.onFileRemove && dz.on('removedfile', function(f) {
+                  $scope.handlers.onFileRemove(f.name)
+              })
           }
           
           createDZ()
@@ -28,5 +37,5 @@ angular.module('dropzoneUploader',['servoy', 'sabloApp']).directive('dropzoneUpl
           
       },
       templateUrl: 'dropzone/Uploader/Uploader.html'
-    };
-  }])
+   }
+}])
