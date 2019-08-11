@@ -26,8 +26,8 @@ angular.module('itechCalendarPro', [ 'servoy' ]).directive('itechCalendarPro', f
 					showClose: true,
 					icons: {
 						close: 'glyphicon glyphicon-ok'
-					}
-			,weekstart:3
+					},
+			        weekStart: 0
 				};
 			// rely on servoy_app.js setLocale which searches the correct locale to set
 			options.locale = numeral.locale();
@@ -40,8 +40,7 @@ angular.module('itechCalendarPro', [ 'servoy' ]).directive('itechCalendarPro', f
 			child.datetimepicker(options);
 			var theDateTimePicker = child.data('DateTimePicker');
 			
-			console.log(child,$element,theDateTimePicker,$('.datepicker'))//.datepicker({weekStart: 3, format:'mm/dd/yyyy'}))
-//theDateTimePicker.weekStart = 3
+
 			function inputChanged(e) {
 				if ($scope.model.findmode) {
 					ngModel.$setViewValue(child.children("input").val());

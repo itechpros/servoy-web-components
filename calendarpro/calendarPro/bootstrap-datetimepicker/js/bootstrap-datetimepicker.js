@@ -493,12 +493,13 @@
                 var weekname = (options.isoCalendarWeeks ? 'isoWeek' : 'week'),
                     row = $('<tr>'),
                 currentDate = viewDate.clone().startOf(weekname).startOf('d');
+                options.weekStart && currentDate.add(options.weekStart, 'd')
 
                 if (options.calendarWeeks === true || options.isoCalendarWeeks === true) {
                     row.append($('<th>').addClass('cw').text('#'));
                 }
 
-                while (currentDate.isBefore(viewDate.clone().endOf(weekname))) {
+                for (var i = 0; i < 7; i += 1) {
                     row.append($('<th>').addClass('dow').text(currentDate.format('dd')));
                     currentDate.add(1, 'd');
                 }
@@ -684,9 +685,7 @@
                     clsNames = [],
                     i,
                     weekname = (options.isoCalendarWeeks ? 'isoWeek' : 'w'),
-                    weekstart = options.weekstart || (options.isoCalendarWeeks ? 1 : 0);
-weekstart=0
-console.log(options,weekstart)
+                    weekstart = options.weekStart || (options.isoCalendarWeeks ? 1 : 0);
 
                 if (!hasDate()) {
                     return;
@@ -708,11 +707,11 @@ console.log(options,weekstart)
 
                 currentDate = viewDate.clone().startOf('M').startOf(weekname).startOf('d');
 
+                currentDate.add(weekstart, 'd')
+
                 for (i = 0; i < 42; i++) { //always display 42 days (should show 6 weeks)
-                    if ((//options.weekstart < 2 && 
-			(options.isoCalendarWeeks ? currentDate.isoWeekday() : currentDate.weekday()) === weekstart)
-//|| (options.weekstart > 1 && i === weekstart)
-) {
+
+                    if ((options.isoCalendarWeeks ? currentDate.isoWeekday() : currentDate.weekday()) === weekstart) {
                         row = $('<tr>');
                         if (options.isoCalendarWeeks) {
                             row.append('<td class="cw">' + currentDate.isoWeek() + '</td>');
@@ -1505,7 +1504,7 @@ console.log(options,weekstart)
             return picker;
         };
 
-picker.weekstart = function (weekStart) { options.weekstart = weekStart}
+        picker.weekStart = function (weekStart) { options.weekStart = weekStart}
 
         picker.date = function (newDate) {
             ///<signature helpKeyword="$.fn.datetimepicker.date">
