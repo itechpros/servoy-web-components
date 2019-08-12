@@ -493,7 +493,7 @@
                 var weekname = (options.isoCalendarWeeks ? 'isoWeek' : 'week'),
                     row = $('<tr>'),
                 currentDate = viewDate.clone().startOf(weekname).startOf('d');
-                options.weekStart && currentDate.add(options.weekStart, 'd')
+                !options.isoCalendarWeeks && currentDate.add(options.weekStart, 'd')
 
                 if (options.calendarWeeks === true || options.isoCalendarWeeks === true) {
                     row.append($('<th>').addClass('cw').text('#'));
@@ -684,8 +684,7 @@
                     row,
                     clsNames = [],
                     i,
-                    weekname = (options.isoCalendarWeeks ? 'isoWeek' : 'w'),
-                    weekstart = options.weekStart || (options.isoCalendarWeeks ? 1 : 0);
+                    weekname = (options.isoCalendarWeeks ? 'isoWeek' : 'w')
 
                 if (!hasDate()) {
                     return;
@@ -707,11 +706,12 @@
 
                 currentDate = viewDate.clone().startOf('M').startOf(weekname).startOf('d');
 
-                currentDate.add(weekstart, 'd')
+                !options.isoCalendarWeeks && currentDate.add(options.weekStart, 'd')
 
                 for (i = 0; i < 42; i++) { //always display 42 days (should show 6 weeks)
 
-                    if ((options.isoCalendarWeeks ? currentDate.isoWeekday() : currentDate.weekday()) === weekstart) {
+                    if ((options.isoCalendarWeeks ? currentDate.isoWeekday() : currentDate.weekday()) 
+                        === (options.isoCalendarWeeks && 1 || options.weekStart)) {
                         row = $('<tr>');
                         if (options.isoCalendarWeeks) {
                             row.append('<td class="cw">' + currentDate.isoWeek() + '</td>');

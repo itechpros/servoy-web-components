@@ -26,8 +26,7 @@ angular.module('itechCalendarPro', [ 'servoy' ]).directive('itechCalendarPro', f
 					showClose: true,
 					icons: {
 						close: 'glyphicon glyphicon-ok'
-					},
-			        weekStart: 0
+					}
 				};
 			// rely on servoy_app.js setLocale which searches the correct locale to set
 			options.locale = numeral.locale();
@@ -274,6 +273,11 @@ angular.module('itechCalendarPro', [ 'servoy' ]).directive('itechCalendarPro', f
 			$scope.api.getHeight = $apifunctions.getHeight($element[0]);
 			$scope.api.getLocationX = $apifunctions.getX($element[0]);
 			$scope.api.getLocationY = $apifunctions.getY($element[0]);
+			
+			$scope.api.setOptions = function(options) {
+			    child.datetimepicker(options)
+			    child.data('DateTimePicker');
+			}
 
 			var element = $element.children().first();
 			var inputElement = element.children().first();

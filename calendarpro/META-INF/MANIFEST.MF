@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: calendarpro
-Bundle-Name: Calendar Pro
+Bundle-Name: calendar Pro
 Bundle-Version: 1.0.0
 Package-Type: Web-Component
 

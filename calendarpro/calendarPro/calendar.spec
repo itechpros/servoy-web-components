@@ -122,6 +122,14 @@
 				"delayUntilFormLoads": true,
 			"discardPreviouslyQueuedSimilarCalls": true
 
+	        },
+	        "setOptions": {
+	        	"parameters": [
+	        		{
+	        		"name": "options",
+	        		"type": "object" 
+	        		}
+	        	]
 	        }
 	}
 	
