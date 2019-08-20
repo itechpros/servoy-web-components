@@ -15,6 +15,7 @@ angular.module('itechCalendarPro', [ 'servoy' ]).directive('itechCalendarPro', f
 			var ngModel = child.controller("ngModel");
 			var isDataFormatted = true;
 
+			
 			var options = {
 					widgetParent: $(document.body),
 					useCurrent : false,
@@ -26,7 +27,8 @@ angular.module('itechCalendarPro', [ 'servoy' ]).directive('itechCalendarPro', f
 					showClose: true,
 					icons: {
 						close: 'glyphicon glyphicon-ok'
-					}
+					},
+					weekStart: 0
 				};
 			// rely on servoy_app.js setLocale which searches the correct locale to set
 			options.locale = numeral.locale();
@@ -177,7 +179,8 @@ angular.module('itechCalendarPro', [ 'servoy' ]).directive('itechCalendarPro', f
 								showClose: true,
 								icons: {
 									close: 'glyphicon glyphicon-ok'
-								}
+								},
+								weekStart: 0
 							};
 					if (showISOWeeks)
 					{
@@ -274,9 +277,13 @@ angular.module('itechCalendarPro', [ 'servoy' ]).directive('itechCalendarPro', f
 			$scope.api.getLocationX = $apifunctions.getX($element[0]);
 			$scope.api.getLocationY = $apifunctions.getY($element[0]);
 			
-			$scope.api.setOptions = function(options) {
-			    child.datetimepicker(options)
-			    child.data('DateTimePicker');
+			$scope.api.setOptions = function(opt) {
+			    
+			    for (var o in opt)
+			        options[o] = opt[o]
+			        
+			    theDateTimePicker.options(options);
+			    
 			}
 
 			var element = $element.children().first();

@@ -7,8 +7,8 @@
 	"libraries": [
 			{"name":"moment", "version":"2.19.1", "url": "calendarpro/calendarPro/bootstrap-datetimepicker/js/moment-with-locales.min.js", "mimetype":"text/javascript"},
 			{"name":"moment-jdateformatparser", "version":"0.1.1", "url":"calendarpro/calendarPro/bootstrap-datetimepicker/js/moment-jdateformatparser.js", "mimetype":"text/javascript"},
-			{"name":"bootstrap-datetimepicker", "version":"4.7.47", "url":"calendarpro/calendarPro/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js", "mimetype":"text/javascript"},
-			{"name":"bootstrap-datetimepicker", "version":"4.7.47", "url":"calendarpro/calendarPro/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css", "mimetype":"text/css"},
+			{"name":"bootstrap-datetimepicker-pro", "version":"4.7.47", "url":"calendarpro/calendarPro/bootstrap-datetimepicker/js/bootstrap-datetimepicker-pro.js", "mimetype":"text/javascript"},
+			{"name":"bootstrap-datetimepicker-pro", "version":"4.7.47", "url":"calendarpro/calendarPro/bootstrap-datetimepicker/css/bootstrap-datetimepicker-pro.css", "mimetype":"text/css"},
 			{"name":"bootstrap-datetimepicker-servoy-extension", "version":"1.0", "url":"calendarpro/calendarPro/bootstrap-datetimepicker/css/bootstrap-datetimepicker-servoy-extension.css", "mimetype":"text/css"}
 		],
 	"model":

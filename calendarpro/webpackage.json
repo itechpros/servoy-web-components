@@ -1,0 +1,12 @@
+{
+    "name":"calendarpro",
+    "displayName":"Calendar Pro",
+    "packageType": "Web-Component",
+    "icon": "https://github.com/itechpros/servoy-web-components/raw/master/calendarpro/icon.png",
+    "description": "Servoy Calendar component with extended options",
+    "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/calendarpro/README.md",
+    "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/calendarpro",
+    "releases" : [
+        {"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/raw/master/calendarpro/calendarpro.zip"}
+    ]
+}

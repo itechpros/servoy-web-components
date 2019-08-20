@@ -10,5 +10,6 @@
     {"name":"iframe", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/iframe/webpackage.json"},
     {"name":"keyboardevents", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/KeyboardEvents/webpackage.json"},
     {"name":"pdfviewer", "url":"https://raw.githubusercontent.com/itechpros/svyPDFViewer/master/pdfviewer/webpackage.json"},
-    {"name":"dropzone", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/dropzone/webpackage.json"}
+    {"name":"dropzone", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/dropzone/webpackage.json"},
+    {"name":"calendarpro", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/calendarpro/webpackage.json"}
 ]
