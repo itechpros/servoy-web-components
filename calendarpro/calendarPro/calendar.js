@@ -38,7 +38,7 @@ angular.module('itechCalendarPro', [ 'servoy' ]).directive('itechCalendarPro', f
 				options.isoCalendarWeeks = true;
 			}	
 			
-			child.datetimepicker(options);
+			child.datetimepickerpro(options);
 			var theDateTimePicker = child.data('DateTimePicker');
 			
 
@@ -369,6 +369,6 @@ angular.module('itechCalendarPro', [ 'servoy' ]).directive('itechCalendarPro', f
 				modelChangFunction(key, $scope.model[key]);
 			}
 		},
-		templateUrl : 'servoydefault/calendar/calendar.html'
+		templateUrl : 'calendarpro/calendarPro/calendar.html'
 	};
 })
