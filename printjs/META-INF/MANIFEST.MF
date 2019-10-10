@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-Name: PrintJS
+Bundle-SymbolicName: printjs
+Package-Type: Web-Service
+Bundle-Version: 1.0.0
+
+Name: PrintJS/print.spec
+Web-Service: True
