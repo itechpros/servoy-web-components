@@ -1,9 +1,11 @@
-angular.module('printjs',['servoy'])
-.factory("printjs",function( $services ) 
+angular.module('printjs',['servoy']).factory('printjs', function( $services ) 
 {
 	return {
-		printJS: function(printable, type) {
+		print: function(printable, type) {
 			printJS(printable, type || 'pdf')
+		},
+		printJS: function(json) {
+            printJS(json)
 		}
 	}
 })

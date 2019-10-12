@@ -2,13 +2,14 @@
 	"name": "printjs",
 	"displayName": "PrintJS",
 	"version": 1,
- 	"definition": "/printjs/PrintJS/print.js",
+	"icon": "printjs/PrintJS/icon.png",
+ 	"definition": "printjs/PrintJS/print.js",
 	"libraries": [
 		{
 	      "name": "printjs.min.css",
 	      "version": "1",
 	      "mimetype": "text/css",
-	      "url": "/printjs/PrintJS/lib/print.min.css"
+	      "url": "printjs/PrintJS/lib/print.min.css"
 	    },
 	    {
 	      "name": "printjs.min.js",
