@@ -6,5 +6,5 @@
     "description": "Upon successful NG Service installation, plugins.printjs will become available under Developer plugins node",
     "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/printjs/README.md",
     "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/printjs",
-    "releases" : [{"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/tree/master/printjs/printjs.zip"}]
+    "releases" : [{"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/raw/master/printjs/printjs.zip"}]
 }
