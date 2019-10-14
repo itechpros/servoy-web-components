@@ -2,7 +2,7 @@
 ## Web Component for pgAdmin Menu
 
 
-https://www.pgadmin.org/docs/pgadmin4/dev/pgadmin_menu_bar.html
+https://www.pgadmin.org/docs/pgadmin4/3.6/pgadmin_menu_bar.html
 
 
 Component Properties:
