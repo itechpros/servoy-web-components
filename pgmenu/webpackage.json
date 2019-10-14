@@ -3,7 +3,7 @@
     "displayName":"pgMenu",
     "packageType": "Web-Component",
     "icon": "https://image.flaticon.com/icons/svg/148/148795.svg",
-    "description": "pgAdmin Menu AngularJS directive",
+    "description": "Menu component based on pgAdmin4 menu bar https://www.pgadmin.org/docs/pgadmin4/3.6/pgadmin_menu_bar.html",
     "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/pgmenu/README.md",
     "sourceUrl": "https://github.com/itechpros/servoy-web-components/tree/master/pgmenu",
     "releases": [
