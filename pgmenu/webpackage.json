@@ -3,7 +3,7 @@
     "displayName":"pgMenu",
     "packageType": "Web-Component",
     "icon": "https://image.flaticon.com/icons/svg/148/148795.svg",
-    "description": "Menu component based on <a href='https://www.pgadmin.org/docs/pgadmin4/3.6/pgadmin_menu_bar.html'>pgAdmin4 menu bar</a>",
+    "description": "Menu component based on the pgAdmin4 menu bar.",
     "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/pgmenu/README.md",
     "sourceUrl": "https://github.com/itechpros/servoy-web-components/tree/master/pgmenu",
     "releases": [
