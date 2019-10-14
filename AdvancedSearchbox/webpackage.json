@@ -3,7 +3,7 @@
     "displayName":"Advanced Searchbox",
     "packageType": "Web-Component",
     "icon": "https://github.com/itechpros/servoy-web-components/raw/master/AdvancedSearchbox/icon.jpeg",
-    "description": "Advanced visual search box based on http://dnauck.github.io/angular-advanced-searchbox/",
+    "description": "Advanced visual search box with a single input for multiple search parameters.",
     "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/AdvancedSearchbox/README.md",
     "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/AdvancedSearchbox",
     "releases" : [{"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/releases/download/1.0/advancedsearchbox.zip"},
