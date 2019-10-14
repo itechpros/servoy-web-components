@@ -334,6 +334,7 @@ All source code in the repository is licensed under a dual license.  To use thes
 
  * For non-commercial and open public uses: Open Software License 3.0 (https://opensource.org/licenses/OSL-3.0)
  * For commercial or non-public / in-house uses: contact sales@itechpros.com for licensing costs and information
+ * You will also need to purchae a license of the third-party component from Code Canyon for $7.
 
 &copy; iTech Professionals, Inc. 
 http://itechpros.com
