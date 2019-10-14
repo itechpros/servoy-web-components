@@ -3,7 +3,7 @@
 
 
 Website of component library:  
-https://codecanyon.net/item/mega-responsive-megamenu-navigation/20095078/support
+https://codecanyon.net/item/mega-responsive-megamenu-navigation/20095078
 
 
 Model:
