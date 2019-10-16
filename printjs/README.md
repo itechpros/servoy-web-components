@@ -1,11 +1,19 @@
 # PrintJS
 ## NG Service for PrintJS http://printjs.crabbly.com
 
-Usage:
+Basic Usage:
 
-plugins.printjs.print('/path/mydoc','pdf')
-plugins.printjs.printJS({printable: '/path/mydoc', type: 'pdf'})
+```javascript
+plugins.printjs.print('http://localhost:8080/path/mydoc.pdf','pdf')
+```
 
+Suggested Usage:
+```javascript
+//Store your docs to be printed in the location of plugins.file.getDefaultUploadLocation()
+var file = plugins.file.convertToRemoteJSFile("/mydoc.pdf");
+var url = plugins.file.getUrlForRemoteFile(file);
+plugins.printjs.print(url,'pdf')
+```
 
 ## License
 
