@@ -1,0 +1,10 @@
+{
+    "name":"itechutils",
+    "displayName":"iTech Utils",
+    "packageType": "Web-Service",
+    "icon": "https://raw.githubusercontent.com/itechpros/servoy-web-components/master/itechutils/icon.png",
+    "description": "Many utils such as browser info, download, cookies, DOM manipulation, and onReady",
+    "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/itechutils/README.md",
+    "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/itechutils",
+    "releases" : [{"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/raw/master/itechutils/itechutils.zip"}]
+}

@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-Name: iTech Utils
+Bundle-SymbolicName: itechutils
+Package-Type: Web-Service
+Bundle-Version: 1.0.0
+
+Name: browser/browser.spec
+Web-Service: True
+
+Name: download/download.spec
+Web-Service: True
+
+Name: onReady/onReady.spec
+Web-Service: True
+
+Name: cookies/cookies.spec
+Web-Service: True
+
+Name: DOM/DOM.spec
+Web-Service: True
+
