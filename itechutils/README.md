@@ -9,7 +9,7 @@ plugins.itechutilsBrowser allows you to get browser information.  It is is based
 Get Browser Info:
 ```javascript
 //each call returns a JSON object.  See UAParser docs for details
-plugins.itechutilsBrowser..getBrowser().name
+plugins.itechutilsBrowser.getBrowser().name
 ```
 Many more functions available.  See code completion.
 
