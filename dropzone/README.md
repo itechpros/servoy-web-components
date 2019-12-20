@@ -37,6 +37,7 @@ function cbk(a, b, c){
     application.output(m_filename)
     application.output(m_mimetype)
     application.output(plugins.file.writeFile(plugins.file.createFile('<file path>'), b))
+    m = null // clears media variable from memory, enables repeat upload of same file
 }
 
 ```
