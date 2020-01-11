@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-Name: NgClientUtils
+Bundle-SymbolicName: ngclientutils
+Package-Type: Web-Service
+Bundle-Version: 1.0.0
+
+Name: NgClientUtils/NgClientUtils.spec
+Web-Service: True
+
