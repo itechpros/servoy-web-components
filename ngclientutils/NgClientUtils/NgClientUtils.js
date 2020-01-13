@@ -38,7 +38,7 @@ angular.module('NgClientUtils',['servoy'])
 		},
 		executeClientSideJS: function (jsToExecute, callback, callbackParameters) {
 			(function() {
-				eval(jsToExecute);
+				eval.call(window, jsToExecute);
 				if (callback !== null && callback !== undefined) {
 					if (callbackParameters === null || callbackParameters === undefined || callbackParameters.length == 0) {
 						$window.executeInlineScript(callback.formname, callback.script, []);
@@ -84,10 +84,10 @@ angular.module('NgClientUtils',['servoy'])
 				callbackFormName = "undefined";
 			else
 				callbackFormName = callback.formname
+							
+			return 'window.executeInlineScript(\'' + callbackFormName + '\', \'' + callback.script + '\', [' + (callbackParameters || []).join(',') + '])'
 			
-			return 'window.executeInlineScript(\'' + callback.formname + '\', \'' + callback.script + '\')'
-			
-//			return "$window.executeInlineScript(" + callbackFormName + ", '" + callback.script + "', [" + callbackParameters.join(",") + "]);";
+
 		}
 	}
 })

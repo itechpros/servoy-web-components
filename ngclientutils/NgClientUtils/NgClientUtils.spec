@@ -67,7 +67,7 @@
 		"addCallback": {
 			"parameters": [
 				{"name": "callback", "type": "function"},
-				{"name": "callbackParameters", "type": "string[]"}
+				{"name": "callbackParameters", "type": "string[]", "optional": true}
 			],
 			"returns": "string"
 		}
