@@ -76,7 +76,7 @@ angular.module('NgClientUtils',['servoy'])
 				callbackFormName = "'" + callback.formname + "'";
 			return "$window.executeInlineScript(" + callbackFormName + ", '" + callback.script + "', [" + callbackParameters.join(",") + "]);";
 		},
-		addCallback: function (callback, callbackParameters) {
+		addCallback: function (callback, callbackParameters) {	
 			var callbackFormName;
 			if (callback.formname === null)
 				callbackFormName = "null";
@@ -84,10 +84,10 @@ angular.module('NgClientUtils',['servoy'])
 				callbackFormName = "undefined";
 			else
 				callbackFormName = callback.formname
-							
 			return 'window.executeInlineScript(\'' + callbackFormName + '\', \'' + callback.script + '\', [' + (callbackParameters || []).join(',') + '])'
-			
-
+		},
+		getElementMarkupId: function (element) {
+			return element
 		}
 	}
 })

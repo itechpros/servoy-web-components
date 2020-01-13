@@ -36,7 +36,7 @@
 				{"name": "jQuerySelector", "type": "string"},
 				{"name": "eventType", "type": "string"},
 				{"name": "serverSideFunction", "type": "function"},
-				{"name": "serverSideFunctionArgs", "type": "[]object"},
+				{"name": "serverSideFunctionArgs", "type": "object[]"},
 				{"name": "clearExistingListeners", "type": "boolean"}
 			]
 		},
@@ -68,6 +68,12 @@
 			"parameters": [
 				{"name": "callback", "type": "function"},
 				{"name": "callbackParameters", "type": "string[]", "optional": true}
+			],
+			"returns": "string"
+		},
+		"getElementMarkupId": {
+			"parameters": [
+				{"name": "element", "type": "runtimecomponent"}
 			],
 			"returns": "string"
 		}
