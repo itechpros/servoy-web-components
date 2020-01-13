@@ -1,5 +1,5 @@
 {
-	"name": "ngclientutils-NgClientUtils",
+	"name": "NgClientUtils",
 	"displayName": "NgClientUtils",
 	"version": 1,
  	"definition": "ngclientutils/NgClientUtils/NgClientUtils.js",
@@ -58,6 +58,13 @@
 			]
 		},
 		"generateCallbackScript": {
+			"parameters": [
+				{"name": "callback", "type": "function"},
+				{"name": "callbackParameters", "type": "string[]"}
+			],
+			"returns": "string"
+		},
+		"addCallback": {
 			"parameters": [
 				{"name": "callback", "type": "function"},
 				{"name": "callbackParameters", "type": "string[]"}

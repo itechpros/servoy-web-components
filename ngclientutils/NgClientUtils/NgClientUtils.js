@@ -1,7 +1,7 @@
-angular.module('ngclientutilsNgClientUtils',['servoy'])
-.factory("ngclientutilsNgClientUtils",function($services) 
+angular.module('NgClientUtils',['servoy'])
+.factory("NgClientUtils",function($services) 
 {
-	var scope = $services.getServiceScope('cesoftservicesBrowser');
+	var scope = $services.getServiceScope('NgClientUtils');
 	return {
 		getBrowserWidth: function() {
 			return $(window).width();
@@ -75,6 +75,19 @@ angular.module('ngclientutilsNgClientUtils',['servoy'])
 			else
 				callbackFormName = "'" + callback.formname + "'";
 			return "$window.executeInlineScript(" + callbackFormName + ", '" + callback.script + "', [" + callbackParameters.join(",") + "]);";
+		},
+		addCallback: function (callback, callbackParameters) {
+			var callbackFormName;
+			if (callback.formname === null)
+				callbackFormName = "null";
+			else if (callback.formname === undefined)
+				callbackFormName = "undefined";
+			else
+				callbackFormName = callback.formname
+			
+			return 'window.executeInlineScript(\'' + callback.formname + '\', \'' + callback.script + '\')'
+			
+//			return "$window.executeInlineScript(" + callbackFormName + ", '" + callback.script + "', [" + callbackParameters.join(",") + "]);";
 		}
 	}
 })
