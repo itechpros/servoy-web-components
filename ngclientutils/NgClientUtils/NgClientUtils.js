@@ -3,39 +3,6 @@ angular.module('NgClientUtils',['servoy'])
 {
 	var scope = $services.getServiceScope('NgClientUtils');
 	return {
-		getBrowserWidth: function() {
-			return $(window).width();
-		},
-		getBrowserHeight: function() {
-			return $(window).height();
-		},
-		setClipboardContents: function(elementName) {
-			var copyText = document.querySelector("[name='" + elementName + "']");
-			copyText.select();
-			document.execCommand("copy");
-		},
-		trackCaretPosition: function (textboxSelector) {
-			function updateCaretPosition() {
-				$(textboxSelector).attr("data-caret-position", $(textboxSelector).caret().begin);
-			}
-			$(textboxSelector).click(updateCaretPosition);
-			$(textboxSelector).keydown(updateCaretPosition);
-		},
-		getStoredCaretPosition: function (textboxSelector) {
-			var caretPosition = $(textboxSelector).attr("data-caret-position");
-			if ([null, undefined].indexOf(caretPosition) > -1)
-				return null;
-			else
-				return parseInt(caretPosition, 10);
-		},
-		bindClientSideEvent: function (jQuerySelector, eventType, serverSideFunction, serverSideFunctionArgs, clearExistingListeners) {
-			var target = $(jQuerySelector);
-			if (clearExistingListeners)
-				target.off(eventType);
-			target.on(eventType, function() {
-				$window.executeInlineScript(serverSideFunction.formname, serverSideFunction.script, serverSideFunctionArgs);
-			})
-		},
 		executeClientSideJS: function (jsToExecute, callback, callbackParameters) {
 			(function() {
 				eval.call(window, jsToExecute);
@@ -88,6 +55,17 @@ angular.module('NgClientUtils',['servoy'])
 		},
 		getElementMarkupId: function (element) {
 			return element
+		},
+		removeJsReference: function (jsFilePath) {
+			var scripts = document.getElementsByTagName('script')
+			for (var a = 0, an = scripts.length; a < an; a += 1)
+				scripts[a] &&
+				scripts[a].getAttribute('src') &&
+				~scripts[a].getAttribute('src').indexOf(jsFilePath) &&
+				scripts[a].parentNode.removeChild(scripts[a])
+		},
+		setRendered: function (element) {
+			return null
 		}
 	}
 })

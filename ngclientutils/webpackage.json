@@ -1,0 +1,10 @@
+{
+    "name":"ngclientutils",
+    "displayName":"NgClientUtils",
+    "packageType": "Web-Service",
+    "icon": "https://raw.githubusercontent.com/itechpros/servoy-web-components/master/ngclientutils/icon.png",
+    "description": "Ng Service with functionality of WebClientUtils plugin.",
+    "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/ngclientutils/README.md",
+    "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/ngclientutils",
+    "releases" : [{"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/raw/master/ngclientutils/ngclientutils.zip"}]
+}

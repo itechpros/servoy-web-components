@@ -6,40 +6,6 @@
 	"libraries": [],
 	"api":
 	{
- 		"getBrowserWidth": {
- 			"parameters": [],
- 			"returns": "int"
-		},
-		"getBrowserHeight": {
-			"parameters": [],
-			"returns": "int"
-		},
-		"setClipboardContents": {
-			"parameters": [
-				{"name": "elementName", "type": "string"}
-			]
-		},
-		"trackCaretPosition": {
-			"delayUntilFormLoads": true,
-			"parameters": [
-				{"name": "textboxSelector", "type": "string"}
-			]
-		},
-		"getStoredCaretPosition": {
-			"parameters": [
-				{"name": "textboxSelector", "type": "string"}
-			],
-			"returns": "int"
-		},
-		"bindClientSideEvent": {
-			"parameters": [
-				{"name": "jQuerySelector", "type": "string"},
-				{"name": "eventType", "type": "string"},
-				{"name": "serverSideFunction", "type": "function"},
-				{"name": "serverSideFunctionArgs", "type": "object[]"},
-				{"name": "clearExistingListeners", "type": "boolean"}
-			]
-		},
 		"executeClientSideJS": {
 			"parameters": [
 				{"name": "jsToExecute", "type": "string"},
@@ -72,6 +38,17 @@
 			"returns": "string"
 		},
 		"getElementMarkupId": {
+			"parameters": [
+				{"name": "element", "type": "runtimecomponent"}
+			],
+			"returns": "string"
+		},
+		"removeJsReference": {
+			"parameters": [
+				{"name": "jsFilePath", "type": "string"}
+			]
+		},
+		"setRendered": {
 			"parameters": [
 				{"name": "element", "type": "runtimecomponent"}
 			],
