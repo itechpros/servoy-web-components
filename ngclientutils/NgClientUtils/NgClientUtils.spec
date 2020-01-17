@@ -53,6 +53,17 @@
 				{"name": "element", "type": "runtimecomponent"}
 			],
 			"returns": "string"
+		},
+		"setExtraCssClass": {
+			"parameters": [
+				{"name": "element", "type": "runtimecomponent"},
+				{"name": "classAttribute", "type": "string"}
+			]
+		},
+		"removeExtraCssClass": {
+			"parameters": [
+				{"name": "element", "type": "runtimecomponent"}
+			]
 		}
  	}
  }

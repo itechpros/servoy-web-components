@@ -1,6 +1,7 @@
 angular.module('NgClientUtils',['servoy'])
 .factory("NgClientUtils",function($services) 
 {
+	var Elements = {}
 	var scope = $services.getServiceScope('NgClientUtils');
 	return {
 		executeClientSideJS: function (jsToExecute, callback, callbackParameters) {
@@ -66,7 +67,17 @@ angular.module('NgClientUtils',['servoy'])
 		},
 		setRendered: function (element) {
 			return null
+		},
+		setExtraCssClass: function (element, classAttribute) {
+			var classes = document.getElementById(element).className || ''
+			document.getElementById(element).className = classes + (classes && ' ' || '') + classAttribute
+			if (!(element in Elements))
+				Elements[element] = classes
+				
+		},
+		removeExtraCssClass: function (element) {
+			Elements[element] && (document.getElementById(element).className = Elements[element])		
 		}
+
 	}
 })
-//.run(function($rootScope,$services){})
