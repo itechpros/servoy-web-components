@@ -63,6 +63,16 @@
                "type":"string"
             }
          ]
+      },
+      "enableTabs":
+      {
+          "parameters":
+          [
+              {
+                 "name":"selector",
+                 "type":"string"
+              }
+          ]
       }
  	}
 }

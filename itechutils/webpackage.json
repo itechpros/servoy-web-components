@@ -6,5 +6,6 @@
     "description": "Many utils such as browser info, download, cookies, DOM manipulation, and onReady",
     "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/itechutils/README.md",
     "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/itechutils",
-    "releases" : [{"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/raw/master/itechutils/itechutils.zip"}]
+    "releases" : [{"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/raw/master/itechutils/itechutils.zip"},
+                  {"version":"1.0.1","url":"https://github.com/itechpros/servoy-web-components/raw/master/itechutils/itechutils.1.0.1.zip"}]
 }
