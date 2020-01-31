@@ -1,7 +1,8 @@
 angular.module('itechutilsDOM',['servoy'])
 .factory("itechutilsDOM",function($services) 
 {
-	var scope = $services.getServiceScope('itechutilsDOM');
+	var scope = $services.getServiceScope('itechutilsDOM'),
+		enableTabsReady = false
 	return {
 		setClass: function(elementSelector, className, removeCurrent){
 			  if(removeCurrent){
@@ -68,24 +69,39 @@ angular.module('itechutilsDOM',['servoy'])
 		         
 		      },
 			  enableTabs: function(selector) {
-
-				  var textareas = document.getElementsByClassName(selector)
-				  var count = textareas.length
-				  for(var i=0;i<count;i++){
-				      textareas[i].onkeydown = function(e){
-				          if(e.keyCode==9 || e.which==9){
-				              e.preventDefault();
-				              var s = this.selectionStart;
-				              this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
-				              this.selectionEnd = s+1 
-				          }
-				      }
+				  
+				  function enable(sel) {
+					  var textareas = document.getElementsByClassName(sel)
+					  var count = textareas.length
+					  for(var i=0;i<count;i++){
+					      textareas[i].onkeydown = function(e){
+					          if(e.keyCode==9 || e.which==9){
+					              e.preventDefault();
+					              var s = this.selectionStart;
+					              this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
+					              this.selectionEnd = s+1
+					          }
+					      }
+					  }
 				  }
+				  
+				  if (!enableTabsReady)
+				  
+					  angular.element(document).ready(function() {
+					        setTimeout(function() {
+					        	enable(selector)
+					        },1200)
+					  })
+					  
+				  else
+					  
+					  enable(selector)
+					  
+				  enableTabsReady = true
 
 			  }
 	}
 })
 .run(function($rootScope,$services)
 {
-
 })
