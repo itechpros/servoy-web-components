@@ -6,6 +6,14 @@
 	"libraries": [],
 	"model":
 	{
+	    "enableTabsSelector":
+	    {
+      		"type": "string"
+		},
+		"enableTabsFn":
+	    {
+      		"type": "function"
+		}
  	},
  	"api":
  	{
