@@ -36,11 +36,11 @@ angular.module('itechutilsDOM',['servoy'])
 		   },
 		  
 		  setViewport: function(content) {
-		         var meta = document.createElement('meta');
-		         meta.content = content;
-		         meta.name = "viewport"
-		         document.getElementsByTagName('head')[0].appendChild(meta);
-		      },
+				 var meta = document.createElement('meta');
+				 meta.content = content;
+				 meta.name = "viewport"
+				 document.getElementsByTagName('head')[0].appendChild(meta);
+			  },
 			  autoSetViewport : function() {
 				 var minWidth = 420;
 				 var width = screen.width;
@@ -67,9 +67,9 @@ angular.module('itechutilsDOM',['servoy'])
 					 //then update it
 					 meta.setAttribute('content',content);
 				 }
-		         
-		         
-		      },
+				 
+				 
+			  },
 			  enableTabs: function(selector) {
 				  
 				  scope.model.enableTabsSelector = selector
@@ -82,30 +82,31 @@ angular.module('itechutilsDOM',['servoy'])
 {
 
 	var scope = $services.getServiceScope('itechutilsDOM')
-	
-	scope.model.enableTabsFn = function(selector){
-		
-		  var textareas = document.getElementsByClassName(selector)
-		  var count = textareas.length
-		  console.log(count)
-		  for(var i=0;i<count;i++){
-		      textareas[i].onkeydown = function(e){
-		          if(e.keyCode==9 || e.which==9){
-		              e.preventDefault();
-		              var s = this.selectionStart;
-		              this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
-		              this.selectionEnd = s+1
-		          }
-		      }
-		  }
 
+	scope.model.enableTabsFn = function(){
+		
+		  var selector = scope.model.enableTabsSelector,
+		  	  textareas = document.getElementsByClassName(selector),
+			  count = textareas.length
+		  
+		  for(var i=0;i<count;i++){
+			  
+			  textareas[i].onkeydown = function(e){
+				  if(e.keyCode==9 || e.which==9){
+					  e.preventDefault();
+					  var s = this.selectionStart;
+					  this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
+					  this.selectionEnd = s+1
+				  }
+			  }
+			  
+		  }
 	}
 
-	
 	angular.element(document).ready(function() {
-		
-	  	var dom_observer = new MutationObserver(function(mutations) {
 
+	  	var dom_observer = new MutationObserver(function(mutations) {
+	  		
 	  		if (!scope.model.enableTabsSelector)
 	  			
 	  			return
@@ -118,15 +119,15 @@ angular.module('itechutilsDOM',['servoy'])
 					mutation.target.classList.contains(scope.model.enableTabsSelector))
 	  			run = true
 	  		})
-			
-	  		run && scope.model.enableTabsFn(scope.model.enableTabsClass)
+
+	  		run && scope.model.enableTabsFn()
 			
 		})
-	  	
+
 	  	var container = document.documentElement || document.body,
 	  		config = { characterData: false, attributes: true, childList: false, subtree: true }
-	  	
+
 		dom_observer.observe(container, config)
-		
-	  })
+
+	})
 })

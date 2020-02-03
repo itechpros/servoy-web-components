@@ -8,11 +8,13 @@
 	{
 	    "enableTabsSelector":
 	    {
-      		"type": "string"
+      		"type": "string",
+      		"tags": {"scope": "private"}
 		},
 		"enableTabsFn":
 	    {
-      		"type": "function"
+      		"type": "function",
+      		"tags": {"scope": "private"}
 		}
  	},
  	"api":
