@@ -1,9 +1,12 @@
-function svyGetDom(_name){
+/*function svyGetDom(_name){
+	
   var containers = document.getElementsByName(_name)
+  console.log(_name,containers.length)
+  //for (var a = 0; a< containers.length;a++)console.dir(containers[a])
   if (containers.length > 1) container = null
   else container = containers[0]
   return container
-}
+}*/
 function svyRunScript(_inp){
   window.executeInlineScript(
     this.formname,
@@ -44,9 +47,12 @@ jsWidget_Notify.prototype.refreshNotifications = function(items, today, pos) {
     }
   });
     
+  var widgetId = "widget_" + svy.name
+  var headerId = "header_" + svy.name
+  
   var template = 
-      '<div id="notificationsWidget" class="notifications">' +
-        '<div id="notificationsHeader"><h3>Notifications</h3></div>' +
+      '<div id="' + widgetId + '" class="notifications">' +
+        '<div id="' + headerId + '"><h3>Notifications</h3></div>' +
         '<ul class="notifications-list">' +
           '<li class="item no-data">You don\'t have notifications</li>' +
           '{{#items}}' +
@@ -74,19 +80,59 @@ jsWidget_Notify.prototype.refreshNotifications = function(items, today, pos) {
       .append(Mustache.render(template, { items: items }))
       .find('.js-count').attr('data-count', items.length).html(items.length).end()
       .on('click', '.js-show-notifications', function(event) {
-        var top = 0,
+    	  
+    	  var offsetTop = 20,
+    	      offsetBottom = 10
+			  
+      	container.find('.notifications').toggleClass('active').blur();
+      	
+        if (svy.model.fixedPosition) {
+        	
+        	var iconH = svy.model.size.height,//$('#' + widgetId).prev().offset().height,
+        		iconW = svy.model.size.width,//parseInt($('#' + widgetId).prev().css('width'), 10),
+        		iconL = $('#' + widgetId).prev().offset().left,
+        		iconT = $('#' + widgetId).prev().offset().top,
+			    divW = parseInt($('#' + widgetId).css('width'), 10),
+			    divH = parseInt($('#' + widgetId).css('height'), 10)
+
+			$('#' + widgetId).css('position', 'fixed')
+			$('#' + widgetId).prev().css('z-index', '9999')
+        	
+		    if (svy.model.horizontalAlignment === 'left')
+		  	  $('#' + widgetId).css('left', iconL - divW + iconW)
+		    else
+			  $('#' + widgetId).css('left', iconL)
+		
+			if (svy.model.verticalAlignment === 'top')
+		  	  $('#' + widgetId).css('top', iconT - divH - offsetTop)
+		    else
+			  $('#' + widgetId).css('top', iconT + iconH + offsetBottom)
+			
+      	  
+        } else {
+        	
+        	var top = 0,
             left = 0,
-            vOffset = $('#notificationsHeader').css('height').replace('px', '')/1,
-            widget = $('#notificationsWidget'),
+            vOffset = $('#' + headerId).css('height').replace('px', '')/1,
+            widget = $('#' + widgetId),
             w = widget.css('width').replace('px', '')/1,
             h = widget.css('height').replace('px', '')/1
-        if (!svy.model.horizontalAlignment) left = svy.model.size.width - w
-        else left = 0
-        if (!svy.model.verticalAlignment) top = - (svy.model.maxheight && svy.model.maxheight < h ? (svy.model.maxheight + vOffset) : h) - 20
-        else top = svy.model.size.height + 10
-        container.find('.notifications').toggleClass('active').blur();
-        widget.css('top', (top + 'px'))
-        widget.css('left', (left + 'px'))
+		
+        	if (svy.model.horizontalAlignment === 'left')
+            	left = svy.model.size.width - w
+            else
+            	left = 0
+    			
+            if (svy.model.verticalAlignment === 'top')
+            	top = - (svy.model.maxheight && svy.model.maxheight < h ? (svy.model.maxheight + vOffset) : h) - offsetTop
+            else
+            	top = svy.model.size.height + offsetBottom
+        
+        	widget.css('top', (top + 'px'))
+        	widget.css('left', (left + 'px'))
+			
+        }
+        
         if (svy.model.maxheight) {
           container.find('.notifications-list').css('max-height', svy.model.maxheight + 'px')
           container.find('.notifications-list').css('overflow', 'overlay')
@@ -123,7 +169,8 @@ jsWidget_Notify.prototype.refreshNotifications = function(items, today, pos) {
         return true;
       })
   }
-  $('.notifications').toggleClass('arrow-' + svy.model.horizontalAlignment + svy.model.verticalAlignment)
+  
+  $('#' + widgetId).toggleClass('arrow-' + svy.model.horizontalAlignment + '-' + svy.model.verticalAlignment)
   if (!(container.find('.js-count').attr('data-count')/1)) {
    container.find('.js-count').addClass('zerocount')
    container.find('.notifications').addClass('empty')}
