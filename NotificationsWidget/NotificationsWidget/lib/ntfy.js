@@ -1,12 +1,3 @@
-/*function svyGetDom(_name){
-	
-  var containers = document.getElementsByName(_name)
-  console.log(_name,containers.length)
-  //for (var a = 0; a< containers.length;a++)console.dir(containers[a])
-  if (containers.length > 1) container = null
-  else container = containers[0]
-  return container
-}*/
 function svyRunScript(_inp){
   window.executeInlineScript(
     this.formname,
