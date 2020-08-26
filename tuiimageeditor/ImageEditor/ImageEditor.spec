@@ -61,58 +61,33 @@
     ],
     "model":
     {
-        "callback": { "type": "function" },
-        "menuItems": { "type": "item[]" },
-        "options": { "type": "object" },
-        "skin": { "type": "string" }
+        "image": { "type": "image" },
+        "skin": {
+        	"type": "string",
+        	"tags": { "scope": "design" },
+        	"values": [
+        		{ "white": "white" },
+        		{ "black": "black" }
+    		],
+    		"default": "white"},
+        "menuBar": {
+        	"type": "string",
+        	"tags": { "scope": "design" },
+        	"values": [
+        		{ "top": "top" },
+        		{ "left": "left" },
+        		{ "bottom": "bottom" },
+        		{ "right": "right" }
+    		],
+    		"default": "bottom"
+    	}
     },
     "types":
     {
-        "item":
+        "image":
          {
-             "align": { "type": "string" },
-             "horizontal": { "type": "boolean" },
-             "href": { "type": "string" },
-             "icon": { "type": "string" },
-             "id": { "type": "string" },
-             "items": { "type": "item[]" },
-             "type": { "type": "string",
-                       "default": "item",
-                       "values": [
-                                   {"item":"item"},
-                                   {"brand":"brand"},
-                                   {"logotype":"logotype"},
-                                   {"grid":"grid"},
-                                   {"list":"list"},
-                                   {"panel":"panel"},
-                                   {"panelHalf":"panelHalf"},
-                                   {"panelQuarter":"panelQuarter"},
-                                   {"text":"text"},
-                                   {"button":"button"},
-                                   {"search":"search"}                                   
-                                 ]
-                     },
-             "value": { "type": "string" }
+             "url": { "type": "string" },
+             "name": { "type": "string" }
          }
-    },
-    "api":
-    {
-        "toggleOffCanvas":
-        {
-            "returns": "boolean"
-        },
-        "toggleSearch":
-        {
-            "returns": "boolean"
-        }
-    },
-    "handlers":
-       {
-           "onInit": "function",
-           "onLandscape": "function",
-           "onPortrait": "function",
-           "onShowOffCanvas": "function",
-           "onHideOffCanvas": "function",
-           "onSearch": "function"
-       }
+    }
 }
