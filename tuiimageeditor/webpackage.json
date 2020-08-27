@@ -1,0 +1,12 @@
+{
+    "name":"wowza",
+    "displayName":"Wowza Player",
+    "packageType": "Web-Component",
+    "icon": "https://github.com/itechpros/servoy-web-components/raw/master/tuiimageeditor/icon.png",
+    "description": "AngularJS directive for TUI Image Editor",
+    "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/tuiimageeditor/README.md",
+    "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/tuiimageeditor",
+    "releases" : [
+        {"version":"1.0.0","url":"https://github.com/itechpros/servoy-web-components/raw/master/tuiimageeditor/tuiimageeditor.1.0.0.zip"}
+    ]
+}

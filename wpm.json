@@ -14,5 +14,6 @@
     {"name":"calendarpro", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/calendarpro/webpackage.json"},
     {"name":"printjs", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/printjs/webpackage.json"},
     {"name":"ngclientutils", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/ngclientutils/webpackage.json"},
-	{"name":"itechutils", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/itechutils/webpackage.json"}
+    {"name":"itechutils", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/itechutils/webpackage.json"},
+    {"name":"tuiimageeditor", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/tuiimageeditor/webpackage.json"}
 ]
