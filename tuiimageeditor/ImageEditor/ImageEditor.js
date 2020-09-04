@@ -7,7 +7,19 @@ angular.module('imageEditor',['servoy']).directive('imageEditor', function() {
           handlers: '=svyHandlers'
       },
       controller: function($scope, $element, $attrs, $window) {
-  
+    
+    	
+		
+		function downloadImage(blob,u){
+			console.log('BLOB')
+			console.log(blob)
+			
+            $scope.handlers.saveFileH(blob)
+
+			
+		}
+		
+		imageEditorDownload.register(downloadImage)
     	  
   		function loadImage() {
   			
@@ -41,3 +53,21 @@ angular.module('imageEditor',['servoy']).directive('imageEditor', function() {
   }
 })
 
+
+
+function ImageEditorDownload(){}
+
+ImageEditorDownload.prototype.register = function(fn){
+
+	this.fn = fn
+	
+}
+
+
+ImageEditorDownload.prototype.download = function(blob){
+
+	this.fn(blob)
+	
+}
+
+var imageEditorDownload = new ImageEditorDownload()

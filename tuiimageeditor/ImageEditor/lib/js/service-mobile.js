@@ -332,6 +332,8 @@
 
     	      if (supportingFileAPI) {
     	          blob = base64ToBlob(dataURL);
+// patch
+parent.imageEditorDownload && parent.imageEditorDownload.download(dataURL)
     	          type = blob.type.split('/')[1];
     	          if (imageName.split('.').pop() !== type) {
     	              imageName += '.' + type;

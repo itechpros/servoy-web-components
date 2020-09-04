@@ -3,12 +3,21 @@
     "displayName": "TUI Image Editor",
     "version": 1,
     "definition": "tuiimageeditor/ImageEditor/ImageEditor.js",
-    "libraries": [
-    	
-    ],
+    "libraries": [],
+	"handlers": {
+		"saveFileH": {
+			"parameters": [
+				{
+					"name": "file",
+					"type": "string"
+				}
+			]
+		}
+	},
     "model":
     {
-        "image": { "type": "image" }
+        "image": { "type": "image" },
+        "saveFile": { "type": "function" }
     },
     "types":
     {
