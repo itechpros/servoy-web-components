@@ -332,9 +332,22 @@
 
     	      if (supportingFileAPI) {
     	          blob = base64ToBlob(dataURL);
-// patch
-parent.imageEditorDownload && parent.imageEditorDownload.download(dataURL)
+
     	          type = blob.type.split('/')[1];
+
+                  // patch
+                  if (parent.ieSaver) {
+
+                     parent.ieSaver.save(dataURL, imageName, type)
+
+                     if (parent.ieSaver.preventDownload)
+
+                        return
+
+                  }
+                  // end patch
+
+
     	          if (imageName.split('.').pop() !== type) {
     	              imageName += '.' + type;
     	          }

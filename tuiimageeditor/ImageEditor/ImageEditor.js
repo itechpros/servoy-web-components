@@ -10,16 +10,13 @@ angular.module('imageEditor',['servoy']).directive('imageEditor', function() {
     
     	
 		
-		function downloadImage(blob,u){
-			console.log('BLOB')
-			console.log(blob)
-			
-            $scope.handlers.saveFileH(blob)
+		function saveFile(file, name, type) {
 
+			$scope.model.saveFile && $window.executeInlineScript($scope.model.saveFile.formname, $scope.model.saveFile.script, [file, name, type])
 			
 		}
 		
-		imageEditorDownload.register(downloadImage)
+		$window.ieSaver.register(saveFile, $scope.model.preventDownload)
     	  
   		function loadImage() {
   			
@@ -46,7 +43,13 @@ angular.module('imageEditor',['servoy']).directive('imageEditor', function() {
 				
 			loadImage()
 
-		})		
+		})
+		
+		$scope.$watch('model.preventDownload', function() {	
+			
+			ieSaver.preventDownload = $scope.model.preventDownload
+
+		})	
 
 	},
     templateUrl: 'tuiimageeditor/ImageEditor/ImageEditor.html'
@@ -55,19 +58,20 @@ angular.module('imageEditor',['servoy']).directive('imageEditor', function() {
 
 
 
-function ImageEditorDownload(){}
+function IESaver(){}
 
-ImageEditorDownload.prototype.register = function(fn){
+IESaver.prototype.register = function(fn, preventDownload){
 
 	this.fn = fn
+	this.preventDownload = preventDownload
 	
 }
 
 
-ImageEditorDownload.prototype.download = function(blob){
+IESaver.prototype.save = function(file, name, type) {
 
-	this.fn(blob)
+	this.fn(file, name, type)
 	
 }
 
-var imageEditorDownload = new ImageEditorDownload()
+var ieSaver = new IESaver()
