@@ -9,14 +9,27 @@ angular.module('imageEditor',['servoy']).directive('imageEditor', function() {
       controller: function($scope, $element, $attrs, $window) {
     
     	
+    	
 		
-		function saveFile(file, name, type) {
+		function saveFile(file, name) {
 
-			$scope.model.saveFile && $window.executeInlineScript($scope.model.saveFile.formname, $scope.model.saveFile.script, [file, name, type])
+		//	$scope.model.saveFile && $window.executeInlineScript($scope.model.saveFile.formname, $scope.model.saveFile.script, [file, name, type])
 			
 		}
 		
-		$window.ieSaver.register(saveFile, $scope.model.preventDownload)
+        $scope.api.getBytes = function() {
+    		
+    		return document.getElementById('tui').contentWindow.getBytes()
+    		
+    	}
+		
+		function getBytes(blob, name) {
+			console.log(blob)
+			//$scope.model.getBytes && $window.executeInlineScript($scope.model.getBytes.formname, $scope.model.getBytes.script, [blob, name])
+			
+		}
+		
+		$window.ieSaver.register(getBytes, $scope.model.preventDownload)
     	  
   		function loadImage() {
   			
@@ -71,6 +84,12 @@ IESaver.prototype.register = function(fn, preventDownload){
 IESaver.prototype.save = function(file, name, type) {
 
 	this.fn(file, name, type)
+	
+}
+
+IESaver.prototype.getBytes = function(file, name) {
+
+	this.fn(file, name)
 	
 }
 

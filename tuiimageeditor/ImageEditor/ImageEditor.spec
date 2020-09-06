@@ -3,6 +3,11 @@
     "displayName": "TUI Image Editor",
     "version": 1,
     "definition": "tuiimageeditor/ImageEditor/ImageEditor.js",
+    "api":{
+    	"getBytes": {
+    		"returns": "object"
+    	}
+    },
     "model":
     {
         "image": { "type": "image" },

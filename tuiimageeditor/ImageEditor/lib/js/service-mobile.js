@@ -324,6 +324,28 @@
     	      imageEditor.removeObject(activeObjectId);
     	  });
 
+function getBytes() {
+
+    	      var imageName = imageEditor.getImageName();
+    	      var dataURL = imageEditor.toDataURL();
+    	      var blob, type;
+
+    	          blob = base64ToBlob(dataURL);
+
+    	          type = blob.type.split('/')[1];
+
+    	          if (imageName.split('.').pop() !== type) {
+    	              imageName += '.' + type;
+    	          }
+
+
+    return {
+        base64: dataURL.replace(/^data:image\/(png|jpg);base64,/, ''),
+        fileName: imageName
+    }
+
+}
+
     	  // Download action
     	  $btnDownload.on('click', function() {
     	      var imageName = imageEditor.getImageName();
@@ -335,10 +357,17 @@
 
     	          type = blob.type.split('/')[1];
 
+    	          if (imageName.split('.').pop() !== type) {
+    	              imageName += '.' + type;
+    	          }
+
+
                   // patch
                   if (parent.ieSaver) {
 
-                     parent.ieSaver.save(dataURL, imageName, type)
+//                     
+
+//                     parent.ieSaver.save(dataURL, imageName, type)
 
                      if (parent.ieSaver.preventDownload)
 
@@ -348,9 +377,6 @@
                   // end patch
 
 
-    	          if (imageName.split('.').pop() !== type) {
-    	              imageName += '.' + type;
-    	          }
 
     	          // Library: FileSaver - saveAs
     	          saveAs(blob, imageName); // eslint-disable-line
