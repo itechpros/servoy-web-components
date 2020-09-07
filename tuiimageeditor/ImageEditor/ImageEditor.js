@@ -3,34 +3,22 @@ angular.module('imageEditor',['servoy']).directive('imageEditor', function() {
       restrict: 'E',
       scope: {
           api: '=svyApi',
-          model: '=svyModel',
-          handlers: '=svyHandlers'
+          model: '=svyModel'
       },
       controller: function($scope, $element, $attrs, $window) {
     
-    	
-    	
-		
-		function saveFile(file, name) {
-
-		//	$scope.model.saveFile && $window.executeInlineScript($scope.model.saveFile.formname, $scope.model.saveFile.script, [file, name, type])
-			
-		}
-		
-        $scope.api.getBytes = function() {
-    		
-    		return document.getElementById('tui').contentWindow.getBytes()
+        $scope.api.getImageBytes = function() {
+        	
+    		return document.getElementById('tui').contentWindow.getImageBytes()
     		
     	}
-		
-		function getBytes(blob, name) {
-			console.log(blob)
-			//$scope.model.getBytes && $window.executeInlineScript($scope.model.getBytes.formname, $scope.model.getBytes.script, [blob, name])
-			
-		}
-		
-		$window.ieSaver.register(getBytes, $scope.model.preventDownload)
-    	  
+
+        $scope.api.getImageName = function() {
+        	
+    		return document.getElementById('tui').contentWindow.getImageName()
+    		
+    	}
+    		  
   		function loadImage() {
   			
   			var imageEditor = document.getElementById('tui').contentWindow.imageEditor
@@ -57,40 +45,8 @@ angular.module('imageEditor',['servoy']).directive('imageEditor', function() {
 			loadImage()
 
 		})
-		
-		$scope.$watch('model.preventDownload', function() {	
-			
-			ieSaver.preventDownload = $scope.model.preventDownload
-
-		})	
 
 	},
     templateUrl: 'tuiimageeditor/ImageEditor/ImageEditor.html'
   }
 })
-
-
-
-function IESaver(){}
-
-IESaver.prototype.register = function(fn, preventDownload){
-
-	this.fn = fn
-	this.preventDownload = preventDownload
-	
-}
-
-
-IESaver.prototype.save = function(file, name, type) {
-
-	this.fn(file, name, type)
-	
-}
-
-IESaver.prototype.getBytes = function(file, name) {
-
-	this.fn(file, name)
-	
-}
-
-var ieSaver = new IESaver()

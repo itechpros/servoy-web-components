@@ -4,15 +4,16 @@
     "version": 1,
     "definition": "tuiimageeditor/ImageEditor/ImageEditor.js",
     "api":{
-    	"getBytes": {
-    		"returns": "object"
+    	"getImageBytes": {
+    		"returns": "string"
+    	},
+    	"getImageName": {
+    		"returns": "string"
     	}
     },
     "model":
     {
-        "image": { "type": "image" },
-        "saveFile": { "type": "function" },
-        "preventDownload": { "type": "boolean" }
+        "image": { "type": "image" }
     },
     "types":
     {

@@ -324,27 +324,35 @@
     	      imageEditor.removeObject(activeObjectId);
     	  });
 
-function getBytes() {
+function getImageBytes() {
 
-    	      var imageName = imageEditor.getImageName();
-    	      var dataURL = imageEditor.toDataURL();
-    	      var blob, type;
+    var dataURL = imageEditor.toDataURL();
+    var blob
 
-    	          blob = base64ToBlob(dataURL);
-
-    	          type = blob.type.split('/')[1];
-
-    	          if (imageName.split('.').pop() !== type) {
-    	              imageName += '.' + type;
-    	          }
-
-
-    return {
-        base64: dataURL.replace(/^data:image\/(png|jpg);base64,/, ''),
-        fileName: imageName
-    }
+    blob = base64ToBlob(dataURL);
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, '')
 
 }
+
+
+function getImageName() {
+
+    var imageName = imageEditor.getImageName();
+    var dataURL = imageEditor.toDataURL();
+    var blob, type;
+
+    blob = base64ToBlob(dataURL);
+
+    type = blob.type.split('/')[1];
+
+    if (imageName.split('.').pop() !== type) {
+      imageName += '.' + type;
+    }
+
+    return imageName
+
+}
+
 
     	  // Download action
     	  $btnDownload.on('click', function() {
@@ -360,23 +368,6 @@ function getBytes() {
     	          if (imageName.split('.').pop() !== type) {
     	              imageName += '.' + type;
     	          }
-
-
-                  // patch
-                  if (parent.ieSaver) {
-
-//                     
-
-//                     parent.ieSaver.save(dataURL, imageName, type)
-
-                     if (parent.ieSaver.preventDownload)
-
-                        return
-
-                  }
-                  // end patch
-
-
 
     	          // Library: FileSaver - saveAs
     	          saveAs(blob, imageName); // eslint-disable-line
