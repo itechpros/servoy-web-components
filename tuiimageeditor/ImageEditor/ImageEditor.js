@@ -6,22 +6,36 @@ angular.module('imageEditor',['servoy']).directive('imageEditor', function() {
           model: '=svyModel'
       },
       controller: function($scope, $element, $attrs, $window) {
-    
+
+    	var tui = document.getElementById('tui'),
+    		template = $scope.model.template.split('.')
+		
+    	tui.src = 'tuiimageeditor/ImageEditor/lib/' + template[0] + '.html' + (template[1] ? '?' + template[1] : '')
+    	  
         $scope.api.getImageBytes = function() {
         	
-    		return document.getElementById('tui').contentWindow.getImageBytes()
+    		return tui.contentWindow.getImageBytes()
     		
     	}
 
         $scope.api.getImageName = function() {
         	
-    		return document.getElementById('tui').contentWindow.getImageName()
+    		return tui.contentWindow.getImageName()
     		
     	}
+        
+    	$scope.api.crop = function(rect) {
+    		
+    		var imageEditor = tui.contentWindow.imageEditor
+			
+			imageEditor.crop(rect)
+    		
+    	}
+    	
     		  
   		function loadImage() {
   			
-  			var imageEditor = document.getElementById('tui').contentWindow.imageEditor
+  			var imageEditor = tui.contentWindow.imageEditor
   			var i = $scope.model.image
 			
 			if (!i)

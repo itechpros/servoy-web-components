@@ -9,11 +9,26 @@
     	},
     	"getImageName": {
     		"returns": "string"
+    	},
+    	"crop": {
+    		"parameters": [
+    			{
+    				"name": "rect",
+    				"type": "object"
+				}
+    		],
+    		"returns": "string"
     	}
     },
     "model":
     {
-        "image": { "type": "image" }
+        "image": { "type": "image" },
+        "template": {
+        	"type": "string",
+        	"tags": { "scope": "design" },
+        	"values": [{ "Default Black": "default" }, { "Default White": "default.white" }, { "Basic": "basic" }, { "Mobile": "mobile" }],
+        	"default": "default"
+        }
     },
     "types":
     {
