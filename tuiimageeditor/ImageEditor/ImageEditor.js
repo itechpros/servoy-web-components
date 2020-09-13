@@ -24,15 +24,40 @@ angular.module('imageEditor',['servoy']).directive('imageEditor', function() {
     		
     	}
         
-    	$scope.api.crop = function(rect) {
+    	
+    	
+    	$scope.api.addIcon = function(type, options, callback) {
     		
-    		var imageEditor = tui.contentWindow.imageEditor
+    		tui.contentWindow.imageEditor.addIcon(type, options).then(function(objectProps){
+    			
+    	        callback && $window.executeInlineScript(callback.formname, callback.script, [objectProps])
+
+    		})
 			
-			imageEditor.crop(rect)
+    	}
+    	
+    	
+        
+    	$scope.api.crop = function(rect, callback) {
+
+    		
+    		tui.contentWindow.imageEditor.crop(rect).then(function(objectProps){
+    			
+    	        callback && $window.executeInlineScript(callback.formname, callback.script, [objectProps])
+
+    		})
+
     		
     	}
     	
-    		  
+    	$scope.api.destroy = function(callback) {
+
+    		
+    		return tui.contentWindow.imageEditor.destroy()
+    		
+    	}
+
+    	
   		function loadImage() {
   			
   			var imageEditor = tui.contentWindow.imageEditor
