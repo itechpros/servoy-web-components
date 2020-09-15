@@ -33,8 +33,8 @@
          var imageEditor = new tui.ImageEditor('#tui-image-editor-container', {
              includeUI: {
                  loadImage: {
-//                     path: 'img/sampleImage2.png',
- //                    name: 'SampleImage'
+                     path: 'img/sampleImage2.png',
+                     name: 'SampleImage'
                  },
                  theme: theme,
                  initMenu: 'filter',
@@ -44,6 +44,7 @@
              cssMaxHeight: 500,
              usageStatistics: false
          });
+console.log(imageEditor)
          window.onresize = function() {
              imageEditor.ui.resizeEditor();
          }

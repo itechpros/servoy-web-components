@@ -252,13 +252,14 @@ angular.module('imageEditor',['servoy']).directive('imageEditor', function() {
 				
 				return
 			
-			if (!imageEditor)
+			if (!imageEditor || (~$scope.model.template.indexOf('default') && !imageEditor.getImageName()))
 				
 				$timeout(function(){loadImage(url, imageName, callback)}, 200)
 			
 			else
 				
 				imageEditor.loadImageFromURL(url, imageName).then(function() {
+					imageEditor.clearUndoStack()
 					callback && $window.executeInlineScript(callback.formname, callback.script, [objectProps])
 				})
 
