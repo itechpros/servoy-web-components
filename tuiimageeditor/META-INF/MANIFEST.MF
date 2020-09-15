@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-Name: TUI Image Editor
 Bundle-SymbolicName: tuiimageeditor
 Package-Type: Web-Component
-Bundle-Version: 1.0.2
+Bundle-Version: 1.0.3
 
 Name: ImageEditor/ImageEditor.spec
 Web-Component: True
