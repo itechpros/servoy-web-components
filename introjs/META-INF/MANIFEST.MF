@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-Name: Intro.js
+Bundle-SymbolicName: introjs
+Package-Type: Web-Service
+Bundle-Version: 1.0.0
+
+Name: introjs/introjs.spec
+Web-Service: True
