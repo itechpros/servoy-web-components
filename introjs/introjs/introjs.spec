@@ -5,6 +5,12 @@
  	"definition": "introjs/introjs/introjs.js",
 	"libraries": [
 		{ 
+			"name": "introjs.css",
+			"version": "0.0.1",
+			"url":"introjs/introjs/lib/introjs.css", 
+			"mimetype":"text/css"
+		},
+		{ 
 			"name": "intro.min.js",
 			"version": "0.0.1",
 			"url":"introjs/introjs/lib/intro.min.js", 
@@ -22,15 +28,16 @@
  	},
  	"api":
  	{
-	   	"downloadFile":
-      {
+ 	  "setOptions": {
          "parameters":
           [
           	{
-               "name":"URL",
-               "type":"string"
+               "name":"options",
+               "type":"object"
             }
          ]
-      }
+      },
+      "showHints": {},
+	  "start": {}
  	}
 }
