@@ -4,6 +4,26 @@ angular.module('introjs',['servoy', 'angular-intro'])
 
 	return {
 		
+		clear: function() {
+			
+			ngIntroService.clear()
+			
+		},
+		goToStepNumber: function(step) {
+			console.log(step)
+			ngIntroService.goToStepNumber(step)
+			
+		},
+		hideHint: function(hint) {
+			
+			ngIntroService.hideHint(hint)
+			
+		},
+		hideHints: function() {
+			
+			ngIntroService.hideHints()
+			
+		},
 		setOptions: function(options){
 			
 			var opt = {}
@@ -20,8 +40,12 @@ angular.module('introjs',['servoy', 'angular-intro'])
 				
 			})
 			
-			ngIntroService.clear()
 			ngIntroService.setOptions(opt)
+			
+		},
+		showHint: function(hint) {
+			
+			ngIntroService.showHint(hint)
 			
 		},
 		showHints: function() {
@@ -31,7 +55,8 @@ angular.module('introjs',['servoy', 'angular-intro'])
 		},
 		start : function() {
 			
-		      ngIntroService.start()
+		    ngIntroService.start()
+			
 	    }
 		
 	}

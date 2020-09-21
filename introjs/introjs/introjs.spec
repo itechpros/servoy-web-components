@@ -28,12 +28,41 @@
  	},
  	"api":
  	{
+ 	  "clear": {},
+ 	  "goToStepNumber": {
+         "parameters":
+          [
+          	{
+               "name":"step",
+               "type":"int"
+            }
+         ]
+      },
+      "hidehint": {
+         "parameters":
+          [
+          	{
+               "name":"hint",
+               "type":"int"
+            }
+         ]
+      },
+	  "hideHints": {},
  	  "setOptions": {
          "parameters":
           [
           	{
                "name":"options",
                "type":"object"
+            }
+         ]
+      },
+      "showHint": {
+         "parameters":
+          [
+          	{
+               "name":"hint",
+               "type":"int"
             }
          ]
       },
