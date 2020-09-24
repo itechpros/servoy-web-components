@@ -30,21 +30,27 @@ angular.module('introjs',['servoy', 'angular-intro'])
 			
 			var trav = function(doc, name) {
 			
+				if (!doc)
+					
+					return null
+					
 				var element = null
 				
 				var traverse = function(doc) {
-					
-					for (var i = 0, ix = doc.children.length; i < ix; i += 1){
-						
-						if (doc.children[i].getAttribute('name') === name) {
-							
-							element = doc.children[i]
-							i = ix
-							
-						} else
-							
-							traverse(doc.children[i], name)
-					}
+
+					for (var i = 0, ix = doc.children.length; i < ix; i += 1)
+
+						if (!element)
+
+							if (doc.children[i].getAttribute('name') === name) {
+
+								element = doc.children[i]
+								i = ix
+								
+							} else if (doc.children[i].nodeName !== 'DATA-SERVOYDEFAULT-TABPANEL')
+								
+								traverse(doc.children[i], name)
+
 				}
 				
 				traverse(doc)
@@ -66,25 +72,31 @@ angular.module('introjs',['servoy', 'angular-intro'])
 				for (var i = 0, ix = (options[typ] || []).length; i < ix; i += 1) {
 					
 					var e = options[typ][i].element.split('.'),
-						element = null
+						element = document.getElementsByTagName("BODY")[0],
+						len = e.length
 					
-					if (!(e.length % 3)) {
+					if (len > 1) {
 						
-						var tab = document.getElementsByName(e[0])[0]
+						var idx = 0
+						element = trav(element, e[idx++])
 						
-						tab && (tab = tab.children[0])
-						tab && (tab = tab.children[0])
-						tab && (tab = tab.children[0])
-						tab && (tab = tab.children[tab.children.length - 1])
-						tab && (tab = tab.children[Number(e[1])])
-						
-						element = tab && trav(tab, e[2]) || null
+						while (idx < len - 1) {
+													
+							element && (element = element.children[0])
+							element && (element = element.children[0])
+							element && (element = element.children[0])
+							element && (element = element.children[element.children.length - 1])
+							element && (element = element.children[Number(e[idx++])])
+							
+							element = trav(element, e[idx++]) || null
+	
+						}
 					
 					}
 						
 					else
 						
-						element = document.getElementsByName(e[0])[0]
+						element = trav(element, e[0])
 						
 					if (element) {
 						
