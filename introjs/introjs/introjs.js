@@ -1,8 +1,7 @@
 angular.module('introjs',['servoy', 'angular-intro'])
-.factory("introjs",function($services, $window, ngIntroService) 
+.factory('introjs',function($services, $window, ngIntroService) 
 {
-
-	//console.log(document.getElementsByName('tab_button_1')[0].getAttribute('name'),document.getElementsByName('tab_button_1')[0].tagName,document.getElementsByName('tab_button_1')[0].className)
+	
 	return {
 		
 		clear: function() {
@@ -11,7 +10,7 @@ angular.module('introjs',['servoy', 'angular-intro'])
 			
 		},
 		goToStepNumber: function(step) {
-			console.log(step)
+
 			ngIntroService.goToStepNumber(step)
 			
 		},
@@ -71,33 +70,26 @@ angular.module('introjs',['servoy', 'angular-intro'])
 				
 				for (var i = 0, ix = (options[typ] || []).length; i < ix; i += 1) {
 					
-					var e = options[typ][i].element.split('.'),
-						element = document.getElementsByTagName("BODY")[0],
+					var e = options[typ][i] && options[typ][i].element.split('.') || [],
+						body = document.getElementsByTagName('BODY')[0],
+						element = null,
+						idx = 0,
 						len = e.length
+
+					element = trav(body, e[idx++])
 					
-					if (len > 1) {
+					while (idx < len - 1) {
+												
+						element && (element = element.children[0])
+						element && (element = element.children[0])
+						element && (element = element.children[0])
+						element && (element = element.children[element.children.length - 1])
+						element && (element = element.children[Number(e[idx++])])
 						
-						var idx = 0
 						element = trav(element, e[idx++])
-						
-						while (idx < len - 1) {
-													
-							element && (element = element.children[0])
-							element && (element = element.children[0])
-							element && (element = element.children[0])
-							element && (element = element.children[element.children.length - 1])
-							element && (element = element.children[Number(e[idx++])])
-							
-							element = trav(element, e[idx++]) || null
-	
-						}
-					
+
 					}
-						
-					else
-						
-						element = trav(element, e[0])
-						
+										
 					if (element) {
 						
 						opt[typ].push(options[typ][i])
@@ -111,6 +103,19 @@ angular.module('introjs',['servoy', 'angular-intro'])
 			})
 			
 			ngIntroService.setOptions(opt)
+			
+		},
+		setTheme: function(theme) {
+			
+			var src = 'introjs/introjs/lib/themes/introjs-' + theme + '.css',
+				link = document.createElement( 'link' )
+				
+			link.href = src
+			link.type = 'text/css'
+			link.rel = 'stylesheet'
+			link.media = 'screen,print'
+
+			document.getElementsByTagName( 'head' )[0].appendChild( link )
 			
 		},
 		showHint: function(hint) {

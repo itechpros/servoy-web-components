@@ -23,9 +23,6 @@
 			"mimetype":"text/javascript"
 		}
 	],
-	"model":
-	{
- 	},
  	"api":
  	{
  	  "clear": {},
@@ -38,7 +35,7 @@
             }
          ]
       },
-      "hidehint": {
+      "hideHint": {
          "parameters":
           [
           	{
@@ -67,6 +64,15 @@
          ]
       },
       "showHints": {},
-	  "start": {}
+	  "start": {},
+	  "setTheme": {
+         "parameters":
+          [
+          	{
+               "name":"theme",
+               "type":"string"
+            }
+         ]
+      }
  	}
 }
