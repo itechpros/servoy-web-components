@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: dateinput
+Bundle-Name: Date Input
+Bundle-Version: 1.0.0
+Package-Type: Web-Component
+
+Name: DateInput/DateInput.spec
+Web-Component: True
