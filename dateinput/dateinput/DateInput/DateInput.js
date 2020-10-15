@@ -9,11 +9,14 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 
     	var container = $('#datepicker-value')
 		
-    	container.datepicker({})
-		
+    	
 		$('#datepicker-activate').click(function(e){
 
 	       $(document).ready(function() {
+	    	   
+	       		container.datepicker({onClose: function() {
+	       			container.datepicker('destroy')
+	       	    }})
 
 	       		container.datepicker().focus()
 				   
