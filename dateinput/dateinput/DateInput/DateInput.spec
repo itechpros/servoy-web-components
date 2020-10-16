@@ -21,9 +21,17 @@
 	      "version": "1",
 	      "mimetype": "text/javascript",
 	      "url": "dateinput/DateInput/lib/js/bootstrap-datepicker.min.js"
+	    },
+	    {
+	      "name": "moment.js",
+	      "version": "1",
+	      "mimetype": "text/javascript",
+	      "url": "dateinput/DateInput/lib/moment.js"
 	    }
 	],
-    
+  	"model": {
+        "format" : {"type" :"string", "default": "dd/mm/yy", "tags": { "scope" :"design" }} 
+    },
     "api":{
     	"getImageBytes": {
     		"returns": "string"

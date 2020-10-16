@@ -21,10 +21,20 @@
 
 
 <div class="input-group mb-3">
+  
+  <input type="text" class="form-control" placeholder="enter date" aria-label="Date" aria-describedby="date-input-label" id="datepicker-value" style="border-right:none;padding-right:100px;">
   <div class="input-group-prepend">
-    <span class="input-group-text" id="date-input-label"><span class="glyphicon glyphicon-th" id="datepicker-activate"></span></span>
+    <span class="input-group-text" style="border-left:none;boreder-right:none;background-color:white;cursor:pointer;">
+    	<span class="glyphicon glyphicon-minus" id="datepicker-minus"></span>
+    </span>
   </div>
-  <input type="text" class="form-control" placeholder="enter date" aria-label="Date" aria-describedby="date-input-label" id="datepicker-value">
-  <!-- input type="text" class="form-control" style="background-color:#eaeaea;" aria-label="Date" aria-describedby="date-input-label" id="datepicker-value"-->
+  <div class="input-group-prepend">
+    <span class="input-group-text" style="border-left:none;boreder-right:none;background-color:white;cursor:pointer;">
+    	<span class="glyphicon glyphicon-plus" id="datepicker-plus"></span>
+    </span>
+  </div>
+  <div class="input-group-prepend">
+    <span class="input-group-text"><span class="glyphicon glyphicon-th" id="datepicker-activate" style="cursor:pointer;"></span></span>
+  </div>
 </div>
 
