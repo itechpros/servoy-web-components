@@ -30,19 +30,7 @@
 	    }
 	],
   	"model": {
-        "format" : {"type" :"string", "default": "dd/mm/yy", "tags": { "scope" :"design" }} 
-    },
-    "api":{
-    	"getImageBytes": {
-    		"returns": "string"
-    	},
-		 
-		"undo": {
-		  "parameters": [
-		    {"name": "callback", "type": "function", "optional": true}
-		  ]
-		}
-
+        "format" : {"type" :"string", "default": "dd/mm/yy" },
+        "date" : {"type" :"string" }
     }
-
 }
