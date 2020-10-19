@@ -3,7 +3,7 @@
     "displayName":"Shorthand Date Input",
     "packageType": "Web-Component",
     "icon": "https://github.com/itechpros/servoy-web-components/raw/master/dateinput/icon.png",
-    "description": "AngularJS directive for Intro.js",
+    "description": "Shorthand date input with picker",
     "wikiUrl": "https://github.com/itechpros/servoy-web-components/tree/master/dateinput/README.md",
     "sourceUrl" : "https://github.com/itechpros/servoy-web-components/tree/master/dateinput",
     "releases" : [
