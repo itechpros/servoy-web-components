@@ -11,7 +11,8 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 
     	var container = $('#datepicker-value'),
     		lock = false,
-			format = 'DD/MM/YYYY'
+			format = 'DD/MM/YYYY',
+			show = false
 		
 		container.on('focusout', function() {
 			
@@ -32,23 +33,23 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			
 			if (len === 8)	
 				
-				out = val.substr(2, 2) + '/' + val.substr(0, 2) + '/' + val.substr(6, 2)
+				out = val.substr(0, 2) + '/' + val.substr(2, 2) + '/' + val.substr(6, 2)
 				
 			else if (len === 6)
 				
-				out = val.substr(2, 2) + '/' + val.substr(0, 2) + '/' + val.substr(4, 2) 
+				out = val.substr(0, 2) + '/' + val.substr(2, 2) + '/' + val.substr(4, 2) 
 				
 			else if (len === 4)
 				
-				out = val.substr(2, 2) + '/' + val.substr(0, 2) + '/' + year
+				out = val.substr(0, 2) + '/' + val.substr(2, 2) + '/' + year
 				
 			else if (len === 2)
 				
-				out = val.substr(1, 1) + '/' + val.substr(0, 1) + '/' + year
+				out = val.substr(0, 1) + '/' + val.substr(1, 1) + '/' + year
 			
 			else if (len === 1) {
 				
-				out = month + '/' + day + '/' + year
+				out = day + '/' + month + '/' + year
 					
 				if (val === 'Y')
 					
@@ -57,7 +58,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			} else
 				
 				out = val
-			
+			//console.log(out)
 			out = out && moment(out, format).format($scope.model.format) || ''
 			
 			$scope.model.date = out
@@ -79,27 +80,35 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			$scope.model.date = container.val()
 			$(this).select()
 			
-			
 		})
     	
 		
-		$('#datepicker-minus').click(function(e) {
+		$('#datepicker-minus').click(function() {
 			
-			var val = container.val()
-			
-			val && container.val(moment(val, $scope.model.format).subtract(1, 'd').format($scope.model.format))
-			//$scope.model.date = container.val()
+			plusMinus('subtract')
 			
 		})
 		
-		$('#datepicker-plus').click(function(e) {
+		
+		$('#datepicker-plus').click(function() {
+
+			plusMinus('add')
+			
+		})
+		
+		function plusMinus(dir) {
+			
+			if (show)
+				
+				return
 			
 			var val = container.val()
 			
-			val && container.val(moment(val, $scope.model.format).add(1, 'd').format($scope.model.format))
-			//$scope.model.date = container.val()
+			val && container.val(moment(val, $scope.model.format)[dir](1, 'd').format($scope.model.format))
+			$scope.model.date = container.val()
 			
-		})
+		}
+		
 		
 		$('#datepicker-activate').click(function() {
 
@@ -109,20 +118,31 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			   
 	       		container.datepicker({
 	       			
-	       			onClose: function() {
+	       			dateFormat: 'd/m/y',
+					beforeShow : function() {
+
+				        show = true
 						
-						setTimeout(function(){container.datepicker('destroy')}, 500)
+				    },
+				    onClose: function() {
+					
+						var val = moment(container.val(), format).format($scope.model.format)
+	
+						$scope.model.date = val
+						$window.setTimeout(function() {container.val(val)}, 1)
+				        $window.setTimeout(function() {show = false}, 50)
+						$window.setTimeout(function(){container.datepicker('destroy')}, 500)
 						
-       				}
+				    }
 	       		
 	       		})
 
 				container.datepicker().on('change', function() {
 
 					var val = moment(container.val(), format).format($scope.model.format)
-					console.log(val,container.val(), format,  $scope.model.format)
-				//	$scope.model.date = val
-					setTimeout(function() {container.val(val)}, 1)
+
+					$scope.model.date = val
+					$window.setTimeout(function() {container.val(val)}, 1)
 
 				})
 
@@ -133,22 +153,25 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 	    })
 		
 		
-        $scope.$watch('model.date', function(date) {
-        	
-        	container.val(moment(date, format).format($scope.model.format))
-			console.log(date)
-			//$scope.model.date = container.val()
-        	
-        })
-		        
+		$scope.api.getDate = function() {
+			
+			return moment(container.val(), $scope.model.format).format(format)
+			
+		}
 
-        $scope.$watch('model.format', function(newformat, oldformat) {
+		
+		$scope.api.setDate = function(date) {
+			
+			date && container.val(moment(date, format).format($scope.model.format))
+			
+		}
+		
+        
+		$scope.$watch('model.format', function(newformat, oldformat) {
         	
         	var val = container.val()
-			console.log(newformat,oldformat)
-        	val && container.val(moment(val, oldformat).format($scope.model.format))
 			
-			//$scope.model.date = container.val()
+        	val && container.val(moment(val, oldformat).format($scope.model.format))
 			
         })
 

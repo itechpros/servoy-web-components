@@ -30,7 +30,19 @@
 	    }
 	],
   	"model": {
-        "format" : {"type" :"string", "default": "dd/mm/yy" },
-        "date" : {"type" :"string" }
+        "format" : {"type" :"string", "default": "dd/mm/yy" }
+    },
+    "api": {
+    	"getDate": {
+    		"returns": "string"
+    	},
+    	"setDate": {
+    		"parameters": [
+    			{
+    				"name": "date",
+    				"type": "string"
+    			}
+    		]
+    	}
     }
 }
