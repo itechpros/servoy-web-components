@@ -1,24 +1,41 @@
 angular.module('dateinput',['servoy']).directive('dateinput', function() {  
   return {
-      restrict: 'E',
-      scope: {
-          api: '=svyApi',
-          model: '=svyModel'
-      },
-    controller: function($scope, $element, $attrs, $window, $timeout) {
+	  restrict: 'E',
+	  scope: {
+		  api: '=svyApi',
+		  model: '=svyModel',
+		  handlers: "=svyHandlers",
+		  svyServoyapi : "="
+	  },
+	controller: function($scope, $element, $attrs, $window, $timeout) {
 
-    	'use strict'
+		'use strict'
 
-    	var container = $('#datepicker-value'),
-    		lock = false,
+		var container = $('#datepicker-value'),
+			provider = $('#data-provider'),
+			lock = false,
 			format = 'DD/MM/YYYY',
 			show = false
+			
+			
+		container.keydown(function(e) {
+			
+			if (e.keyCode === 40)
+				
+				plusMinus('subtract')
+				
+			else if (e.keyCode === 38)
+				
+				plusMinus('add')
+			
+		})
+		
 		
 		container.on('focusout', function() {
 			
-			if (lock) {
+			if (show) {
 				
-				lock = false
+				show = false
 				return
 				
 			}
@@ -45,138 +62,153 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 			else if (len === 2)
 				
-				out = val.substr(0, 1) + '/' + val.substr(1, 1) + '/' + year
+				out = val + '/' + month + '/' + year
 			
-			else if (len === 1) {
+			else if (len === 1)
 				
-				out = day + '/' + month + '/' + year
+				if (isNaN(val)) {
 					
-				if (val === 'Y')
+					out = day + '/' + month + '/' + year
+						
+					if (val === 'Y')
+						
+						out = moment(out, format).subtract(1, 'd').format(format)
+						
+				} else
 					
-					out = moment(out, format).subtract(1, 'd').format(format)
+					out = val + '/' + month + '/' + year
 				
-			} else
+			else
 				
 				out = val
-			//console.log(out)
+console.log(out)
 			out = out && moment(out, format).format($scope.model.format) || ''
-			
-			$scope.model.date = out
-				
-			$window.setTimeout(function() {
-				
-				container.val(out)
-				
-			}, 1)
+			container.val(out)
+			lock = true
+			$scope.model.dataProviderID = moment(container.val(), $scope.model.format).format(format)
+			$scope.svyServoyapi.apply('dataProviderID')
+
 			
 		})
 		
 
 		container.focus(function() {
 			
-			var val = container.val()
+			var val = $scope.model.dataProviderID
 			
-			val && container.val(moment(val, $scope.model.format).format(format))
-			$scope.model.date = container.val()
+			val && container.val(val)
 			$(this).select()
-			
-		})
-    	
-		
-		$('#datepicker-minus').click(function() {
-			
-			plusMinus('subtract')
+			console.log('f',val)
 			
 		})
 		
-		
-		$('#datepicker-plus').click(function() {
-
-			plusMinus('add')
-			
-		})
 		
 		function plusMinus(dir) {
 			
-			if (show)
+			//if (show)
 				
-				return
+				//return
 			
 			var val = container.val()
 			
-			val && container.val(moment(val, $scope.model.format)[dir](1, 'd').format($scope.model.format))
-			$scope.model.date = container.val()
+			if (val) {
+				
+				container.val(moment(val, format)[dir](1, 'd').format(format))
+				lock = true
+				$scope.model.dataProviderID = moment(container.val(), format).format(format)
+				$scope.svyServoyapi.apply('dataProviderID')
+				
+			}
 			
 		}
-		
+
 		
 		$('#datepicker-activate').click(function() {
 
-	       $(document).ready(function() {
-	    	   
-	       		lock = true
+		   $(document).ready(function() {
 			   
-	       		container.datepicker({
-	       			
-	       			dateFormat: 'd/m/y',
+		   		lock = true
+			   
+		   		container.datepicker({
+		   			
+		   			dateFormat: 'd/m/y',
 					beforeShow : function() {
 
-				        show = true
+						show = true
 						
-				    },
-				    onClose: function() {
+					},
+					onClose: function() {
 					
 						var val = moment(container.val(), format).format($scope.model.format)
 	
-						$scope.model.date = val
-						$window.setTimeout(function() {container.val(val)}, 1)
-				        $window.setTimeout(function() {show = false}, 50)
-						$window.setTimeout(function(){container.datepicker('destroy')}, 500)
+						show = false
 						
-				    }
-	       		
-	       		})
+						$window.setTimeout(function() {
+							
+							container.val(val)
+							
+						}, 1)
+						
+						$window.setTimeout(function() {
+							
+							container.datepicker('destroy')
+							
+						}, 500)
+						
+					}
+		   		
+		   		})
 
 				container.datepicker().on('change', function() {
 
 					var val = moment(container.val(), format).format($scope.model.format)
 
-					$scope.model.date = val
-					$window.setTimeout(function() {container.val(val)}, 1)
+					lock = true
+					$scope.model.dataProviderID = container.val()
+					$scope.svyServoyapi.apply('dataProviderID')
+				
 
+					$window.setTimeout(function() {
+							
+							container.val(val)
+							
+					}, 1)
+						
 				})
 
-	       		container.datepicker().focus()
+		   		container.datepicker().focus()
 				   
-	       })
+		   })
 
-	    })
+		})
 		
 		
-		$scope.api.getDate = function() {
-			
-			return moment(container.val(), $scope.model.format).format(format)
-			
-		}
-
-		
-		$scope.api.setDate = function(date) {
-			
-			date && container.val(moment(date, format).format($scope.model.format))
-			
-		}
-		
-        
 		$scope.$watch('model.format', function(newformat, oldformat) {
-        	
-        	var val = container.val()
 			
-        	val && container.val(moment(val, oldformat).format($scope.model.format))
+			var val = container.val()
 			
-        })
+			val && container.val(moment(val, oldformat).format($scope.model.format))
+			
+		})
 
 		
-    },
-    templateUrl: 'dateinput/DateInput/DateInput.html'
+		$scope.$watch('model.dataProviderID', function(newformat, oldformat) {
+
+			if (lock) {
+				
+				lock = false
+				return
+				
+			}
+			console.log('mod')
+			$scope.model.dataProviderID && container.val(moment($scope.model.dataProviderID, format).format($scope.model.format))
+			
+		})
+		
+			
+	
+		
+	},
+	templateUrl: 'dateinput/DateInput/DateInput.html'
   }
 })

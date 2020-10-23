@@ -30,19 +30,12 @@
 	    }
 	],
   	"model": {
-        "format" : {"type" :"string", "default": "dd/mm/yy" }
+        "format": {"type" :"string", "default": "dd/mm/yy" },
+        "dataProviderID": {"type" :"dataprovider", "pushToServer": "allow", "ondatachange": { "onchange":"onDataChange" } }
     },
-    "api": {
-    	"getDate": {
-    		"returns": "string"
-    	},
-    	"setDate": {
-    		"parameters": [
-    			{
-    				"name": "date",
-    				"type": "string"
-    			}
-    		]
-    	}
+    "handlers": {
+    	"onDataChange": "function",
+    	"onFocusGained": "function",
+    	"onFocusLost": "function"
     }
 }
