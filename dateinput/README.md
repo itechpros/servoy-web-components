@@ -8,22 +8,28 @@
 
 
 
-API:
 
-### setDate(date)
+## Model:
 
-### getDate()
+##### dataProvider
 
-set/get date in MM/DD/YYYY format
+form variable binding
 
-Model:
-
-### format
+##### format
 
 sets display format, refer to https://momentjs.com/ for details
 
+##### cutoffNextYear
+
+true/false year in six digit input is in past
 
 
+
+## Handlers:
+
+##### onDataChange
+##### onFocusGained
+##### onFocusLost
 
 ## License
 
