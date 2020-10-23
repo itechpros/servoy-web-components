@@ -31,7 +31,12 @@
 	],
   	"model": {
         "format": {"type" :"string", "default": "dd/mm/yy" },
-        "dataProviderID": {"type" :"dataprovider", "pushToServer": "allow", "ondatachange": { "onchange":"onDataChange" } }
+        "dataProviderID": {
+        	"type" :"dataprovider",
+        	"pushToServer": "allow",
+        	"ondatachange": { "onchange":"onDataChange" }
+        },
+        "cutoffNextYear": { "type": "boolean", "default": true }
     },
     "handlers": {
     	"onDataChange": "function",

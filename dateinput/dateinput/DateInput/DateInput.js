@@ -45,18 +45,21 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				date = new Date(),
 				day = date.getDate().toString(),
 				month = (date.getMonth() + 1).toString(),
-				year = date.getFullYear().toString().substr(2, 2),
+				year = date.getFullYear().toString(),
 				out = val
 			
 			if (len === 8)	
 				
-				out = val.substr(0, 2) + '/' + val.substr(2, 2) + '/' + val.substr(6, 2)
+				out = val.substr(0, 2) + '/' + val.substr(2, 2) + '/' + val.substr(4, 4)
 				
-			else if (len === 6)
+			else if (len === 6) {
 				
-				out = val.substr(0, 2) + '/' + val.substr(2, 2) + '/' + val.substr(4, 2) 
+				var inp = Number(val.substr(4, 2)),
+					yr = $scope.model.cutoffNextYear && inp > Number(year.substr(2, 2)) + 1 ? 19 : 20
+
+				out = val.substr(0, 2) + '/' + val.substr(2, 2) + '/' + yr.toString() + inp.toString()
 				
-			else if (len === 4)
+			} else if (len === 4)
 				
 				out = val.substr(0, 2) + '/' + val.substr(2, 2) + '/' + year
 				
@@ -81,12 +84,17 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			else
 				
 				out = val
-console.log(out)
-			out = out && moment(out, format).format($scope.model.format) || ''
-			container.val(out)
+
 			lock = true
-			$scope.model.dataProviderID = moment(container.val(), $scope.model.format).format(format)
+			$scope.model.dataProviderID = out
 			$scope.svyServoyapi.apply('dataProviderID')
+			
+			$window.setTimeout(function() {
+	
+				container.val(moment($scope.model.dataProviderID, format).format($scope.model.format))
+				
+			}, 1)
+			
 
 			
 		})
@@ -98,16 +106,12 @@ console.log(out)
 			
 			val && container.val(val)
 			$(this).select()
-			console.log('f',val)
+			lock = true
 			
 		})
 		
 		
 		function plusMinus(dir) {
-			
-			//if (show)
-				
-				//return
 			
 			var val = container.val()
 			
@@ -131,7 +135,7 @@ console.log(out)
 			   
 		   		container.datepicker({
 		   			
-		   			dateFormat: 'd/m/y',
+		   			dateFormat: 'd/m/yy',
 					beforeShow : function() {
 
 						show = true
@@ -144,6 +148,13 @@ console.log(out)
 						show = false
 						
 						$window.setTimeout(function() {
+							
+							if (lock) {
+								
+								lock = false
+								return
+								
+							}
 							
 							container.val(val)
 							
@@ -166,7 +177,6 @@ console.log(out)
 					lock = true
 					$scope.model.dataProviderID = container.val()
 					$scope.svyServoyapi.apply('dataProviderID')
-				
 
 					$window.setTimeout(function() {
 							
@@ -192,15 +202,15 @@ console.log(out)
 		})
 
 		
-		$scope.$watch('model.dataProviderID', function(newformat, oldformat) {
-
+		$scope.$watch('model.dataProviderID', function() {
+		//	console.log('mod', lock, $scope.model.dataProviderID)
 			if (lock) {
 				
 				lock = false
 				return
 				
 			}
-			console.log('mod')
+			
 			$scope.model.dataProviderID && container.val(moment($scope.model.dataProviderID, format).format($scope.model.format))
 			
 		})
