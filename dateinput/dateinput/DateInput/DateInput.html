@@ -22,7 +22,6 @@
 
 <div class="input-group mb-3">
   
-  <!input type="hidden" ng-model="model.dataProviderID" id="data-provider" svy-autoapply>
   <input
 	type="text"
 	class="form-control"
@@ -33,7 +32,10 @@
 	svy-focuslost='handlers.onFocusLost($event)'
   >
   <div class="input-group-prepend">
-    <span class="input-group-text"><span class="glyphicon glyphicon-th" id="datepicker-activate" style="cursor:pointer;"></span></span>
+    <span class="input-group-text">
+		<span class="glyphicon glyphicon-th" id="datepicker-activate" style="cursor:pointer;">
+		</span>
+	</span>
   </div>
 </div>
 

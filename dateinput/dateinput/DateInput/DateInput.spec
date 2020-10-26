@@ -30,7 +30,8 @@
 	    }
 	],
   	"model": {
-        "format": {"type" :"string", "default": "dd/mm/yy" },
+        "displayFormat": {"type" :"string", "default": "dd/mm/yy" },
+        "inputFormat": {"type" :"string", "values": [{ "EU": "EU" }, { "US": "US" }], "default": "EU" },
         "dataProviderID": {
         	"type" :"dataprovider",
         	"pushToServer": "allow",
