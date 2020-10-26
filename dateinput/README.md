@@ -17,13 +17,13 @@ form variable binding
 
 ##### displayFormat
 
-sets display format when input is not focused
+Date format when input is not focused
 
 See to https://momentjs.com/ for details on date display formats
 
 ##### inputFormat
 
-EU/US input format
+Date format when input is focused
 
 ##### cutoffNextYear
 

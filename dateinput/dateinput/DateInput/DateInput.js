@@ -16,7 +16,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			formats = {
 				
 			
-				EU: {
+				'DD/MM/YY': {
 					
 					drop: 'd/m/yy',
 					input: 'DD/MM/YY',
@@ -24,10 +24,26 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 				},
 				
-				US: {
+				'DD/MM/YYYY': {
+					
+					drop: 'd/m/yy',
+					input: 'DD/MM/YYYY',
+					store: 'DD/MM/YYYY'
+				
+				},
+				
+				'MM/DD/YY': {
 					
 					drop: 'm/d/yy',
 					input: 'MM/DD/YY',
+					store: 'MM/DD/YYYY'
+				
+				},
+				
+				'MM/DD/YYYY': {
+					
+					drop: 'm/d/yy',
+					input: 'MM/DD/YYYY',
 					store: 'MM/DD/YYYY'
 				
 				}
@@ -66,7 +82,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			
 			2: function(val) {
 				
-				return ($scope.model.inputFormat === 'EU' ? val + '/' + month : month + '/' + val) + '/' + year
+				return ($scope.model.inputFormat.split('/')[0] === 'DD' ? val + '/' + month : month + '/' + val) + '/' + year
 				
 			},
 			
@@ -76,7 +92,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 				if (isNaN(val)) {
 					
-					out = ($scope.model.inputFormat === 'EU' ? day + '/' + month : month + '/' + day) + '/' + year
+					out = ($scope.model.inputFormat.split('/')[0] === 'DD' ? day + '/' + month : month + '/' + day) + '/' + year
 						
 					if (val === 'Y')
 						
@@ -84,7 +100,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 						
 				} else
 					
-					out = ($scope.model.inputFormat === 'EU' ? val + '/' + month : month + '/' + val) + '/' + year
+					out = ($scope.model.inputFormat.split('/')[0] === 'DD' ? val + '/' + month : month + '/' + val) + '/' + year
 					
 				return out
 				
@@ -101,6 +117,12 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			else if (e.keyCode === 38)
 				
 				plusMinus('add')
+				
+			else if (e.key === 'Enter')
+				
+				container.blur()
+				
+				
 			
 		})
 		
@@ -261,9 +283,9 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			
 			format = formats[$scope.model.inputFormat]
 			lock = true
-			$scope.model.dataProviderID = moment($scope.model.dataProviderID, formats[oldformat].input).format(format.store)
+			$scope.model.dataProviderID = moment($scope.model.dataProviderID, formats[oldformat].store).format(format.store)
 			$scope.svyServoyapi.apply('dataProviderID')
-			container.val(moment($scope.model.dataProviderID, format.input).format($scope.model.displayFormat))
+			container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
 			
 		})
 
@@ -277,6 +299,9 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 			}
 			
+			lock = true
+			$scope.model.dataProviderID = moment($scope.model.dataProviderID, format.store).format(format.store)
+			$scope.svyServoyapi.apply('dataProviderID')
 			$scope.model.dataProviderID && container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
 			
 		})

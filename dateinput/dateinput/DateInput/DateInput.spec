@@ -31,7 +31,12 @@
 	],
   	"model": {
         "displayFormat": {"type" :"string", "default": "dd/mm/yy" },
-        "inputFormat": {"type" :"string", "values": [{ "EU": "EU" }, { "US": "US" }], "default": "EU" },
+        "inputFormat": {"type" :"string", "values": [
+        	{ "DD/MM/YY": "DD/MM/YY" },
+        	{ "DD/MM/YYYY": "DD/MM/YYYY" },
+        	{ "MM/DD/YY": "MM/DD/YY" },
+        	{ "MM/DD/YYYY": "MM/DD/YYYY" }
+        ], "default": "DD/MM/YY" },
         "dataProviderID": {
         	"type" :"dataprovider",
         	"pushToServer": "allow",
