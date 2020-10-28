@@ -42,7 +42,8 @@
         	"pushToServer": "allow",
         	"ondatachange": { "onchange":"onDataChange" }
         },
-        "cutoffNextYear": { "type": "boolean", "default": true }
+        "cutoffNextYear": { "type": "boolean", "default": true },
+        "tabSeq" : {"type" :"tabseq", "tags": { "scope" :"design" }}
     },
     "handlers": {
     	"onDataChange": "function",

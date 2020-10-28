@@ -161,8 +161,6 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 			}
 			
-			
-			
 			lock = true
 			$scope.model.dataProviderID = out
 			$scope.svyServoyapi.apply('dataProviderID')
@@ -273,9 +271,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 		
 		$scope.$watch('model.displayFormat', function(newformat, oldformat) {
 			
-			var val = container.val()
-			
-			val && container.val(moment(val, oldformat).format($scope.model.displayFormat))
+			container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
 			
 		})
 
