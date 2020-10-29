@@ -1,4 +1,5 @@
 <style>
+
 	.ui-widget-header .ui-icon {
 	    background-image: url("dateinput/DateInput/lib/images/ui-icons_ffffff_256x240.png");
 	}
@@ -6,6 +7,7 @@
 	.ui-datepicker-prev ui-corner-all span {
 	    background-image: url("dateinput/DateInput/lib/images/ui-icons_454545_256x240.png");
 	}
+	
 	.ui-datepicker-next ui-corner-all span {
 	    background-image: url("dateinput/DateInput/lib/images/ui-icons_454545_256x240.png");
 	}
@@ -17,20 +19,22 @@
 	.datepicker table tr td span {
     	width: 100% !important;
 	}
+	
+	
 </style>
 
 
 <div class="input-group mb-3" style="height: 100%">
   
   <input
+	class="form-control input-lg"
+	placeholder="{{model.placeholderText}}"
 	sablo-tabseq='model.tabSeq'
-    style="height: 100%"
-	type="text"
-	class="form-control"
-	placeholder="enter date"
-	id="datepicker-value"
+	style="height: 100%;font-size:1.3rem;"
 	svy-focusgained='handlers.onFocusGained($event)'
 	svy-focuslost='handlers.onFocusLost($event)'
+	title="{{model.toolTipText}}"
+	type="text"
   >
   <div class="input-group-append">
     <span class="input-group-text">

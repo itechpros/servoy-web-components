@@ -11,7 +11,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 
 		'use strict'
 
-		var container = $('#datepicker-value'),
+		var container = $element.children().eq(1).children().first(),
 			lock = false,
 			formats = {
 				
@@ -167,7 +167,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			
 			$window.setTimeout(function() {
 	
-				container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
+				$scope.model.dataProviderID && container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat)) || container.val('')
 				
 			}, 1)
 			
@@ -271,17 +271,22 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 		
 		$scope.$watch('model.displayFormat', function(newformat, oldformat) {
 			
-			container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
+			$scope.model.dataProviderID && container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
 			
 		})
 
 		$scope.$watch('model.inputFormat', function(newformat, oldformat) {
 			
 			format = formats[$scope.model.inputFormat]
-			lock = true
-			$scope.model.dataProviderID = moment($scope.model.dataProviderID, formats[oldformat].store).format(format.store)
-			$scope.svyServoyapi.apply('dataProviderID')
-			container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
+			
+			if ($scope.model.dataProviderID) {
+				
+				lock = true
+				$scope.model.dataProviderID = moment($scope.model.dataProviderID, formats[oldformat].store).format(format.store)
+				$scope.svyServoyapi.apply('dataProviderID')
+				container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
+				
+			}
 			
 		})
 
@@ -295,13 +300,54 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 			}
 			
-			lock = true
-			$scope.model.dataProviderID = moment($scope.model.dataProviderID, format.store).format(format.store)
-			$scope.svyServoyapi.apply('dataProviderID')
-			$scope.model.dataProviderID && container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
+			if ($scope.model.dataProviderID) {
+				
+			
+				lock = true
+				$scope.model.dataProviderID = moment($scope.model.dataProviderID, format.store).format(format.store)
+				$scope.svyServoyapi.apply('dataProviderID')
+				$scope.model.dataProviderID && container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
+				
+			}
 			
 		})
 		
+		
+		$scope.$watch('model.border', function() {
+
+			for (var a in $scope.model.border.borderStyle) {
+				
+				$element.children().eq(1).css(a, $scope.model.border.borderStyle[a])
+			
+			}
+			
+		})
+		
+		
+		$scope.$watch('model.background', function() {
+				
+			container.css('backgroundColor', $scope.model.background)
+			
+		})
+		
+		
+		$scope.$watch('model.foreground', function() {
+				
+			container.css('color', $scope.model.foreground)
+			
+		})
+		
+		$scope.$watch('model.backgroundPicker', function() {
+
+			$element.children().eq(1).children().last().children().first().css('backgroundColor', $scope.model.backgroundPicker)
+			
+		})
+		
+		$scope.$watch('model.foregroundPicker', function() {
+				console.log($scope.model.foregroundPicker)
+			$element.children().eq(1).children().last().children().first().css('color', $scope.model.foregroundPicker)
+			
+		})		
 			
 	
 		

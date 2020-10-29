@@ -43,7 +43,14 @@
         	"ondatachange": { "onchange":"onDataChange" }
         },
         "cutoffNextYear": { "type": "boolean", "default": true },
-        "tabSeq" : {"type" :"tabseq", "tags": { "scope" :"design" }}
+        "tabSeq" : {"type" :"tabseq", "tags": { "scope" :"design" }},
+        "placeholderText" : "tagstring",
+     	"toolTipText" : "tagstring",
+     	"border": "border",
+     	"background": "color",
+     	"foreground": "color",
+     	"backgroundPicker": "color",
+     	"foregroundPicker": "color"
     },
     "handlers": {
     	"onDataChange": "function",
