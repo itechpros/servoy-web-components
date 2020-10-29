@@ -344,7 +344,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 		})
 		
 		$scope.$watch('model.foregroundPicker', function() {
-				console.log($scope.model.foregroundPicker)
+
 			$element.children().eq(1).children().last().children().first().css('color', $scope.model.foregroundPicker)
 			
 		})		

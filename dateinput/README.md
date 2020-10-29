@@ -29,6 +29,23 @@ Date format when input is focused
 
 true/false year in six digit input is in past
 
+##### background/foreground
+
+color of input box
+
+##### backgroundPicker/foregroundPicker
+
+color of calendar dropdown button
+
+##### border
+
+defines element border
+
+##### tabSeq
+
+defines element tabSeq
+
+
 
 
 ## Handlers:
