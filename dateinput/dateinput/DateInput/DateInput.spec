@@ -43,6 +43,7 @@
         	"ondatachange": { "onchange":"onDataChange" }
         },
         "cutoffNextYear": { "type": "boolean", "default": true },
+        "entryTemplate": { "type": "boolean", "default": true },
         "tabSeq" : {"type" :"tabseq", "tags": { "scope" :"design" }},
         "placeholderText" : "tagstring",
      	"toolTipText" : "tagstring",
