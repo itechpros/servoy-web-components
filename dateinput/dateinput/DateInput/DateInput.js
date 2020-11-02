@@ -112,6 +112,15 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			}
 			
 		}
+		
+		function getCurrent() {
+			
+			date = new Date()
+			day = date.getDate().toString()
+			month = (date.getMonth() + 1).toString()
+			year = date.getFullYear().toString()
+			
+		}
 			
 		container.keydown(function(e) {
 			
@@ -130,24 +139,64 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			else if (e.keyCode == 37 || e.keyCode === 39)
 				
 				console.log('arrw')
+			
+			else if (~[84, 89].indexOf(e.keyCode)) {
 				
-			else if (e.keyCode === 8) {
+				getCurrent()
+				container.val(inputs[1](e.key.toUpperCase()))
+				container.blur()
 				
-				// no?
-				var start = $(this)[0].selectionStart
-				console.log('start', start, container.val().charAt(start))
+			} else if (e.keyCode === 8) {
 				
-			}
+				e.preventDefault()
 				
+				var start = $(this)[0].selectionStart,
+					val = container.val()
 				
-			else if (!isNaN(e.key) || (isNaN(e.key) && e.keyCode >= 48 && !e.ctrlKey))
+				if (!start) {
+					
+					if (start !== $(this)[0].selectionEnd) {
+						
+						container.val(format.entry)
+						$(this)[0].setSelectionRange(0, 0)
+						
+					}
+					
+					return
+					
+				}
+
+				if (!(start > 1 && val.charAt(start - 1) === '/'))
+						
+					val = (~start && val.slice(0, start - 1) + '_' || '') + val.slice(start)
+			
+				
+				var idx = start
+				
+				while (idx < val.length && val.charAt(idx) !== '/') {
+					
+					val = val.slice(0, idx) + '_' + val.slice(idx + 1)					
+					idx += 1
+					
+				}
+
+				start -= 1
+					
+				container.val(val)				
+				$(this)[0].setSelectionRange(start, start)
+				
+			} else if (!isNaN(e.key) || (isNaN(e.key) && e.keyCode >= 48 && !e.ctrlKey))
 				
 				e.preventDefault()
 				
 			
-			
 		})
 		
+		container.blur(function(e) {
+			
+			lock = false
+			
+		})
 		
 		container.keyup(function(e) {
 
@@ -172,7 +221,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				idx = val.indexOf('_') + 1,
 				start = $(this)[0].selectionStart
 				
-			//console.log('surr',val.charAt(start - 1),val.charAt(start),val.charAt(start+1), start, isNaN(val.charAt(start - 1)) && isNaN(val.charAt(start+1)))
+			console.log('surr',val.charAt(start - 1),val.charAt(start),val.charAt(start+1), start, isNaN(val.charAt(start - 1)) && isNaN(val.charAt(start+1)))
 			
 			if ((isNaN(val.charAt(start - 1)) || isNaN(val.charAt(start+1))) && val.charAt(start) !== '_') {
 				console.log('dbg',val.slice(0, start) , key , val.slice(start + 1))
@@ -185,10 +234,9 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 					start += 1
 				
 				$(this)[0].setSelectionRange(start, start)
-			}
-			
-			else if (idx) {
 				
+			} else if (idx) {
+				console.log(idx)
 				val = val.replace(/_/, key)
 				
 				if (val.charAt(idx) === '/')
@@ -208,19 +256,20 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 					
 					val = val.slice(0, start) + key + val.slice(start)
 				
-				start += 1
 
-				if (val.charAt(start) === '/')
+console.log('char', val.charAt(start + 1), val.charAt(start - 1), !isNaN(val.charAt(start - 1)))
+				if (val.charAt(start + 1) === '/' && (val.charAt(start - 1) && !isNaN(val.charAt(start - 1))))
 					
 					start += 1
-
+					
+				start += 1
+				
 				container.val(val)
 				$(this)[0].setSelectionRange(start, start)
 						
 				
 			}
 			
-	
 			
 		})
 		
@@ -237,11 +286,8 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			var val = container.val().replace(/_/g, '').toUpperCase().trim(),
 				len = val.length,
 				out = val
-				
-			date = new Date()
-			day = date.getDate().toString()
-			month = (date.getMonth() + 1).toString()
-			year = date.getFullYear().toString()
+
+			getCurrent()
 
 			if ((!isNaN(val) || (len === 1)) && inputs[len])
 			
@@ -265,16 +311,16 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 					
 					out[0] = '0' + out[0]
 				
-				if (out[1].length === 1)
+				if (out[1] && out[1].length === 1)
 					
 					out[1] = '0' + out[1]
 				
 				out = out.join('/')
 				
 			}
-			
+
 			lock = true
-			$scope.model.dataProviderID = out
+			$scope.model.dataProviderID = moment(out, format.store, true).isValid() ? out : ''
 			$scope.svyServoyapi.apply('dataProviderID')
 			
 			$window.setTimeout(function() {
@@ -425,7 +471,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 
 		
 		$scope.$watch('model.dataProviderID', function() {
-			
+			console.log($scope.model.dataProviderID , moment($scope.model.dataProviderID, format.store).format(format.store), lock)
 			if (lock) {
 				
 				lock = false
