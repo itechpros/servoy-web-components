@@ -185,10 +185,14 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				container.val(val)				
 				$(this)[0].setSelectionRange(start, start)
 				
-			} else if (!isNaN(e.key) || (isNaN(e.key) && e.keyCode >= 48 && !e.ctrlKey))
+			} else if (!isNaN(e.key)) {
 				
 				e.preventDefault()
+
+			} else if (isNaN(e.key) && e.keyCode >= 48 && !e.ctrlKey)
 				
+				e.preventDefault()
+			
 			
 		})
 		
@@ -213,7 +217,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 			}
 			
-			if (isNaN(key))
+			if (isNaN(key) || e.keyCode === 32)
 				
 				return
 			
@@ -221,22 +225,23 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				idx = val.indexOf('_') + 1,
 				start = $(this)[0].selectionStart
 				
-			console.log('surr',val.charAt(start - 1),val.charAt(start),val.charAt(start+1), start, isNaN(val.charAt(start - 1)) && isNaN(val.charAt(start+1)))
+				console.log(val.charAt(start - 1),val.charAt(start+1), val.charAt(start))
 			
-			if ((isNaN(val.charAt(start - 1)) || isNaN(val.charAt(start+1))) && val.charAt(start) !== '_') {
-				console.log('dbg',val.slice(0, start) , key , val.slice(start + 1))
+			if ((isNaN(val.charAt(start - 1)) || isNaN(val.charAt(start+1))) && val.charAt(start) !== '_' && isNaN(val.charAt(start))) {
+				
 				val = val.slice(0, start) + key + val.slice(start)
 				container.val(val)
 				
 				start += 1
+				
 				if (val.charAt(start) === '/')
 					
 					start += 1
 				
 				$(this)[0].setSelectionRange(start, start)
 				
-			} else if (idx) {
-				console.log(idx)
+			} else if (idx && idx <= start + 1) {
+				
 				val = val.replace(/_/, key)
 				
 				if (val.charAt(idx) === '/')
@@ -247,7 +252,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				$(this)[0].setSelectionRange(idx, idx)
 				
 			} else {
-									
+
 				if (!isNaN(val.charAt(start)))
 						
 					val = val.slice(0, start) + key + val.slice(start + 1)
@@ -257,16 +262,19 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 					val = val.slice(0, start) + key + val.slice(start)
 				
 
-console.log('char', val.charAt(start + 1), val.charAt(start - 1), !isNaN(val.charAt(start - 1)))
 				if (val.charAt(start + 1) === '/' && (val.charAt(start - 1) && !isNaN(val.charAt(start - 1))))
 					
 					start += 1
 					
 				start += 1
 				
-				container.val(val)
-				$(this)[0].setSelectionRange(start, start)
+				
+				if (val.length <= format.entry.length) {
+				
+					container.val(val)
+					$(this)[0].setSelectionRange(start, start)
 						
+				}
 				
 			}
 			
