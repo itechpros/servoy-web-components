@@ -5,10 +5,6 @@
 
 
 
-
-
-
-
 ## Model:
 
 ##### dataProvider
@@ -28,6 +24,10 @@ Date format when input is focused
 ##### cutoffNextYear
 
 true/false year in six digit input is in past
+
+##### entryTemplate
+
+use entry template __/__/____
 
 ##### background/foreground
 

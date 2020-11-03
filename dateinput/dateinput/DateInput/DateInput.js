@@ -94,65 +94,108 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			1: function(val) {
 				
 				var out
-				
+
 				if (isNaN(val)) {
 					
 					out = ($scope.model.inputFormat.split('/')[0] === 'DD' ? day + '/' + month : month + '/' + day) + '/' + year
-						
+					out = moment(out, format.input).format(format.input)
+
 					if (val === 'Y')
 						
 						out = moment(out, format.input).subtract(1, 'd').format(format.input)
 						
-				} else
-					
+				} else {
+			
+					val = '0' + val
 					out = ($scope.model.inputFormat.split('/')[0] === 'DD' ? val + '/' + month : month + '/' + val) + '/' + year
 					
+				}
+				
 				return out
 				
 			}
 			
 		}
+
 		
-		function getCurrent() {
+		var keyCodes = {
 			
-			date = new Date()
-			day = date.getDate().toString()
-			month = (date.getMonth() + 1).toString()
-			year = date.getFullYear().toString()
 			
-		}
-			
-		container.keydown(function(e) {
-			
-			if (e.keyCode === 40)
+			40: function(e){
 				
 				plusMinus('subtract')
 				
-			else if (e.keyCode === 38)
+			},
+			
+			38: function(e){
 				
 				plusMinus('add')
 				
-			else if (e.key === 'Enter')
+			},
 				
+			13: function(e) {
+							
 				container.blur()
 				
-			else if (e.keyCode == 37 || e.keyCode === 39)
+			},
 				
-				console.log('arrw')
+			37: function(e) {
+		
+				var start = $(this)[0].selectionStart,
+					val = container.val()
+					
+					
+				if (start && val.charAt(start - 1) === '/')
+					
+					$(this)[0].setSelectionRange(start - 1, start - 1)
+				
 			
-			else if (~[84, 89].indexOf(e.keyCode)) {
+			},
+			
+			39: function(e) {
+		
+				var start = $(this)[0].selectionStart,
+					val = container.val()
+					
+				if (start && start < val.length && val.charAt(start + 1) === '/') {
+				
+					if (val.charAt(start) === '_' && val.charAt(start - 1) !== '_') {
+						
+						val = val.slice(0, start - 1) + '0' + val.charAt(start - 1) + val.slice(start + 1)
+						container.val(val)
+					}
+					
+					$(this)[0].setSelectionRange(start + 1, start + 1)
+				
+				}
+			
+			},
+			
+			84: function(e) {
 				
 				getCurrent()
 				container.val(inputs[1](e.key.toUpperCase()))
 				container.blur()
 				
-			} else if (e.keyCode === 8) {
+			},
+			
+			89: function(e){
+				
+				keyCodes[84].call(this, e)
+				
+			},
+			
+			8: function(e) {
+				
+				if (!$scope.model.entryTemplate)
+					
+					return
 				
 				e.preventDefault()
 				
 				var start = $(this)[0].selectionStart,
 					val = container.val()
-				
+
 				if (!start) {
 					
 					if (start !== $(this)[0].selectionEnd) {
@@ -162,15 +205,23 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 						
 					}
 					
-					return
+					if (e.keyCode === 8)
+						
+						return
 					
 				}
 
 				if (!(start > 1 && val.charAt(start - 1) === '/'))
 						
-					val = (~start && val.slice(0, start - 1) + '_' || '') + val.slice(start)
+					if (e.keyCode === 8)
+						
+						val = (~start && val.slice(0, start - 1) + '_' || '') + val.slice(start)
+						
+					else
+						
+						val = val.slice(0, start) + '_' + val.slice(start + 1)
 			
-				
+
 				var idx = start
 				
 				while (idx < val.length && val.charAt(idx) !== '/') {
@@ -180,18 +231,54 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 					
 				}
 
-				start -= 1
+				if (e.keyCode === 8)
+					
+					start -= 1
 					
 				container.val(val)				
 				$(this)[0].setSelectionRange(start, start)
 				
-			} else if (!isNaN(e.key)) {
+			},
+			
+			46: function(e){
 				
-				e.preventDefault()
+				keyCodes[8].call(this, e)
+				
+			}
+			
+		}
+		
+		
+		function getCurrent() {
+			
+			date = new Date()
+			day = date.getDate().toString()
+			month = (date.getMonth() + 1).toString()
+			year = date.getFullYear().toString()
+			
+		}
 
-			} else if (isNaN(e.key) && e.keyCode >= 48 && !e.ctrlKey)
+		
+		container.keydown(function(e) {
+			
+			if ($scope.model.entryTemplate) {
+			
+				if (keyCodes[e.keyCode])
+					
+					keyCodes[e.keyCode].call(this, e)
+					
+				else if (!isNaN(e.key)) {
+					
+					e.preventDefault()
+	
+				} else if (isNaN(e.key) && e.keyCode >= 48 && !e.ctrlKey)
+					
+					e.preventDefault()
+					
+			} else if (keyCodes[e.keyCode])
 				
-				e.preventDefault()
+				keyCodes[e.keyCode].call(this, e)
+				
 			
 			
 		})
@@ -210,7 +297,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 				return
 			
-			if (!container.val()) {
+			if (!container.val() && $scope.model.entryTemplate) {
 				
 				container.val(format.entry)
 				$(this)[0].setSelectionRange(0, 0)
@@ -224,8 +311,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			var val = container.val(),
 				idx = val.indexOf('_') + 1,
 				start = $(this)[0].selectionStart
-				
-				console.log(val.charAt(start - 1),val.charAt(start+1), val.charAt(start))
+
 			
 			if ((isNaN(val.charAt(start - 1)) || isNaN(val.charAt(start+1))) && val.charAt(start) !== '_' && isNaN(val.charAt(start))) {
 				
@@ -291,7 +377,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 			}
 			
-			var val = container.val().replace(/_/g, '').toUpperCase().trim(),
+			var val = container.val().replace(/_|\//g, '').toUpperCase().trim(),
 				len = val.length,
 				out = val
 
@@ -304,7 +390,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			else {
 				
 				out = val.replace(/\.|\-/g, '/').split('/')
-				console.log(out)
+				
 				if (out.length === 3)
 					
 					if (out[2].length === 2)
@@ -343,7 +429,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 		
 
 		container.on('focus click', function() {
-			console.log('focus', $scope.model.dataProviderID, format.store, moment($scope.model.dataProviderID, format.store, true).isValid())
+			
 			if (focus)
 				
 				return
@@ -356,7 +442,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				$(this).select()
 			
 			} else if ($scope.model.entryTemplate) {
-				// move to fun
+
 				var element = $(this)[0]
 				
 				container.val(format.entry)
@@ -367,7 +453,10 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 					
 				}, 1)
 			
-			}	
+			} else
+				
+				container.val('')
+			
 				
 			lock = true
 			
@@ -379,7 +468,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			var val = container.val()
 			
 			if (val) {
-				// ##
+				
 				container.val(moment(val, format.input)[dir](1, 'd').format(format.input))
 				lock = true
 				$scope.model.dataProviderID = moment(container.val(), format.input).format(format.input)
@@ -468,7 +557,6 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			
 			if ($scope.model.dataProviderID) {
 				
-				lock = true
 				$scope.model.dataProviderID = moment($scope.model.dataProviderID, formats[oldformat].store).format(format.store)
 				$scope.svyServoyapi.apply('dataProviderID')
 				container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
@@ -479,7 +567,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 
 		
 		$scope.$watch('model.dataProviderID', function() {
-			console.log($scope.model.dataProviderID , moment($scope.model.dataProviderID, format.store).format(format.store), lock)
+			
 			if (lock) {
 				
 				lock = false
@@ -487,17 +575,15 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 			}
 			
-//			if ($scope.model.dataProviderID) {
+			if ($scope.model.dataProviderID) {
 				
-			console.log($scope.model.dataProviderID , moment($scope.model.dataProviderID, format.store).format(format.store))
-				//lock = true
-				//$scope.model.dataProviderID = moment($scope.model.dataProviderID, format.store).format(format.store)
-				//$scope.svyServoyapi.apply('dataProviderID')
-				$scope.model.dataProviderID && 
+				$scope.model.dataProviderID = moment($scope.model.dataProviderID, format.store).format(format.store)
+				$scope.svyServoyapi.apply('dataProviderID') 
 				container.val(moment($scope.model.dataProviderID, format.store).format($scope.model.displayFormat))
 				
-	//		}
+			} else 
 			
+				container.val('')
 		})
 		
 		
