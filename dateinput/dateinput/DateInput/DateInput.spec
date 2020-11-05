@@ -17,12 +17,6 @@
 	      "url": "dateinput/DateInput/lib/css/bootstrap-datepicker3.min.css"
 	    },
 	    {
-	      "name": "bootstrap-datepicker.min.js",
-	      "version": "1",
-	      "mimetype": "text/javascript",
-	      "url": "dateinput/DateInput/lib/js/bootstrap-datepicker.min.js"
-	    },
-	    {
 	      "name": "moment.js",
 	      "version": "1",
 	      "mimetype": "text/javascript",

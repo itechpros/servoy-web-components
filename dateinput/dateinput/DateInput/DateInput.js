@@ -244,7 +244,37 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 				keyCodes[8].call(this, e)
 				
-			}
+			},
+			
+			189:function(e) {
+				
+				e.preventDefault()
+
+				var start = $(this)[0].selectionStart,
+					val = container.val()
+					
+				if (val.charAt(start) === '_' && val.charAt(start + 1) === '/') {
+				
+					val = val.slice(0, start - 1) + '0' + val.charAt(start - 1) + val.slice(start + 1)
+					container.val(val)
+					$(this)[0].setSelectionRange(start + 2, start + 2)
+					
+				}
+					
+					
+			},
+			
+			190: function(e) {
+				
+				keyCodes[189].call(this, e)
+				
+			},
+			
+			191: function(e) {
+				
+				keyCodes[189].call(this, e)
+				
+			},
 			
 		}
 		
@@ -589,7 +619,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 		
 		$scope.$watch('model.border', function() {
 
-			for (var a in $scope.model.border.borderStyle) {
+			for (var a in $scope.model.border && $scope.model.border.borderStyle || {}) {
 				
 				$element.children().eq(1).css(a, $scope.model.border.borderStyle[a])
 			
