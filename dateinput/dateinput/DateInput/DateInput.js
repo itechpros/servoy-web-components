@@ -60,8 +60,89 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			day,
 			month,
 			year
+		
 			
+		function getCurrent() {
 			
+			date = new Date()
+			day = date.getDate().toString()
+			month = (date.getMonth() + 1).toString()
+			year = date.getFullYear().toString()
+			
+		}
+
+	
+		function getVal(val) {
+		
+			val = val.replace(/_|\./g, '/').toUpperCase().trim()
+			
+			var len,
+				parts = val.split('/')
+				
+			if (parts.length > 1) {
+				
+				parts[0] = parts[0].length === 1 ? '0' + parts[0] : parts[0]
+				parts[1] = parts[1].length === 1 ? '0' + parts[1] : parts[1]
+				val = parts.join('')
+				
+			}
+
+			val = val.replace(/\//g, '')
+			len = val.length
+			
+			getCurrent()
+		
+			if ((!isNaN(val) || (len === 1)) && inputs[len])
+			
+				val = inputs[len](val)
+				
+			else {
+				
+				val = val.replace(/\.|\-/g, '/').split('/')
+				
+				if (val.length === 3)
+					
+					if (val[2].length === 2)
+						
+						val[2] = ($scope.model.cutoffNextYear && Number(val[2]) > Number(year.substr(2, 2)) + 1 ? '19' : '20') + val[2]
+						
+					else if (val[2].length === 0)
+					
+						val[2] = year
+		
+				if (val[0].length === 1)
+					
+					val[0] = '0' + val[0]
+				
+				if (val[1] && val[1].length === 1)
+					
+					val[1] = '0' + val[1]
+				
+				val = val.join('/')
+				
+			}
+			
+			return moment(val, format.store, true).isValid() ? val : ''
+			
+		}
+
+
+		function plusMinus(dir) {
+			
+			var val = container.val()
+			
+			if (val) {
+				
+				container.val(moment(val, format.input)[dir](1, 'd').format(format.input))
+				lock = true
+				$scope.model.dataProviderID = moment(container.val(), format.input).format(format.input)
+				$scope.svyServoyapi.apply('dataProviderID')
+				
+			}
+			
+		}
+
+		
 		var inputs = { 
 			
 			8: function(val) {	
@@ -274,19 +355,17 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 				keyCodes[189].call(this, e)
 				
-			},
+			}
 			
 		}
 		
 		
-		function getCurrent() {
+		
+		container.blur(function(e) {
 			
-			date = new Date()
-			day = date.getDate().toString()
-			month = (date.getMonth() + 1).toString()
-			year = date.getFullYear().toString()
+			lock = false
 			
-		}
+		})
 
 		
 		container.keydown(function(e) {
@@ -309,15 +388,8 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 				keyCodes[e.keyCode].call(this, e)
 				
-			
-			
 		})
-		
-		container.blur(function(e) {
-			
-			lock = false
-			
-		})
+
 		
 		container.keyup(function(e) {
 
@@ -339,11 +411,35 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				return
 			
 			var val = container.val(),
-				idx = val.indexOf('_') + 1,
+				len = val.length,
+				end = $(this)[0].selectionEnd,
 				start = $(this)[0].selectionStart
-
 			
-			if ((isNaN(val.charAt(start - 1)) || isNaN(val.charAt(start+1))) && val.charAt(start) !== '_' && isNaN(val.charAt(start))) {
+			if (len === format.entry.length &&
+					start === 0 &&
+					end === len)
+						
+				container.val(format.entry)
+			
+			else if (end !== start) {
+				console.log(val.charAt(start),val.charAt(end))
+				container.val(val.slice(0, start) +
+					//(val.charAt(start) === '/' ? '_' : '') +
+					e.key +
+					(!isNaN(val.charAt(start)) && val.charAt(end) === '/' ? '_' : '') +
+					val.slice(end))
+				
+				$(this)[0].setSelectionRange(start, start)
+			}
+			
+			
+			start = $(this)[0].selectionStart
+			val = container.val()
+			
+			var idx = val.indexOf('_') + 1
+				
+			
+			if ((isNaN(val.charAt(start - 1)) || isNaN(val.charAt(start + 1))) && val.charAt(start) !== '_' && isNaN(val.charAt(start))) {
 				
 				val = val.slice(0, start) + key + val.slice(start)
 				container.val(val)
@@ -382,8 +478,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 					
 					start += 1
 					
-				start += 1
-				
+				start += 1				
 				
 				if (val.length <= format.entry.length) {
 				
@@ -407,44 +502,8 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 			}
 			
-			var val = container.val().replace(/_|\//g, '').toUpperCase().trim(),
-				len = val.length,
-				out = val
-
-			getCurrent()
-
-			if ((!isNaN(val) || (len === 1)) && inputs[len])
-			
-				out = inputs[len](val)
-				
-			else {
-				
-				out = val.replace(/\.|\-/g, '/').split('/')
-				
-				if (out.length === 3)
-					
-					if (out[2].length === 2)
-						
-						out[2] = ($scope.model.cutoffNextYear && Number(out[2]) > Number(year.substr(2, 2)) + 1 ? '19' : '20') + out[2]
-						
-					else if (out[2].length === 0)
-					
-						out[2] = year
-
-				if (out[0].length === 1)
-					
-					out[0] = '0' + out[0]
-				
-				if (out[1] && out[1].length === 1)
-					
-					out[1] = '0' + out[1]
-				
-				out = out.join('/')
-				
-			}
-
 			lock = true
-			$scope.model.dataProviderID = moment(out, format.store, true).isValid() ? out : ''
+			$scope.model.dataProviderID = getVal(container.val()) 
 			$scope.svyServoyapi.apply('dataProviderID')
 			
 			$window.setTimeout(function() {
@@ -491,22 +550,22 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			lock = true
 			
 		})
+
 		
-		
-		function plusMinus(dir) {
+		container.on('paste', function(e) {
+
+			e.preventDefault()
 			
-			var val = container.val()
-			
-			if (val) {
+			var data = e.originalEvent.clipboardData.getData('text'),
+				val = getVal(data)
+			  console.log(val, data)
+			val && $window.setTimeout(function() {
+	
+				container.val(val)
 				
-				container.val(moment(val, format.input)[dir](1, 'd').format(format.input))
-				lock = true
-				$scope.model.dataProviderID = moment(container.val(), format.input).format(format.input)
-				$scope.svyServoyapi.apply('dataProviderID')
-				
-			}
-			
-		}
+			}, 1)
+
+		})
 
 
 		$('#datepicker-activate').click(function() {
@@ -521,6 +580,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 					beforeShow : function() {
 
 						show = true
+						container.datepicker('setDate', $scope.model.dataProviderID)
 						
 					},
 					onClose: function() {
