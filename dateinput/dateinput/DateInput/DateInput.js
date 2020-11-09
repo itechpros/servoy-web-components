@@ -201,71 +201,6 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 		
 		var keyCodes = {
 			
-			
-			40: function(e){
-				
-				plusMinus('subtract')
-				
-			},
-			
-			38: function(e){
-				
-				plusMinus('add')
-				
-			},
-				
-			13: function(e) {
-							
-				container.blur()
-				
-			},
-				
-			37: function(e) {
-		
-				var start = $(this)[0].selectionStart,
-					val = container.val()
-					
-					
-				if (start && val.charAt(start - 1) === '/')
-					
-					$(this)[0].setSelectionRange(start - 1, start - 1)
-				
-			
-			},
-			
-			39: function(e) {
-		
-				var start = $(this)[0].selectionStart,
-					val = container.val()
-					
-				if (start && start < val.length && val.charAt(start + 1) === '/') {
-				
-					if (val.charAt(start) === '_' && val.charAt(start - 1) !== '_') {
-						
-						val = val.slice(0, start - 1) + '0' + val.charAt(start - 1) + val.slice(start + 1)
-						container.val(val)
-					}
-					
-					$(this)[0].setSelectionRange(start + 1, start + 1)
-				
-				}
-			
-			},
-			
-			84: function(e) {
-				
-				getCurrent()
-				container.val(inputs[1](e.key.toUpperCase()))
-				container.blur()
-				
-			},
-			
-			89: function(e){
-				
-				keyCodes[84].call(this, e)
-				
-			},
-			
 			8: function(e) {
 				
 				if (!$scope.model.entryTemplate)
@@ -321,9 +256,80 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				
 			},
 			
+			13: function(e) {
+
+				container.blur()
+
+			},
+				
+			37: function(e) {
+
+				var start = $(this)[0].selectionStart,
+					val = container.val()
+
+				if (start && val.charAt(start - 1) === '/') {
+
+					if (!isNaN(val.charAt(start)) && val.charAt(start + 1) === '_') {
+
+						val = val.slice(0, start) + '0' + val.charAt(start) + val.slice(start + 2)
+						container.val(val)
+
+					}
+
+					$(this)[0].setSelectionRange(start - 1, start - 1)
+
+				}
+
+			},
+
+			38: function(e) {
+				
+				plusMinus('add')
+				
+			},
+			
+			39: function(e) {
+		
+				var start = $(this)[0].selectionStart,
+					val = container.val()
+					
+				if (start && start < val.length && val.charAt(start + 1) === '/') {
+				
+					if (val.charAt(start) === '_' && val.charAt(start - 1) !== '_') {
+						
+						val = val.slice(0, start - 1) + '0' + val.charAt(start - 1) + val.slice(start + 1)
+						container.val(val)
+					}
+					
+					$(this)[0].setSelectionRange(start + 1, start + 1)
+				
+				}
+			
+			},
+			
+			40: function(e){
+				
+				plusMinus('subtract')
+				
+			},
+			
 			46: function(e){
 				
 				keyCodes[8].call(this, e)
+				
+			},
+			
+			84: function(e) {
+				
+				getCurrent()
+				container.val(inputs[1](e.key.toUpperCase()))
+				container.blur()
+				
+			},
+			
+			89: function(e){
+				
+				keyCodes[84].call(this, e)
 				
 			},
 			
@@ -422,12 +428,13 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 				container.val(format.entry)
 			
 			else if (end !== start) {
-				console.log(val.charAt(start),val.charAt(end))
-				container.val(val.slice(0, start) +
-					//(val.charAt(start) === '/' ? '_' : '') +
+
+				container.val(
+					val.slice(0, start) +
 					e.key +
-					(!isNaN(val.charAt(start)) && val.charAt(end) === '/' ? '_' : '') +
-					val.slice(end))
+					'_'.repeat(end - start - 1) +
+					val.slice(end)
+				)
 				
 				$(this)[0].setSelectionRange(start, start)
 			}
@@ -558,7 +565,7 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 			
 			var data = e.originalEvent.clipboardData.getData('text'),
 				val = getVal(data)
-			  console.log(val, data)
+
 			val && $window.setTimeout(function() {
 	
 				container.val(val)
