@@ -24,29 +24,64 @@
 </style>
 
 
-<div class="input-group" style="height: 100%">
-  
-  <input
-	class="form-control"
-	placeholder="{{model.placeholderText}}"
-	sablo-tabseq='model.tabSeq'
-	style="height: 100%;font-size:1.3rem;"
-	svy-focusgained='handlers.onFocusGained($event)'
-	svy-focuslost='handlers.onFocusLost($event)'
-	title="{{model.toolTipText}}"
-	type="text"
-  >
-  <div class="input-group-append" >
-    <span
-		class="input-group-text"
-		id="datepicker-activate"
-		style="cursor:pointer;padding:0px .75rem 0px .75rem;"
+<div
+	class="input-group"
+	style="box-sizing: border-box;
+		height: 100%;
+		display: -webkit-box;
+    	display: -ms-flexbox;
+    	display: flex;"
 	>
-		<span
-			class="glyphicon glyphicon-th"
-			style="top:0px;">
+  
+	<input
+		class="form-control"
+		placeholder="{{model.placeholderText}}"
+		sablo-tabseq='model.tabSeq'
+		svy-focusgained='handlers.onFocusGained($event)'
+		svy-focuslost='handlers.onFocusLost($event)'
+		title="{{model.toolTipText}}"
+		type="text"
+		style="position: relative;
+			height: 100%;
+			font-size:1.3rem;
+		    -webkit-box-flex: 1;
+		    -ms-flex: 1 1 auto;
+		    flex: 1 1 auto;
+		    width: 1%;
+		    margin-bottom: 0;"
+	  >
+	<div
+		class="input-group-append"
+		style="box-sizing: border-box;
+			margin-left: -1px;
+			display: -webkit-box;
+	    	display: -ms-flexbox;
+	    	display: flex;
+	    	margin-bottom: 0;
+	    	text-align: center;
+	    	white-space: nowrap;
+	    	line-height: 1.5;">
+    	<span
+			class="input-group-text"
+			id="datepicker-activate"
+			style="display: -webkit-box;
+	    		display: -ms-flexbox;
+	    		display: flex;
+	    		-webkit-box-align: center;
+	    		-ms-flex-align: center;
+	    		align-items: center;
+	    		cursor:pointer;
+	    		padding:0px .75rem 0px .75rem;"
+		>
+			<span
+				class="glyphicon glyphicon-th"
+				style="box-sizing: border-box;
+					top: 0px;
+					text-align: center;
+	    			white-space: nowrap;"
+			>
+			</span>
 		</span>
-	</span>
   </div>
 </div>
 

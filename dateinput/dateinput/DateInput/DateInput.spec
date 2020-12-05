@@ -5,12 +5,6 @@
     "definition": "dateinput/DateInput/DateInput.js",
     "libraries": [
         {
-	      "name": "bootstrap.min.css",
-	      "version": "1",
-	      "mimetype": "text/css",
-	      "url": "dateinput/DateInput/lib/css/bootstrap.min.css"
-	    },
-        {
 	      "name": "bootstrap-datepicker3.min.css",
 	      "version": "1",
 	      "mimetype": "text/css",
