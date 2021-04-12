@@ -1,5 +1,5 @@
 angular.module('NgClientUtils',['servoy'])
-.factory("NgClientUtils",function($services) 
+.factory("NgClientUtils",function($window, $services) 
 {
 	var Elements = {}
 	var scope = $services.getServiceScope('NgClientUtils');
