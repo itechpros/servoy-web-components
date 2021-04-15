@@ -1,4 +1,4 @@
-# Bootstrap Calender Pro
+# Bootstrap Calendar Pro
 ## Web Component for Servoy NG Client
 
 
