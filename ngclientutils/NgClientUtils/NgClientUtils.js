@@ -20,9 +20,9 @@ angular.module('NgClientUtils',['servoy'])
 				}
 			}());
 		},
-		addCssReference: function (cssFilePath) {
+		addCssReference: function (cssFilePath, relation = "stylesheet") {
 			var linkElement = $("<link>", {
-				rel: "stylesheet",
+				rel: relation,
 				type: "text/css",
 				href: cssFilePath
 			});
