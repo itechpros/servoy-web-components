@@ -17,6 +17,9 @@
 	      "url": "dateinput/DateInput/lib/moment.js"
 	    }
 	],
+	"api": {
+		"requestFocus": {}
+	},
   	"model": {
         "displayFormat": {"type" :"string", "default": "dd/mm/yy" },
         "inputFormat": {"type" :"string", "values": [
@@ -39,7 +42,8 @@
      	"background": "color",
      	"foreground": "color",
      	"backgroundPicker": "color",
-     	"foregroundPicker": "color"
+     	"foregroundPicker": "color",
+     	"readOnly": { "type": "boolean", "default": false }
     },
     "handlers": {
     	"onDataChange": "function",

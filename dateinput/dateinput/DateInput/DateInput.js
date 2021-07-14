@@ -718,9 +718,19 @@ angular.module('dateinput',['servoy']).directive('dateinput', function() {
 
 			$element.children().eq(1).children().last().children().first().css('color', $scope.model.foregroundPicker)
 			
-		})		
+		})
+		
+		$scope.$watch('model.readOnly', function() {
+
+			container.prop('readonly', $scope.model.readOnly)
 			
-	
+		})	
+			
+		$scope.api.requestFocus = function() {
+			
+			container.focus()
+			
+		}
 		
 	},
 	templateUrl: 'dateinput/DateInput/DateInput.html'
