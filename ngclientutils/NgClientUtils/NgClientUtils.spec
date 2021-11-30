@@ -15,7 +15,8 @@
 		},
 		"addCssReference": {
 			"parameters": [
-				{"name": "cssFilePath", "type": "string"}
+				{"name": "cssFilePath", "type": "string"},
+				{"name": "relation", "type": "string", "optional": true}
 			]
 		},
 		"addJsReference": {
