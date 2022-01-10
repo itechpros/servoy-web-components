@@ -18,5 +18,5 @@
     {"name":"tuiimageeditor", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/tuiimageeditor/webpackage.json"},
     {"name":"introjs", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/introjs/webpackage.json"},
     {"name":"dateinput", "url":"https://raw.githubusercontent.com/itechpros/servoy-web-components/master/dateinput/webpackage.json"},
-    {"name":"dateinput", "url":"https://raw.githubusercontent.com/itechpros/svyIdle/master/webpackage.json"}
+    {"name":"svyIdle", "url":"https://raw.githubusercontent.com/itechpros/svyIdle/master/webpackage.json"}
 ]
