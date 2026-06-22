@@ -3,6 +3,11 @@
 	"displayName": "DOM",
 	"version": 1,
  	"definition": "itechutils/DOM/DOM.js",
+    "ng2Config": {
+        "packageName": "itechutils",
+        "serviceName": "DOMService",
+        "entryPoint": "dist"
+    },
 	"libraries": [],
 	"model":
 	{
@@ -63,7 +68,14 @@
             }
          ]
       },
-      "getOuterHeight": {},
+      "getOuterHeight": {
+      	"parameters": [
+      		{
+      			"name": "elementSelector",
+      			"type": "string"
+      		}
+  		]
+      },
       "setTitle":
       {
          "parameters":

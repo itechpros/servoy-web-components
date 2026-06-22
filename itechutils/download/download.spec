@@ -3,6 +3,11 @@
 	"displayName": "download",
 	"version": 1,
  	"definition": "itechutils/download/download.js",
+    "ng2Config": {
+        "packageName": "itechutils",
+        "serviceName": "downloadService",
+        "entryPoint": "dist"
+    },
 	"libraries": [
 		{
 			"name":"DownloadJS", 

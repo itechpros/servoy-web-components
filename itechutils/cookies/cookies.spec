@@ -3,6 +3,11 @@
 	"displayName": "cookies",
 	"version": 1,
  	"definition": "itechutils/cookies/cookies.js",
+    "ng2Config": {
+        "packageName": "itechutils",
+        "serviceName": "cookiesService",
+        "entryPoint": "dist"
+    },
 	"libraries": [
 		{
 			"name":"js-cookie", 

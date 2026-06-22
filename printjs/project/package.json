@@ -1,0 +1,16 @@
+{
+  "name": "printjs",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "@angular/animations": "^17",
+    "@angular/common": "^17",
+    "@angular/core": "^17",
+    "@angular/forms": "^17",
+    "print-js": "^1.6.0"
+  },
+  "dependencies": {
+    "tslib": "*"
+  },
+  "license": "MIT",
+  "repository": {}
+}

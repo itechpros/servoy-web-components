@@ -4,6 +4,11 @@
 	"version": 1,
 	"icon": "printjs/PrintJS/icon.png",
  	"definition": "printjs/PrintJS/print.js",
+    "ng2Config": {
+        "packageName": "printjs",
+        "serviceName": "PrintJSService",
+        "entryPoint": "dist"
+    },
 	"libraries": [
 		{
 	      "name": "printjs.min.css",

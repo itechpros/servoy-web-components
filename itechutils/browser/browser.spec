@@ -3,6 +3,11 @@
 	"displayName": "browser",
 	"version": 1,
  	"definition": "itechutils/browser/browser.js",
+    "ng2Config": {
+        "packageName": "itechutils",
+        "serviceName": "browserService",
+        "entryPoint": "dist"
+    },
 	"libraries": [
 		{
 			"name":"UAParser", 

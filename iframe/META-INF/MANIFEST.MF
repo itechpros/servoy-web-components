@@ -1,8 +1,11 @@
 Manifest-Version: 1.0
-Bundle-SymbolicName: iframe
 Bundle-Name: iFrame
-Bundle-Version: 1.0.0
+Bundle-SymbolicName: iframe
 Package-Type: Web-Component
+Bundle-Version: 2.0.0
+NPM-PackageName: iframe
+NG2-Module: iframeModule
+Entry-Point: dist
 
 Name: iframe/iframe.spec
 Web-Component: True
