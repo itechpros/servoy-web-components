@@ -1,17 +1,17 @@
 {
   "name": "itechutils",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "peerDependencies": {
     "@angular/animations": "^17",
     "@angular/common": "^17",
     "@angular/core": "^17",
-    "@angular/forms": "^17",
+    "@angular/forms": "^17"
+  },
+  "dependencies": {
+    "tslib": "*",
     "downloadjs": "^1.4.7",
     "js-cookie": "^3.0.8",
     "ua-parser-js": "^2.0.10"
-  },
-  "dependencies": {
-    "tslib": "*"
   },
   "license": "MIT",
   "repository": {}

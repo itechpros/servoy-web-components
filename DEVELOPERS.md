@@ -1,12 +1,12 @@
 # Adding a package.json Dependency
 
-Add the dependency at the project's root level.
+Add the dependency at the project's root level AND at the project level.
 
 ```bash
 npm i --save --legacy-peer-deps --package-lock-only <package>
 ```
 
-Then add that package as a `peerDependency` in the package.json file in the project/ folder.
+Then modify `ng-package.json` and add the package name(s) to `allowedNonPeerDependencies`.
 
 # Making a New Titanium Component Release
 

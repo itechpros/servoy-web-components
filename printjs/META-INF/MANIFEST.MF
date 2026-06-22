@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-Name: PrintJS
 Bundle-SymbolicName: printjs
 Package-Type: Web-Service
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0
 
 Name: PrintJS/print.spec
 Web-Service: True

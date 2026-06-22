@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-Name: iTech Utils
 Bundle-SymbolicName: itechutils
 Package-Type: Web-Service
-Bundle-Version: 2.0.0
+Bundle-Version: 2.1.0
 
 Name: browser/browser.spec
 Web-Service: True
