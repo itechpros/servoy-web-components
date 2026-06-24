@@ -27,7 +27,7 @@
     "print-js": "^1.6.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "17.2.2",
+    "@angular-devkit/build-angular": "21.2.16",
     "@angular-eslint/builder": "17.2.1",
     "@angular-eslint/eslint-plugin": "17.2.1",
     "@angular-eslint/eslint-plugin-template": "17.2.1",
